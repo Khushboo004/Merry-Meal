@@ -8,7 +8,7 @@ import Phone from "../../../assets/Logo/phone.png";
 const Footer = () => {
   return (
     <div>
-      <div className="bg-slate-900  m-0 text-white">
+      <div className="bg-slate-900 lg:p-14 m-0 text-white">
         <Container maxWidth="lg" className="pb-5">
           <Grid container spacing={4}>
             <Grid item lg={4} md={4} sm={12} xs={12}>
@@ -24,7 +24,7 @@ const Footer = () => {
             </Grid>
             <Grid item lg={2} md={2} sm={4} xs={12}>
               <div className="sm:text-left text-center">
-                <h1 className="text-xl underline uppercase font-bold mb-2">
+                <h1 className=" underline-offset-4 text-xl underline uppercase font-bold mb-2">
                   Navigation
                 </h1>
                 <ul>
@@ -58,7 +58,7 @@ const Footer = () => {
 
             <Grid item lg={2} md={2} sm={4} xs={12}>
               <div className="sm:text-left text-center">
-                <h1 className="text-xl underline uppercase mb-2 font-bold">
+                <h1 className="underline-offset-4 text-xl underline uppercase mb-2 font-bold">
                   Company
                 </h1>
                 <ul>
@@ -99,7 +99,7 @@ const Footer = () => {
             </Grid>
             <Grid item lg={2} md={2} sm={4} xs={12}>
               <div className="sm:text-left text-center">
-                <h1 className="text-xl underline uppercase mb-2 font-bold">
+                <h1 className="underline-offset-4 text-xl underline uppercase mb-2 font-bold">
                   Social
                 </h1>
                 <div className="sm:text-left sm:ml-0 ml-36">

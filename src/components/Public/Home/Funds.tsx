@@ -4,11 +4,11 @@ import { Box, Container, Card, CardActions, CardContent, CardMedia, Grid, Typogr
 const Funds = () => {
   return (
     <div>
-         <div className='pb-4'>
+         <div className='pb-0'>
         <div className='py-3 bg-slate-100'>
         <Container maxWidth="xl" className="pb-5">
         <div className='lg:px-5'>
-        <Box margin={2} py={1}>
+        <Box margin={2} py={0}>
     <Grid container spacing={4} >
     <Grid item lg={6} xs={6}>
         <div className='text-left'>

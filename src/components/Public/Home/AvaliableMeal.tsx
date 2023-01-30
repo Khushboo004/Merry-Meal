@@ -46,8 +46,8 @@ const AvaliableMeal = () => {
              <h3> 120 calories</h3>
             </Typography>
           </CardContent>
-          <CardActions>
-            <button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button>
+          <CardActions style={{ display:'flex', justifyContent:'center' }}>
+           <a href="/meal-details"><button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button></a> 
           </CardActions>
         </Card>
     
@@ -72,8 +72,8 @@ const AvaliableMeal = () => {
              <h3> 120 calories</h3>
             </Typography>
           </CardContent>
-          <CardActions>
-            <button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button>
+          <CardActions style={{ display:'flex', justifyContent:'center' }}>
+          <a href="/meal-details"><button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button></a> 
           </CardActions>
         </Card>
     
@@ -98,8 +98,8 @@ const AvaliableMeal = () => {
              <h3> 120 calories</h3>
             </Typography>
           </CardContent>
-          <CardActions>
-            <button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button>
+          <CardActions style={{ display:'flex', justifyContent:'center' }}>
+           <a href="/meal-details"><button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button></a> 
           </CardActions>
         </Card>
     
@@ -124,8 +124,8 @@ const AvaliableMeal = () => {
              <h3> 120 calories</h3>
             </Typography>
           </CardContent>
-          <CardActions>
-            <button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button>
+          <CardActions style={{ display:'flex', justifyContent:'center' }}>
+          <a href="/meal-details"><button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button></a> 
           </CardActions>
         </Card>
     
@@ -150,8 +150,8 @@ const AvaliableMeal = () => {
              <h3> 120 calories</h3>
             </Typography>
           </CardContent>
-          <CardActions>
-            <button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button>
+          <CardActions style={{ display:'flex', justifyContent:'center' }}>
+          <a href="/meal-details"><button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button></a> 
           </CardActions>
         </Card>
     
@@ -176,9 +176,15 @@ const AvaliableMeal = () => {
              <h3> 120 calories</h3>
             </Typography>
           </CardContent>
-          <CardActions>
-            <button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button>
+          
+          <CardActions className='text-center' style={{ display:'flex', justifyContent:'center' }}>
+           <Box>
+           <a href="/meal-details" ><button className=' bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto '>Details</button></a> 
+
+           </Box>
+            
           </CardActions>
+          
         </Card>
     
     </Grid>
