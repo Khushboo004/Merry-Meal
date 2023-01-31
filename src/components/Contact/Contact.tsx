@@ -20,14 +20,14 @@ const Contact = () => {
   return (
     <div>
       <Navbar />
-      <div className="banner justify-between items-center ">
+      <div className="banner justify-between   items-center ">
         <div className=" justify-between items-center">
           <Container maxWidth="lg" className="md:pt-16 ">
             <Grid
               container
               mt={0}
               spacing={1}
-              className="justify-between items-center p-7  bg-gray-800 bg-opacity-30"
+              className="justify-between items-center p-8   bg-gray-800 bg-opacity-30"
             >
               <Grid item md={5} sm={7} xs={12}>
                 <Box textAlign="center" className="">
@@ -102,7 +102,7 @@ const Contact = () => {
               </Grid>
 
               <Grid item md={6} sm={5} xs={12}>
-                <Box bgcolor="yellow" className="rounded-lg">
+                <Box  className="rounded-lg ">
                   <Card elevation={10}>
                     <CardHeader
                       title="Contact Us"

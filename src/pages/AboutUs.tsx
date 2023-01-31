@@ -1,12 +1,12 @@
 import React from "react";
-import Navbar from "../../components/Layout/Navbar/Navbar";
+import Navbar from "../components/Layout/Navbar/Navbar";
 import { Box, Container, Grid } from "@mui/material";
-import FreeOrder from "../../assets/about/free order.png";
-import Partner from "../../assets/about/partner.png";
-import Volunteer from "../../assets/about/volunteer.jpeg";
-import Rider from "../../assets/about/delivery.png";
-import Caregiver from "../../assets/about/caregiver.avif";
-import Footer from "../../components/Layout/Footer/Footer";
+import FreeOrder from "../assets/about/free order.png";
+import Partner from "../assets/about/partner.png";
+import Volunteer from "../assets/about/volunteer.jpeg";
+import Rider from "../assets/about/delivery.png";
+import Caregiver from "../assets/about/caregiver.avif";
+import Footer from "../components/Layout/Footer/Footer";
 
 const AboutUs = () => {
   return (
