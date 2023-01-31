@@ -3,8 +3,6 @@ import {  AiOutlineMenu } from "react-icons/ai";
 import HomeIcon from '@mui/icons-material/Home';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import PersonIcon from "@mui/icons-material/Person";
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import SummarizeIcon from "@mui/icons-material/Summarize";
 const PartnerDrawerComp = () => {
   return (
@@ -16,30 +14,30 @@ const PartnerDrawerComp = () => {
   
             <ul className="py-2 uppercase text-left text-xl cursor-pointer font-bold ">
               <li className="p-2 border-b text-center border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/">
+                
                   <AiOutlineMenu className="inline-block mr-2 mb-2 text-gray-900 " />
   
-                </a>
+               
               </li> <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/">
+                <a href="/dashboard">
                   <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
               </li>
                <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/">
+                <a href="/dashboard">
                   <SummarizeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
                 </li>
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/profile">
+                <a href="/dashboard/profile">
                   <PersonIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
               </li>
               <li className="py-3 border-b border-gray-600 text-center dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/meals">
+                <a href="/dashboard/add-meal">
                   <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   
                 </a>

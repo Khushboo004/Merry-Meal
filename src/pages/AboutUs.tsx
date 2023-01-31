@@ -11,7 +11,7 @@ import Footer from "../components/Layout/Footer/Footer";
 const AboutUs = () => {
   return (
     <div>
-      <Navbar />
+   
       <div>
         <h1 className="text-center font-serif bg-gray-200 text-3xl  p-2 m-0 font-bold text-red-600 uppercase">
           About Us
@@ -240,7 +240,8 @@ const AboutUs = () => {
         </div>
       </Container>
 </div>
-      <Footer />
+     
+     
     </div>
   );
 };

@@ -19,7 +19,7 @@ import Footer from "../Layout/Footer/Footer";
 const Contact = () => {
   return (
     <div>
-      <Navbar />
+   
       <div className="banner justify-between   items-center ">
         <div className=" justify-between items-center">
           <Container maxWidth="lg" className="md:pt-16 ">
@@ -157,7 +157,8 @@ const Contact = () => {
           </Container>
         </div>
       </div>
-      <Footer />
+    
+    
     </div>
   );
 };

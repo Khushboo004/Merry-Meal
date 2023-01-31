@@ -25,7 +25,7 @@ const AddCart = () => {
   const theme = useTheme();
   return (
     <div className="bg-gray-50">
-      <Navbar />
+     
       <div className=" pt-2 h-screen">
         <Container maxWidth="xl">
           <Grid container mt={2}>

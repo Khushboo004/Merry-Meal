@@ -8,10 +8,10 @@ import Footer from "../../components/Layout/Footer/Footer";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Grid from "@mui/material/Grid/Grid";
 import Box from "@mui/material/Box/Box";
-const Home = () => {
+const PublicUser = () => {
   return (
     <div>
-      <Navbar />
+
 
       {/* Hero Banner */}
       <div className="w-full m-0 py-6  ">
@@ -115,9 +115,10 @@ const Home = () => {
         </div>
       </div>
 
-      <Footer />
+      
+      
     </div>
   );
 };
 
-export default Home;
+export default PublicUser;

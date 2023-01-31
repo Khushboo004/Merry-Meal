@@ -3,7 +3,7 @@ import { Box, Grid } from "@mui/material";
 import Content from "../../components/Content";
 import "../../styles/MenuItem.css";
 import DashboardNav from "../../components/Dashboard/DashboardNav";
-import Home from "../publicUser/Home";
+import Home from "../publicUser/PublicUser";
 import Footer from "../../components/Layout/Footer/Footer";
 import SidebarNav from "../../components/Dashboard/SidebarNav";
 

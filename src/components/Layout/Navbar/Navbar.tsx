@@ -24,7 +24,7 @@ const Navbar = () => {
   };
   return (
     <div>
-      <div className=" py-1 bg-green-400 w-full fixed">
+      <div className=" py-1 bg-green-400 w-full left-0 top-0 z-20  fixed">
         <div className="  flex justify-between items-center md:h-16 sm:h-16 h-14 lg:px-8 md:px-5 sm:px-5 px-5 blur-backdrop-filter   mx-auto text-white">
           <h1 className=" text-center text-3xl font-bold cursor-pointer font-serif">
             Merry Meal
@@ -92,7 +92,7 @@ const Navbar = () => {
               )}
             </li>
             <li className="lg:p-2 md:px-2 dark:hover:text-green-700">
-              <a href="/contact-us">
+              <a href="/login">
                 <LoginIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
                 Login
               </a>
@@ -119,7 +119,7 @@ const Navbar = () => {
           <div
             className={
               !nav
-                ? "fixed left-0 top-0 h-full md:w-[30%] sm:w-[40%] w-[55%] bg-opacity-100 ease-in-out duration-500 bg-green-400 lg:hidden"
+                ? "fixed left-0 top-0 z-20 h-full md:w-[30%] sm:w-[40%] w-[55%] bg-opacity-100 ease-in-out duration-500 bg-green-400 lg:hidden"
                 : "fixed left-[-100%]"
             }
           >
@@ -169,7 +169,7 @@ const Navbar = () => {
                 </a>
               </li>
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/about-us">
+                <a href="/login">
                   <LoginIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   Login
                 </a>

@@ -1,15 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { AiOutlineClose  } from "react-icons/ai";
-import HomeIcon from '@mui/icons-material/Home';
-import SummarizeIcon from "@mui/icons-material/Summarize";
-import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
-import PersonIcon from "@mui/icons-material/Person";
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+
 
 import DrawerComp from "./DrawerComp";
-import Footer from "../Layout/Footer/Footer";
 import PartnerSidebar from "./Partner/PartnerSidebar";
 type Props = {};
 
@@ -28,7 +22,7 @@ const SidebarNav = (props: Props) => {
         <div
           className={
             !nav
-              ? "fixed left-0 top-0 h-full lg:w-[20%] md:w-[28%] sm:w-[32%] w-[43%]  backdrop-filter backdrop-blur-lg  ease-in-out duration-500 bg-green-400 lg:visible"
+              ? "fixed left-0 top-0 z-20 h-full lg:w-[20%] md:w-[28%] sm:w-[32%] w-[43%]  backdrop-filter backdrop-blur-lg  ease-in-out duration-500 bg-green-400 lg:visible"
               : "fixed left-[-100%]"
           }
         >

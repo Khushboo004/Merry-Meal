@@ -8,8 +8,8 @@ import Footer from "../components/Layout/Footer/Footer";
 
 const MealDetails = () => {
   return (
-    <div>
-      <Navbar />
+   
+     
       <div >
         <div className="mb-0 l md:pb-48 pb-14">
         <h1 className="text-center font-bold text-xl py-2 underline uppercase font-serif underline-offset-4  bg-gray-50">Meal Details</h1>
@@ -66,8 +66,8 @@ const MealDetails = () => {
        </Container>
         </div>
       </div>
-      <Footer />
-    </div>
+     
+   
   );
 };
 

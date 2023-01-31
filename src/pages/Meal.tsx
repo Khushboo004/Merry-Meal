@@ -7,8 +7,7 @@ import Footer from '../components/Layout/Footer/Footer'
 const Meal = () => {
   return (
     <div>
-        <Navbar />
-        
+      
 
 {/* <ul className="w-48 text-sm font-medium   border border-gray-200 rounded-lg0  shadow-sm " >
     <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">Profile</li>
@@ -180,7 +179,8 @@ const Meal = () => {
      </Grid>
  </div>
 </Container>
-<Footer />
+
+
 
     </div>
   )
