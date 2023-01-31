@@ -2,14 +2,15 @@ import React from "react";
 import { useState } from "react";
 import { AiOutlineClose  } from "react-icons/ai";
 import HomeIcon from '@mui/icons-material/Home';
-
+import SummarizeIcon from "@mui/icons-material/Summarize";
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
-import InfoIcon from "@mui/icons-material/Info";
-import ContactsIcon from "@mui/icons-material/Contacts";
-import LoginIcon from "@mui/icons-material/Login";
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import PersonIcon from "@mui/icons-material/Person";
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 
 import DrawerComp from "./DrawerComp";
+import Footer from "../Layout/Footer/Footer";
+import PartnerSidebar from "./Partner/PartnerSidebar";
 type Props = {};
 
 const SidebarNav = (props: Props) => {
@@ -27,7 +28,7 @@ const SidebarNav = (props: Props) => {
         <div
           className={
             !nav
-              ? "fixed left-0 top-0 h-full lg:w-[15%] md:w-[26%] sm:w-[32%] w-[43%]  backdrop-filter backdrop-blur-lg  ease-in-out duration-500 bg-green-400 lg:visible"
+              ? "fixed left-0 top-0 h-full lg:w-[20%] md:w-[28%] sm:w-[32%] w-[43%]  backdrop-filter backdrop-blur-lg  ease-in-out duration-500 bg-green-400 lg:visible"
               : "fixed left-[-100%]"
           }
         >
@@ -63,48 +64,44 @@ const SidebarNav = (props: Props) => {
               </li>
           </ul>
 
-          <ul className="p-4 uppercase text-left text-1xl cursor-pointer font-bold ">
-            <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/">
+<div>
+  <PartnerSidebar />
+</div>
+          {/* <ul className="p-4 uppercase text-left text-1xl cursor-pointer font-bold ">
+          <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+              <a href="/dataSummary">
                 <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                 Home
               </a>
             </li>
+          <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+              <a href="/about-us">
+                <SummarizeIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
+                Info Summary
+              </a>
+            </li>
+            <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+              <a href="/profile">
+                <PersonIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
+                My Profile
+              </a>
+            </li>
+           
             <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
               <a href="/meals">
                 <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
-                Meals
+                Add Meal
               </a>
             </li>
-            <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/about-us">
-                <InfoIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
-                About Us
-              </a>
-            </li>
-            <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/contact-us">
-                <ContactsIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
-                Contact Us
-              </a>
-            </li>
-            <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/about-us">
-                <LoginIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
-                Login
-              </a>
-            </li>
-            <li className="p-4 border-gray-600 hover:border-b dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/contact-us">
-                <AppRegistrationIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
-                Registration
-              </a>
-            </li>
-          </ul>
+           
+            
+            
+          </ul> */}
         </div>
       
     
     <div className=" md:h-14 sm:h-14 h-12"></div>
+   
   </div>
   );
 };

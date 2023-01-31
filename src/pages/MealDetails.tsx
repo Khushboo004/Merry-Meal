@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/Layout/Navbar/Navbar";
 import Grid from "@mui/material/Grid/Grid";
 import Box from "@mui/material/Box/Box";
-import { Container,TableContainer,Table, TableHead, TableRow, TableCell ,TableBody} from "@mui/material";
+import { Container,TableContainer,Table, TableHead, TableRow, TableCell } from "@mui/material";
 import Pic from "../assets/public/home.jpeg";
 import Footer from "../components/Layout/Footer/Footer";
 

@@ -7,6 +7,8 @@ import ContactUs from './pages/ContactUs';
 import MealDetails from './pages/MealDetails';
 import AddCart from './pages/AddCart';
 import Dashboard from './pages/Partner/Dashboard';
+import UserHome from './pages/Partner/UserHome';
+import Profile from './pages/Partner/Profile';
 
 
 function App() {
@@ -18,10 +20,17 @@ function App() {
         <Route path='/about-us' element={<AboutUs />}/>
         <Route path='/contact-us' element={<ContactUs />}/>
         <Route path='/meal-details' element={<MealDetails />}/>
-        <Route path='/' element={<Dashboard />}/>
+      
         {/* <Route path="/user" element={<Privateroute />}> */}
             <Route path="/add-cart" element={<AddCart />} />
           {/* </Route> */}
+
+          <Route path='/' element={<Dashboard />}>
+          <Route index element={<UserHome />}></Route>
+          <Route path={"dataSummary"} element={<UserHome />}></Route>
+          <Route path={"profile"} element={<Profile />}></Route>
+
+          </Route>
         </Routes>
     
   );
