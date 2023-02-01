@@ -64,7 +64,7 @@ const PublicUser = () => {
         </div>
       </div>
       <Funds />
-      <div className="bg-green-800 mb-8 text-white  ">
+      <div className="bg-green-800  text-white  ">
         <div className="max-w-[1240px] mx-auto grid p-3">
           
     <Grid container mt={2} spacing={2} >

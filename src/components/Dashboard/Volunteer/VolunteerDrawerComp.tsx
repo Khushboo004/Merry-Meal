@@ -1,11 +1,8 @@
 import React from 'react'
 import {  AiOutlineMenu } from "react-icons/ai";
-import HomeIcon from '@mui/icons-material/Home';
-import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import PersonIcon from "@mui/icons-material/Person";
-import SummarizeIcon from "@mui/icons-material/Summarize";
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-const CargiverDrawerComp = () => {
+import RecentActorsIcon from "@mui/icons-material/RecentActors";
+const VolunteerDrawerComp = () => {
   return (
     <div>
          <div className=" fixed left-0 top-0 h-screen lg:w-[4%] sm:w-[7%] md:w-[8%] w-[10%] bg-opacity-100 ease-in-out duration-500 py-1 bg-green-400  ">
@@ -19,24 +16,20 @@ const CargiverDrawerComp = () => {
                   <AiOutlineMenu className="inline-block mr-2 mb-2 text-gray-900 " />
   
                
-              </li> <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/caregiver/dashborad">
-                  <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
-                  
-                </a>
               </li>
-               <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/caregiver/time-table">
-                  <AccessTimeFilledIcon className="inline-block mr-2 mb-2 text-gray-900 " />
-                  
-                </a>
-                </li>
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/caregiver/profile">
+                <a href="/volunteer/profile">
                   <PersonIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
               </li>
+              <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                <a href="/volunteer/assessfood">
+                  <RecentActorsIcon className="inline-block mr-2 mb-2 text-gray-900 " />
+                  
+                </a>
+              </li>
+             
              
              
               
@@ -47,4 +40,4 @@ const CargiverDrawerComp = () => {
   )
 }
 
-export default CargiverDrawerComp
+export default VolunteerDrawerComp

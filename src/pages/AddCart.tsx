@@ -24,7 +24,7 @@ const AddCart = () => {
 
   const theme = useTheme();
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 pb-24">
      
      <div className=" pt-2 mb-10">
               <Container maxWidth="xl">

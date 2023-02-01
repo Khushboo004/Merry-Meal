@@ -1,5 +1,5 @@
 import React from "react";
-import Pic from "../../../assets/public/home.jpeg";
+import Pic from "../../../assets/caregiver.png";
 import {
   Box,
   Container,
@@ -10,7 +10,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-const AvaliableMeal = () => {
+const AvailableCareGiver = () => {
   return (
     <div>
       <div className="py-3 bg-slate-100">
@@ -20,7 +20,7 @@ const AvaliableMeal = () => {
               <Grid container spacing={4}>
                 <Grid item lg={6} xs={6}>
                   <div className="text-left">
-                    <h1 className="text-xl font-bold">Available Meal</h1>
+                    <h1 className="text-xl font-bold">Available Caregiver</h1>
                   </div>
                 </Grid>
                 <Grid item lg={6} xs={6}>
@@ -47,41 +47,13 @@ const AvaliableMeal = () => {
                       image={Pic}
                     />
                     <CardContent>
-                    <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Category: Fruit
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        <h2>Pomegranate</h2>
-                        <h3> 120 calories</h3>
-                      </Typography>
-                    </CardContent>
-                    <CardActions
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a href="/meal-details">
-                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                          Details
-                        </button>
-                      </a>
-                    </CardActions>
-                  </Card>
-                </Grid>
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10}>
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
                       <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Category: Fruit
+                        Name: Abc
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        <h2>Pomegranate</h2>
-                        <h3> 120 calories</h3>
+             <h1><span className='font-bold'>Gender: </span>Female</h1>
+           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
+           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
                       </Typography>
                     </CardContent>
                     <CardActions
@@ -95,126 +67,167 @@ const AvaliableMeal = () => {
                     </CardActions>
                   </Card>
                 </Grid>
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10}>
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Category: Fruit
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        <h2>Pomegranate</h2>
-                        <h3> 120 calories</h3>
-                      </Typography>
-                    </CardContent>
-                    <CardActions
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a href="/meal-details">
-                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                          Details
-                        </button>
-                      </a>
-                    </CardActions>
-                  </Card>
-                </Grid>
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10}>
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
-                       <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Category: Fruit
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        <h2>Pomegranate</h2>
-                        <h3> 120 calories</h3>
-                      </Typography>
-                    </CardContent>
-                    <CardActions
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a href="/meal-details">
-                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                          Details
-                        </button>
-                      </a>
-                    </CardActions>
-                  </Card>
-                </Grid>
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10}>
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
-                     <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Category: Fruit
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        <h2>Pomegranate</h2>
-                        <h3> 120 calories</h3>
-                      </Typography>
-                    </CardContent>
-                    <CardActions
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a href="/meal-details">
-                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                          Details
-                        </button>
-                      </a>
-                    </CardActions>
-                  </Card>
-                </Grid>
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10}>
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Category: Fruit
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        <h2>Pomegranate</h2>
-                        <h3> 120 calories</h3>
-                      </Typography>
-                    </CardContent>
 
+                <Grid item lg={2} md={4} sm={4} xs={6}>
+                  <Card elevation={10} className="shadow-xl">
+                    <CardMedia
+                      sx={{ width: "90%" }}
+                      component="img"
+                      alt="green iguana"
+                      height="90"
+                      image={Pic}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom className="text-[16px] font-bold" component="div">
+                        Name: Abc
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+             <h1><span className='font-bold'>Gender: </span>Female</h1>
+           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
+           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
+                      </Typography>
+                    </CardContent>
                     <CardActions
-                      className="text-center"
                       style={{ display: "flex", justifyContent: "center" }}
                     >
-                      <Box>
-                        <a href="/meal-details">
-                          <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                            Details
-                          </button>
-                        </a>
-                      </Box>
+                      <a href="/meal-details">
+                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
+                          Details
+                        </button>
+                      </a>
                     </CardActions>
                   </Card>
                 </Grid>
+
+                <Grid item lg={2} md={4} sm={4} xs={6}>
+                  <Card elevation={10} className="shadow-xl">
+                    <CardMedia
+                      sx={{ width: "90%" }}
+                      component="img"
+                      alt="green iguana"
+                      height="90"
+                      image={Pic}
+                    />
+                    <CardContent>
+                    <Typography gutterBottom className="text-[16px] font-bold" component="div">
+                        Name: Abc
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+             <h1><span className='font-bold'>Gender: </span>Female</h1>
+           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
+           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
+                      </Typography>
+                    </CardContent>
+                    <CardActions
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <a href="/meal-details">
+                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
+                          Details
+                        </button>
+                      </a>
+                    </CardActions>
+                  </Card>
+                </Grid>
+
+                <Grid item lg={2} md={4} sm={4} xs={6}>
+                  <Card elevation={10} className="shadow-xl">
+                    <CardMedia
+                      sx={{ width: "90%" }}
+                      component="img"
+                      alt="green iguana"
+                      height="90"
+                      image={Pic}
+                    />
+                    <CardContent>
+                    <Typography gutterBottom className="text-[16px] font-bold" component="div">
+                        Name: Abc
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+             <h1><span className='font-bold'>Gender: </span>Female</h1>
+           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
+           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
+                      </Typography>
+                    </CardContent>
+                    <CardActions
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <a href="/meal-details">
+                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
+                          Details
+                        </button>
+                      </a>
+                    </CardActions>
+                  </Card>
+                </Grid>
+
+                <Grid item lg={2} md={4} sm={4} xs={6}>
+                  <Card elevation={10} className="shadow-xl">
+                    <CardMedia
+                      sx={{ width: "90%" }}
+                      component="img"
+                      alt="green iguana"
+                      height="90"
+                      image={Pic}
+                    />
+                    <CardContent>
+                    <Typography gutterBottom className="text-[16px] font-bold" component="div">
+                        Name: Abc
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+             <h1><span className='font-bold'>Gender: </span>Female</h1>
+           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
+           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
+                      </Typography>
+                    </CardContent>
+                    <CardActions
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <a href="/meal-details">
+                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
+                          Details
+                        </button>
+                      </a>
+                    </CardActions>
+                  </Card>
+                </Grid>
+
+                <Grid item lg={2} md={4} sm={4} xs={6}>
+                  <Card elevation={10} className="shadow-xl">
+                    <CardMedia
+                      sx={{ width: "90%" }}
+                      component="img"
+                      alt="green iguana"
+                      height="90"
+                      image={Pic}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom className="text-[16px] font-bold" component="div">
+                        Name: Abc
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+             <h1><span className='font-bold'>Gender: </span>Female</h1>
+           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
+           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
+                      </Typography>
+                    </CardContent>
+                    <CardActions
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <a href="/meal-details">
+                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
+                          Details
+                        </button>
+                      </a>
+                    </CardActions>
+                  </Card>
+                </Grid>
+               
+               
+
+
+                
+                
               </Grid>
             </Box>
           </div>
@@ -226,4 +239,4 @@ const AvaliableMeal = () => {
   );
 };
 
-export default AvaliableMeal;
+export default AvailableCareGiver;

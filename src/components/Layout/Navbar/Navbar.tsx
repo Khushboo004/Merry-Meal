@@ -12,13 +12,15 @@ import "./Navbar.css";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuProfile from "./MenuProfile";
 import { FaUserNurse} from "react-icons/fa";
-
-const Navbar = () => {
+type Props = {
+  role: String;
+};
+const Navbar  = (props: Props) => {
   const [nav, setNav] = useState(false);
   const handleNav = () => {
     setNav(!nav);
   };
- 
+  const { role } = props;
 
   const [showOption, setShowOption] = useState(false);
   const handleClick = () => {
@@ -31,7 +33,7 @@ const Navbar = () => {
           <h1 className=" text-center text-3xl font-bold cursor-pointer font-serif">
             Merry Meal
           </h1>
-          
+          {role === "MEMBER" ? (
          
           <ul className="hidden lg:flex cursor-pointer  uppercase  text-center font-bold lg:text-[18px] md:text-[13px]">
             <li className="lg:p-4 md:px-2 dark:hover:text-green-700 md:pt-1 font-normal">
@@ -102,18 +104,7 @@ const Navbar = () => {
                 </div>
               )}
             </li>
-            <li className="lg:p-4 md:px-2 dark:hover:text-green-700">
-              <a href="/login">
-                <LoginIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
-                Login
-              </a>
-            </li>
-            <li className="lg:p-4 px-2 md:px-2 dark:hover:text-green-700 ">
-              <a href="/register" >
-                <AppRegistrationIcon className="inline-block ml-0 mr-1 mb-2 text-gray-900 " />
-                Registration
-              </a>
-            </li>
+            
            
 
             <li className="lg:p-4 md:px-2 mt-3 lg:mb-1 justify-center h-10 items-center  text-white dark:hover:text-green-700 ">
@@ -123,9 +114,106 @@ const Navbar = () => {
             </li >
 
           <li>
-              <MenuProfile />
+              <MenuProfile role={role} />
             </li> 
           </ul>
+           ) : (
+            <></>
+          )}
+
+
+
+
+
+{role === "" ? (
+         
+         <ul className="hidden lg:flex cursor-pointer  uppercase  text-center font-bold lg:text-[18px] md:text-[13px]">
+           <li className="lg:p-4 md:px-2 dark:hover:text-green-700 md:pt-1 font-normal">
+           <ul className="px-4  text-left text-xl cursor-pointer  "> 
+               <li>
+               <div className=" items-center">
+           <div className="flex  rounded">
+               <input
+                   type="text"
+                   className="block w-full px-2 py-1  bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                   placeholder="Search..."
+               />
+               <button className="px-4 text-white bg-gray-600 border-l rounded ">
+                   Search
+               </button>
+           </div>
+       </div>
+               </li>
+           </ul>
+           </li>
+          
+          
+           <li className="lg:p-4 md:px-2 pt-1 dark:hover:text-green-700 md:pt-1">
+             <a href="/">
+               <HomeIcon className="inline-block md:border-none ml-0 mr-2 mb-1 text-gray-900 " />
+               Home
+             </a>
+           </li>
+           <li className="lg:p-4 md:px-2 dark:hover:text-green-700 md:pt-1">
+             <a href="/meals">
+               <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
+               Meals
+             </a>
+           </li>
+          
+           <li
+             onClick={handleClick}
+             className="lg:p-4 relative md:px-2 "
+             x-data="{dropdownIpen:false}"
+           >
+             <ArrowDropDownCircleIcon className="inline-block ml-0 mr-1 mb-2  text-gray-900 " />More
+             {showOption && (
+               <div className="md:absolute bg-green-500 border p-2 rounded-lg  right-0">
+                 <ul className="space-y-2 l md:w-48">
+                
+
+
+
+                   <li className="lg:p-4 md:p-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                     <a href="/about-us">
+                       <InfoIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
+                       <span className=" md:inline-block">About Us</span>
+                     </a>
+                   </li>
+
+                   <li className="lg:p-4 md:px-2 dark:hover:text-green-700">
+                     <a href="/contact-us">
+                       <ContactsIcon className="inline-block ml-0 mr-1 mb-2 text-gray-900 " />{" "}
+                       <span className=" md:inline-block">Contact Us</span>
+                     </a>
+                   </li>
+                 </ul>
+               </div>
+             )}
+           </li>
+           <li className="lg:p-4 md:px-2 dark:hover:text-green-700">
+             <a href="/login">
+               <LoginIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
+               Login
+             </a>
+           </li>
+           <li className="lg:p-4 px-2 md:px-2 dark:hover:text-green-700 ">
+             <a href="/register" >
+               <AppRegistrationIcon className="inline-block ml-0 mr-1 mb-2 text-gray-900 " />
+               Registration
+             </a>
+           </li>
+          
+
+           <li className="lg:p-4 md:px-2 mt-3 lg:mb-1 justify-center h-10 items-center  text-white dark:hover:text-green-700 ">
+             <a href="/add-cart" className="bg-orange-600 p-2 hover:bg-orange-700">
+             <ShoppingCartIcon className=" text-white" />
+             </a>
+           </li >
+         </ul>
+          ) : (
+           <></>
+         )}
           <div onClick={handleNav} className="block lg:hidden ">
             {!nav ? (
               <AiOutlineClose className="font-bold" size={25} />
@@ -160,6 +248,44 @@ const Navbar = () => {
                 </li>
             </ul>
 
+
+            {role === "MEMBER" ? (
+            <ul className="p-4 uppercase text-left text-xl cursor-pointer font-bold ">
+              <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                <a href="/">
+                  <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
+                  Home
+                </a>
+              </li>
+              <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                <a href="/meals">
+                  <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
+                  Meals
+                </a>
+              </li>
+              <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                <a href="/about-us">
+                  <InfoIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
+                  About Us
+                </a>
+              </li>
+              <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                <a href="/contact-us">
+                  <ContactsIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
+                  Contact Us
+                </a>
+              </li>
+              <li>
+              <MenuProfile role={role} />
+            </li> 
+             
+            </ul>
+             ) : (
+              <></>
+            )}
+
+
+{role === "" ? (
             <ul className="p-4 uppercase text-left text-xl cursor-pointer font-bold ">
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
                 <a href="/">
@@ -198,6 +324,9 @@ const Navbar = () => {
                 </a>
               </li>
             </ul>
+             ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

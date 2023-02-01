@@ -18,25 +18,25 @@ const PartnerDrawerComp = () => {
   
                
               </li> <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard">
+                <a href="/partner">
                   <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
               </li>
                <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard">
+                <a href="/partner">
                   <SummarizeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
                 </li>
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard/profile">
+                <a href="/partner/profile">
                   <PersonIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
               </li>
               <li className="py-3 border-b border-gray-600 text-center dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard/add-meal">
+                <a href="/partner/add-meal">
                   <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   
                 </a>

@@ -21,39 +21,39 @@ const AdminDrawerComp = () => {
   
                
               </li> <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard/dataSummary">
+                <a href="/admin/dataSummary">
                   <SummarizeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
               </li>
               <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard/profile">
+                <a href="/admin/profile">
                   <PersonIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
               </li>
                <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard/userinfo">
+                <a href="/admin/userinfo">
                   <RecentActorsIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
                 </li>
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard/mealinfo">
+                <a href="/admin/mealinfo">
                   <DinnerDiningIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
               </li> 
                
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard/deliinfo">
+                <a href="/admin/deliinfo">
                   <DeliveryDiningIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
               </li>  
              
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard/donateinfo">
+                <a href="/admin/donateinfo">
                   <VolunteerActivismIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>

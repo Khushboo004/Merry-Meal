@@ -8,19 +8,19 @@ const CaregiverSidebar = () => {
     <div>
         <ul className="p-4 uppercase text-left text-xl cursor-pointer font-bold ">
           <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/dashboard/caregiver">
+              <a href="/caregiver/dashborad">
                 <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                 Home
               </a>
             </li>
           <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/dashboard/time-table">
+              <a href="/caregiver/time-table">
                 <AccessTimeFilledIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                Time table
               </a>
             </li>
             <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/dashboard/profile">
+              <a href="/caregiver/profile">
                 <PersonIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                 My Profile
               </a>

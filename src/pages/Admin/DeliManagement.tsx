@@ -1,18 +1,41 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Container, FormControl, Grid, InputLabel, NativeSelect } from "@mui/material";
-import ViewMore from "./ViewMore";
+import { useState } from "react";
+import ViewMore from "../ViewMore";
+import filteringMeal from "../../Utils/filteringMeal";
 
 type Props = {};
 
 const DeliManagement = (props: Props) => {
+  const allDelis = [
+    {
+      deiveryNumber: 949943949349,
+      status: "Delivered",
+      address: "Mandalay",
+      orderBy: "Aung Thiha Tun",
+      deliveredBy: "Justin",
+    },
+    {
+      deiveryNumber: 949943949350,
+      status: "Pending",
+      address: "Yangon",
+      orderBy: "Aung Thiha Tun",
+      deliveredBy: "Justin",
+    },
+  ];
+  const [deliLists, setDeliLists] = useState(allDelis);
+  const filterDeli = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    filteringMeal(e, setDeliLists, allDelis);
+  };
   return (
     <div className="py-5">
       <h1 className="text-4xl font-bold text-green-400 text-center">
         Delivery Info
       </h1>
-      <Container maxWidth={'xl'}>
+      <Container maxWidth={'xl'} >
         <Grid container mt={2} spacing={2}>
-      <Grid item xs={12}>
+         <Grid item lg={2} xs={.1}></Grid>
+      <Grid item lg={8} sm={10}>
         <div className="search">
           <div className="border border-green-400 rounded-lg flex p-3 w-64 shadow-sm shadow-green-300">
             <SearchIcon />
@@ -23,14 +46,15 @@ const DeliManagement = (props: Props) => {
             />
           </div>
         </div>
-     
-      </Grid>
-      <Grid item xs={12}>
+        </Grid>
+         <Grid item lg={2} xs={.1}></Grid>
+         <Grid item lg={2} xs={.1}></Grid>
+        <Grid item lg={8} sm={10}>
 
       <div className="py-5 px-5">
         <FormControl>
           <InputLabel variant="standard" htmlFor="uncontrolled-native">
-            Status
+            Delivery Status
           </InputLabel>
           <NativeSelect
             defaultValue={"all"}
@@ -38,21 +62,21 @@ const DeliManagement = (props: Props) => {
               name: "age",
               id: "uncontrolled-native",
             }}
+            onChange={(e) => filterDeli(e)}
           >
             <option value={"all"}>All</option>
-            <option value={"Fruits"}>Fruits</option>
-            <option value={"Vegetables"}>Vegetables</option>
-            <option value={"Healthy Foods"}>Healthy Foods</option>
-            <option value={"Drinks"}>Drinks</option>
-            <option value={"Unhealthy Foods"}>Unhealthy Foods</option>
-            <option value={"Sweets"}>Sweets</option>
+            <option value={"Delivered"}>Delivered</option>
+            <option value={"Ordered"}>Ordered</option>
+            <option value={"Pending"}>Pending</option>
           </NativeSelect>
         </FormControl>
       </div>
       </Grid>
-      <Grid item  xs={12}>
+         <Grid item lg={2} xs={.1}></Grid>
+         <Grid item lg={2} xs={.1}></Grid>
+      <Grid item lg={8} sm={10}>
       <div className="p-4">
-        <table className="table-auto border rounded-md">
+        <table className="table-auto border w-[200x] rounded-md">
           <thead>
             <tr className="border-b-4 border-green-400">
               <th className="p-5">No.</th>
@@ -65,42 +89,29 @@ const DeliManagement = (props: Props) => {
             </tr>
           </thead>
           <tbody className="text-sm">
-            <tr className="border-b">
-              <td className="p-5">No.</td>
-              <td className="p-5">Meal Name</td>
-              <td className="p-5">Meal Category</td>
-              <td className="p-5">Meal Status</td>
-              <td className="p-5">Meal Img</td>
-              <td className="p-5">Meal Description</td>
-              <td className="p-2">
-                <button className="p-2 bg-green-500 rounded-md text-white mr-3">
-                  Edit
-                </button>
-                <button className="p-2 bg-red-500 rounded-md text-white ">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-5">No.</td>
-              <td className="p-5">Meal Name</td>
-              <td className="p-5">Meal Category</td>
-              <td className="p-5">Meal Status</td>
-              <td className="p-5">Meal Img</td>
-              <td className="p-5">Meal Description</td>
-              <td className="p-2">
-                <button className="p-2 bg-green-500 rounded-md text-white mr-3">
-                  Edit
-                </button>
-                <button className="p-2 bg-red-500 rounded-md text-white ">
-                  Delete
-                </button>
-              </td>
-            </tr>
+            {deliLists.map((deli, index) => (
+              <tr className="border-b">
+                <td className="p-5">{index + 1}</td>
+                <td className="p-5">{deli.deiveryNumber}</td>
+                <td className="p-5">{deli.status}</td>
+                <td className="p-5">{deli.address}</td>
+                <td className="p-5">{deli.orderBy}</td>
+                <td className="p-5">{deli.deliveredBy}</td>
+                <td className="p-2">
+                  <button className="p-2 bg-green-500 rounded-md text-white mr-3">
+                    Edit
+                  </button>
+                  <button className="p-2 bg-red-500 rounded-md text-white ">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
-     </Grid>
+      </Grid>
+      <Grid item lg={2} xs={.1}></Grid>
      </Grid>
      </Container>
       <ViewMore />

@@ -2,12 +2,15 @@ import React from 'react'
 import Navbar from '../components/Layout/Navbar/Navbar'
 import Content from '../components/Content'
 import Footer from '../components/Layout/Footer/Footer'
-
-const Home = () => {
+type Props = {
+  role: String;
+};
+function Home(props: Props) {
+  const { role } = props;
   return (
     <div>
              
-       <Navbar />
+       <Navbar role={role}/>
        <div >
         <Content />
     

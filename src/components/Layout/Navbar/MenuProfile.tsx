@@ -4,9 +4,13 @@ import PersonIcon from "@mui/icons-material/Person";
 import { Logout } from "@mui/icons-material";
 
 import Pic from "../../../assets/caregiver.png"
-
-const MenuProfile = () => {
+type Props = {
+  role: String;
+};
+const MenuProfile = (props: Props) => {
     const [nav, setNav] = useState(false);
+    const { role } = props;
+
     const handleNav = () => {
       setNav(!nav);
     };
@@ -16,6 +20,7 @@ const MenuProfile = () => {
     };
   return (
     <div>
+        {role === "MEMBER" ? (
          <li
               onClick={handleClick}
               className="lg:ml-2 mt-5 relative  "
@@ -49,6 +54,9 @@ const MenuProfile = () => {
                 </div>
               )}
             </li>
+             ) : (
+              <></>
+            )}
     </div>
   )
 }

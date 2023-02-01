@@ -1,13 +1,10 @@
 import { Container, FormControl, Grid, InputLabel, NativeSelect } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
-import filteringMeal from "../../Utils/filteringMeal";
+import React, { useState } from "react";
 import ViewMore from "../ViewMore";
-
-
 type Props = {};
 
-const MealManagement = (props: Props) => {
+const MealAssess = (props: Props) => {
   const allMeals = [
     {
       name: "Meal Name",
@@ -26,9 +23,14 @@ const MealManagement = (props: Props) => {
   ];
 
   const [mealRows, setMealRows] = useState(allMeals);
-  const filterMeal = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    filteringMeal(e, setMealRows, allMeals);
+  const filteringMeal = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value === "all") {
+      setMealRows(allMeals);
+      return;
+    }
+    setMealRows(allMeals.filter((meal) => meal.category === e.target.value));
   };
+
   return (
     <div className="py-5">
       <h1 className="text-4xl font-bold text-green-400 text-center">
@@ -51,7 +53,7 @@ const MealManagement = (props: Props) => {
         </Grid>
          <Grid item lg={2} xs={.1}></Grid>
          <Grid item lg={2} xs={.1}></Grid>
-       <Grid item lg={8} sm={10}>
+        <Grid item lg={8} sm={10}>
       <div className="py-5 px-5">
         <FormControl>
           <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -63,7 +65,7 @@ const MealManagement = (props: Props) => {
               name: "age",
               id: "uncontrolled-native",
             }}
-            onChange={(e) => filterMeal(e)}
+            onChange={(e) => filteringMeal(e)}
           >
             <option value={"all"}>All</option>
             <option value={"Fruits"}>Fruits</option>
@@ -78,7 +80,7 @@ const MealManagement = (props: Props) => {
       </Grid>
          <Grid item lg={2} xs={.1}></Grid>
          <Grid item lg={2} xs={.1}></Grid>
-       <Grid item lg={8} sm={10}>
+      <Grid item lg={8} sm={10}>
       <div className="p-4">
         <table className="table-auto border rounded-md">
           <thead>
@@ -103,10 +105,7 @@ const MealManagement = (props: Props) => {
                 <td className="p-5">{meal.desc}</td>
                 <td className="p-2">
                   <button className="p-2 bg-green-500 rounded-md text-white mr-3">
-                    Edit
-                  </button>
-                  <button className="p-2 bg-red-500 rounded-md text-white ">
-                    Delete
+                    View Detail
                   </button>
                 </td>
               </tr>
@@ -115,7 +114,7 @@ const MealManagement = (props: Props) => {
         </table>
       </div>
       </Grid>
-         <Grid item lg={2} xs={.1}></Grid>
+      <Grid item lg={2} xs={.1}></Grid>
      </Grid>
      </Container>
       <ViewMore />
@@ -123,4 +122,4 @@ const MealManagement = (props: Props) => {
   );
 };
 
-export default MealManagement;
+export default MealAssess;

@@ -10,7 +10,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-const AvaliableMeal = () => {
+const AvailableFruit = () => {
   return (
     <div>
       <div className="py-3 bg-slate-100">
@@ -47,7 +47,7 @@ const AvaliableMeal = () => {
                       image={Pic}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h6" component="div">
+                      <Typography gutterBottom className="text-[16px] font-bold" component="div">
                         Category: Vegetable
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
@@ -76,7 +76,7 @@ const AvaliableMeal = () => {
                       image={Pic}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h6" component="div">
+                       <Typography gutterBottom className="text-[16px] font-bold" component="div">
                         Category: Drinks
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
@@ -105,7 +105,7 @@ const AvaliableMeal = () => {
                       image={Pic}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h6" component="div">
+                    <Typography gutterBottom className="text-[16px] font-bold" component="div">
                         Category: Fruit
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
@@ -134,7 +134,7 @@ const AvaliableMeal = () => {
                       image={Pic}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h6" component="div">
+                     <Typography gutterBottom className="text-[16px] font-bold" component="div">
                         Category: Fruit
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
@@ -163,7 +163,7 @@ const AvaliableMeal = () => {
                       image={Pic}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h6" component="div">
+                      <Typography gutterBottom className="text-[16px] font-bold" component="div">
                         Category: Fruit
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
@@ -192,7 +192,7 @@ const AvaliableMeal = () => {
                       image={Pic}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h6" component="div">
+                      <Typography gutterBottom className="text-[16px] font-bold" component="div">
                         Category: Fruit
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
@@ -226,4 +226,4 @@ const AvaliableMeal = () => {
   );
 };
 
-export default AvaliableMeal;
+export default AvailableFruit;

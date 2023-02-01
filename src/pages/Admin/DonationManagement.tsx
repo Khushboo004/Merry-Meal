@@ -1,17 +1,18 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Container, FormControl, Grid, InputLabel, NativeSelect } from "@mui/material";
-import ViewMore from "./ViewMore";
+import ViewMore from "../ViewMore";
 type Props = {};
 
 const DonationManagement = (props: Props) => {
   return (
-    <div className="py-5 mx-3">
+    <div className="py-5">
       <h1 className="text-4xl font-bold text-green-400 text-center">
         Delivery Info
       </h1>
-      <Container maxWidth={'xl'}>
+      <Container maxWidth={'xl'} >
         <Grid container mt={2} spacing={2}>
-      <Grid item xs={12}>
+         <Grid item lg={2} xs={.1}></Grid>
+        <Grid item lg={8} sm={10}>
         <div className="search">
           <div className="border border-green-400 rounded-lg flex p-3 w-64 shadow-sm shadow-green-300">
             <SearchIcon />
@@ -22,32 +23,11 @@ const DonationManagement = (props: Props) => {
             />
           </div>
         </div>
-      </Grid>
-      <Grid container mt={2} spacing={2}>
-      <div className="py-5 px-5">
-        <FormControl>
-          <InputLabel variant="standard" htmlFor="uncontrolled-native">
-            Status
-          </InputLabel>
-          <NativeSelect
-            defaultValue={"all"}
-            inputProps={{
-              name: "age",
-              id: "uncontrolled-native",
-            }}
-          >
-            <option value={"all"}>All</option>
-            <option value={"Fruits"}>Fruits</option>
-            <option value={"Vegetables"}>Vegetables</option>
-            <option value={"Healthy Foods"}>Healthy Foods</option>
-            <option value={"Drinks"}>Drinks</option>
-            <option value={"Unhealthy Foods"}>Unhealthy Foods</option>
-            <option value={"Sweets"}>Sweets</option>
-          </NativeSelect>
-        </FormControl>
-      </div>
-      </Grid>
-      <Grid container mt={2} spacing={2}>
+        </Grid>
+         <Grid item lg={2} xs={.1}></Grid>
+
+         <Grid item lg={2} xs={.1}></Grid>
+       <Grid item lg={8} sm={10}>
       <div className="p-4">
         <table className="table-auto border rounded-md">
           <thead>
@@ -60,7 +40,7 @@ const DonationManagement = (props: Props) => {
             </tr>
           </thead>
           <tbody className="text-sm">
-            <tr className="border-b">
+            <tr>
               <td className="p-5">1</td>
               <td className="p-5">Aung</td>
               <td className="p-5">Paypal</td>
@@ -75,7 +55,7 @@ const DonationManagement = (props: Props) => {
                 </button>
               </td>
             </tr>
-            <tr className="border-b">
+            <tr>
               <td className="p-5">1</td>
               <td className="p-5">Aung</td>
               <td className="p-5">Paypal</td>
@@ -94,6 +74,7 @@ const DonationManagement = (props: Props) => {
         </table>
       </div>
       </Grid>
+         <Grid item lg={2} xs={.1}></Grid>
       </Grid>
       </Container>
       <ViewMore />
