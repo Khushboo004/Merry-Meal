@@ -3,6 +3,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import ViewMore from "./ViewMore";
+import { Container, Grid } from "@mui/material";
 type Props = {};
 
 const UserInfo = (props: Props) => {
@@ -11,8 +12,9 @@ const UserInfo = (props: Props) => {
       <h1 className="text-4xl font-bold text-green-400 text-center">
         User Info
       </h1>
-      <div className="grid grid-cols-2 p-5">
-        <div className="search">
+      <Container>
+        <Grid container mt={2} spacing={2}>
+      <Grid item xs={12}>      
           <div className="border border-green-400 rounded-lg flex p-3 w-64 shadow-sm shadow-green-300">
             <SearchIcon />
             <input
@@ -20,15 +22,16 @@ const UserInfo = (props: Props) => {
               className="ml-2 w-full h-full focus:outline-none"
               placeholder="Search Here"
             />
-          </div>
+         
         </div>
         <div className="add flex justify-end">
           <button className="px-5 py-2 bg-blue-500 text-white rounded-lg mr-16">
             Add
           </button>
         </div>
-      </div>
-      <div className="py-5 px-5">
+        </Grid>
+      <Grid item xs={12}>      <div className="flex justify-center">
+      <div className="py-5 px-5 ">
         <FormControl>
           <InputLabel variant="standard" htmlFor="uncontrolled-native">
             Position
@@ -49,7 +52,9 @@ const UserInfo = (props: Props) => {
           </NativeSelect>
         </FormControl>
       </div>
-      <div className="p-4">
+      </div>
+      </Grid>
+      <Grid item  xs={12}>      <div className="p-4">
         <table className="table-auto border rounded-md">
           <thead>
             <tr className="border-b-4 border-green-400">
@@ -64,8 +69,8 @@ const UserInfo = (props: Props) => {
               <th className="p-5">Actions</th>
             </tr>
           </thead>
-          <tbody className="text-sm">
-            <tr>
+          <tbody className="text-sm border-b">
+            <tr className="border-b">
               <td className="p-2">1</td>
               <td className="p-2">Aung Thiha</td>
               <td className="p-2">5-4-2002</td>
@@ -83,7 +88,7 @@ const UserInfo = (props: Props) => {
                 </button>
               </td>
             </tr>
-            <tr>
+            <tr className="border-b">
               <td className="p-2">1</td>
               <td className="p-2">Aung Thiha</td>
               <td className="p-2">5-4-2002</td>
@@ -101,7 +106,7 @@ const UserInfo = (props: Props) => {
                 </button>
               </td>
             </tr>
-            <tr>
+            <tr className="border-b">
               <td className="p-2">1</td>
               <td className="p-2">Aung Thiha</td>
               <td className="p-2">5-4-2002</td>
@@ -119,7 +124,7 @@ const UserInfo = (props: Props) => {
                 </button>
               </td>
             </tr>
-            <tr>
+            <tr className="border-b">
               <td className="p-2">1</td>
               <td className="p-2">Aung Thiha</td>
               <td className="p-2">5-4-2002</td>
@@ -140,6 +145,9 @@ const UserInfo = (props: Props) => {
           </tbody>
         </table>
       </div>
+      </Grid>
+     </Grid>
+     </Container>
       <ViewMore />
     </div>
   );

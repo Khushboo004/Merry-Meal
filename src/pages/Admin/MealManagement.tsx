@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, NativeSelect } from "@mui/material";
+import { Container, FormControl, Grid, InputLabel, NativeSelect } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ViewMore from "./ViewMore";
 
@@ -10,7 +10,11 @@ const MealManagement = (props: Props) => {
       <h1 className="text-4xl font-bold text-green-400 text-center">
         Meal Info
       </h1>
-      <div className="grid grid-cols-2 p-5">
+      
+
+      <Container>
+        <Grid container mt={2} spacing={2}>
+      <Grid item xs={12}>
         <div className="search">
           <div className="border border-green-400 rounded-lg flex p-3 w-64 shadow-sm shadow-green-300">
             <SearchIcon />
@@ -20,8 +24,10 @@ const MealManagement = (props: Props) => {
               placeholder="Search Here"
             />
           </div>
-        </div>
-      </div>
+          </div>
+      </Grid>
+      <Grid item xs={12}>
+
       <div className="py-5 px-5">
         <FormControl>
           <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -44,6 +50,8 @@ const MealManagement = (props: Props) => {
           </NativeSelect>
         </FormControl>
       </div>
+      </Grid>
+      <Grid item  xs={12}>
       <div className="p-4">
         <table className="table-auto border rounded-md">
           <thead>
@@ -58,7 +66,7 @@ const MealManagement = (props: Props) => {
             </tr>
           </thead>
           <tbody className="text-sm">
-            <tr>
+            <tr className="border-b">
               <td className="p-5">No.</td>
               <td className="p-5">Meal Name</td>
               <td className="p-5">Meal Category</td>
@@ -74,7 +82,7 @@ const MealManagement = (props: Props) => {
                 </button>
               </td>
             </tr>
-            <tr>
+            <tr className="border-b">
               <td className="p-5">No.</td>
               <td className="p-5">Meal Name</td>
               <td className="p-5">Meal Category</td>
@@ -93,6 +101,9 @@ const MealManagement = (props: Props) => {
           </tbody>
         </table>
       </div>
+      </Grid>
+     </Grid>
+     </Container>
       <ViewMore />
     </div>
   );
