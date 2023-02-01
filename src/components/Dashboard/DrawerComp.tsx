@@ -8,9 +8,9 @@ import AdminDrawerComp from './Admin/AdminDrawerComp';
 const DrawerComp = () => {
   return (
     <>
-       {/* <PartnerDrawerComp /> */}
-       {/* <CargiverDrawerComp /> */}
-       <AdminDrawerComp />
+        {/* <PartnerDrawerComp />  */}
+       <CargiverDrawerComp />
+       {/* <AdminDrawerComp /> */}
 
    
     </>

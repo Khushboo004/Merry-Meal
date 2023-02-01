@@ -22,6 +22,7 @@ import UserInfo from './pages/Admin/UserInfo';
 import MealManagement from './pages/Admin/MealManagement';
 import DeliManagement from './pages/Admin/DeliManagement';
 import DonationManagement from './pages/Admin/DonationManagement';
+import Donation from './pages/Donation';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path={'caregiverReq'} element={<CaregiverReq />}/>
         <Route path={"profile"} element={<Profile />}></Route>
         <Route path={"edit-pro"} element={<EditProfile />}></Route>
+        <Route path={"donation"} element={<Donation />}/>
 
         </Route>
     

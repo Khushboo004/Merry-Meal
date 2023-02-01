@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../Layout/Navbar/Navbar";
 import "./Contact.css";
 import {
   Box,
@@ -9,13 +8,11 @@ import {
   CardContent,
   CardHeader,
   Paper,
-  Button,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Gmail from "../../assets/Contact Us/gmail.png";
 import Phone from "../../assets/Contact Us/phone.png";
 import ContactImg from "../../assets/Contact Us/contact.png";
-import Footer from "../Layout/Footer/Footer";
 const Contact = () => {
   return (
     <div>

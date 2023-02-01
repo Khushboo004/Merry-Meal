@@ -62,16 +62,16 @@ const SidebarNav = (props: Props) => {
 
 <div>
 {/* When the partner logs in, he/she will be shown the partner sidebar */}
-  {/* <PartnerSidebar /> */}
+  {/* <PartnerSidebar />  */}
 
   {/* When the Cargiver logs in, he/she will be shown the Cargiver sidebar */}
-  {/* <CaregiverSidebar /> */}
+  <CaregiverSidebar />
 
   {/* When the Volunteer logs in, he/she will be shown the Volunteer sidebar */}
 
 
   {/* When the Admin logs in, he/she will be shown the Admin sidebar */}
-  <AdminSidebar />
+  {/* <AdminSidebar /> */}
 </div>
          
         </div>

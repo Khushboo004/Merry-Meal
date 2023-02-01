@@ -12,7 +12,7 @@ const MealManagement = (props: Props) => {
       </h1>
       
 
-      <Container>
+      <Container maxWidth={'xl'}>
         <Grid container mt={2} spacing={2}>
       <Grid item xs={12}>
         <div className="search">

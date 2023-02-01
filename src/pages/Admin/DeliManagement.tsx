@@ -10,7 +10,7 @@ const DeliManagement = (props: Props) => {
       <h1 className="text-4xl font-bold text-green-400 text-center">
         Delivery Info
       </h1>
-      <Container>
+      <Container maxWidth={'xl'}>
         <Grid container mt={2} spacing={2}>
       <Grid item xs={12}>
         <div className="search">

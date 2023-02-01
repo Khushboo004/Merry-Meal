@@ -44,7 +44,7 @@ const CareGiverHome = () => {
 <Button className='mr-5 text-[15px] font-bold' color='info' variant='contained'
 >Accept</Button>
 
-<Button className=' text-[15px] font-bold' color='secondary' variant='contained'>Details</Button>
+<a href="/profile"><Button className=' text-[15px] font-bold' color='secondary' variant='contained'>Details</Button></a>
 
 
       </Box>
