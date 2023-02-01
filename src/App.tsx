@@ -60,7 +60,11 @@ function App() {
           <Route path={"partner"} element={<UserHome />}></Route>
           <Route path={"profile"} element={<Profile />}></Route>
           <Route path={"add-meal"} element={<AddMeal />}></Route>
+          {/* here we will add a button for update  */}
           <Route path={'meals'} element={<Meal />}/>
+
+
+
           <Route path={'time-table'} element={<TimeTable />}/>
           <Route path={"edit-pro"} element={<EditProfile />}/>
 

@@ -14,6 +14,13 @@ const filteringMeal = (
           : item.status === e.target.value
       )
     );
+    setItems(
+      allItems.filter((item: any) =>
+        item.category
+          ? item.category === e.target.value
+          : item.session === e.target.value
+      )
+    );
   };
   
   export default filteringMeal;

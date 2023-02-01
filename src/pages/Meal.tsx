@@ -149,6 +149,7 @@ const Meal = () => {
            </CardContent>
            <CardActions>
              <button className=' bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto '>Details</button>
+             <button className=' bg-gray-700 md:py-2 py-1 hover:bg-gray-800 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto '>Update</button>
            </CardActions>
          </Card>
      
