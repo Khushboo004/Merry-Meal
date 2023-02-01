@@ -26,8 +26,8 @@ const AddCart = () => {
   return (
     <div className="bg-gray-50">
      
-      <div className=" pt-2 h-screen">
-        <Container maxWidth="xl">
+     <div className=" pt-2 mb-10">
+              <Container maxWidth="xl">
           <Grid container mt={2}>
             <Grid item xs={12}>
               <Box textAlign="center">

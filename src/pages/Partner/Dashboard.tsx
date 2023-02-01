@@ -13,12 +13,12 @@ function Dashboard() {
     
       <div >
         <Grid container>
-      <Grid item lg={0.4} md={0.7} sm={0.8} xs={1.2}>
+      <Grid item lg={0.4} md={0.5} sm={0.8} xs={1.2} >
         
         <SidebarNav />
        
       </Grid>
-      <Grid item lg={11.6} md={11.3} sm={11.2}  xs={10.8}>
+      <Grid item lg={11.6} md={11.5} sm={11.2}  xs={10.8} className="">
           <DashboardNav/>
        <Content />
       

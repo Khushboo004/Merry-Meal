@@ -10,6 +10,8 @@ import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import "./Navbar.css";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import MenuProfile from "./MenuProfile";
+import { FaUserNurse} from "react-icons/fa";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -31,9 +33,9 @@ const Navbar = () => {
           </h1>
           
          
-          <ul className="hidden lg:flex cursor-pointer  uppercase  text-center font-bold lg:text-[15px] md:text-[13px]">
-            <li className="lg:p-3 md:px-2 dark:hover:text-green-700 md:pt-1 font-normal">
-            <ul className="px-4  text-left text-1xl cursor-pointer  "> 
+          <ul className="hidden lg:flex cursor-pointer  uppercase  text-center font-bold lg:text-[18px] md:text-[13px]">
+            <li className="lg:p-4 md:px-2 dark:hover:text-green-700 md:pt-1 font-normal">
+            <ul className="px-4  text-left text-xl cursor-pointer  "> 
                 <li>
                 <div className=" items-center">
             <div className="flex  rounded">
@@ -52,14 +54,14 @@ const Navbar = () => {
             </li>
            
            
-            <li className="lg:p-2 md:px-2 pt-1 dark:hover:text-green-700 md:pt-1">
+            <li className="lg:p-4 md:px-2 pt-1 dark:hover:text-green-700 md:pt-1">
               <a href="/">
                 <HomeIcon className="inline-block md:border-none ml-0 mr-2 mb-1 text-gray-900 " />
                 Home
               </a>
             </li>
-            <li className="lg:p-2 md:px-2 dark:hover:text-green-700 md:pt-1">
-              <a href="/contact-us">
+            <li className="lg:p-4 md:px-2 dark:hover:text-green-700 md:pt-1">
+              <a href="/meals">
                 <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
                 Meals
               </a>
@@ -67,21 +69,30 @@ const Navbar = () => {
            
             <li
               onClick={handleClick}
-              className="lg:p-2 relative md:px-2 "
+              className="lg:p-4 relative md:px-2 "
               x-data="{dropdownIpen:false}"
             >
               <ArrowDropDownCircleIcon className="inline-block ml-0 mr-1 mb-2  text-gray-900 " />More
               {showOption && (
                 <div className="md:absolute bg-green-500 border p-2 rounded-lg  right-0">
-                  <ul className="space-y-2 md:w-40">
-                    <li className="lg:p-3 md:p-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                  <ul className="space-y-2 l md:w-48">
+                  <li className="lg:p-4 md:p-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                      <a href="/caregiverReq">
+                        <FaUserNurse className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
+                        <span className=" md:inline-block">CareGivers</span>
+                      </a>
+                    </li>
+
+
+
+                    <li className="lg:p-4 md:p-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
                       <a href="/about-us">
                         <InfoIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
                         <span className=" md:inline-block">About Us</span>
                       </a>
                     </li>
 
-                    <li className="lg:p-3 md:px-2 dark:hover:text-green-700">
+                    <li className="lg:p-4 md:px-2 dark:hover:text-green-700">
                       <a href="/contact-us">
                         <ContactsIcon className="inline-block ml-0 mr-1 mb-2 text-gray-900 " />{" "}
                         <span className=" md:inline-block">Contact Us</span>
@@ -91,23 +102,29 @@ const Navbar = () => {
                 </div>
               )}
             </li>
-            <li className="lg:p-2 md:px-2 dark:hover:text-green-700">
+            <li className="lg:p-4 md:px-2 dark:hover:text-green-700">
               <a href="/login">
                 <LoginIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
                 Login
               </a>
             </li>
-            <li className="lg:p-2 px-2 md:px-2 dark:hover:text-green-700 ">
-              <a href="/" >
+            <li className="lg:p-4 px-2 md:px-2 dark:hover:text-green-700 ">
+              <a href="/register" >
                 <AppRegistrationIcon className="inline-block ml-0 mr-1 mb-2 text-gray-900 " />
                 Registration
               </a>
             </li>
-            <li className="lg:p-2 md:px-2 mt-3 lg:mb-1 justify-center h-10 items-center  text-white dark:hover:text-green-700 ">
+           
+
+            <li className="lg:p-4 md:px-2 mt-3 lg:mb-1 justify-center h-10 items-center  text-white dark:hover:text-green-700 ">
               <a href="/add-cart" className="bg-orange-600 p-2 hover:bg-orange-700">
               <ShoppingCartIcon className=" text-white" />
               </a>
             </li >
+
+          <li>
+              <MenuProfile />
+            </li> 
           </ul>
           <div onClick={handleNav} className="block lg:hidden ">
             {!nav ? (
@@ -175,7 +192,7 @@ const Navbar = () => {
                 </a>
               </li>
               <li className="p-4 border-gray-600 hover:border-b dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/contact-us">
+                <a href="/register">
                   <AppRegistrationIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   Registration
                 </a>

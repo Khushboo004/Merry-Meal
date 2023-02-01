@@ -5,6 +5,8 @@ import { AiOutlineClose  } from "react-icons/ai";
 
 import DrawerComp from "./DrawerComp";
 import PartnerSidebar from "./Partner/PartnerSidebar";
+import CaregiverSidebar from "./CareGiver/CaregiverSidebar";
+import AdminSidebar from "./Admin/AdminSidebar";
 type Props = {};
 
 const SidebarNav = (props: Props) => {
@@ -59,38 +61,19 @@ const SidebarNav = (props: Props) => {
           </ul>
 
 <div>
-  <PartnerSidebar />
+{/* When the partner logs in, he/she will be shown the partner sidebar */}
+  {/* <PartnerSidebar /> */}
+
+  {/* When the Cargiver logs in, he/she will be shown the Cargiver sidebar */}
+  {/* <CaregiverSidebar /> */}
+
+  {/* When the Volunteer logs in, he/she will be shown the Volunteer sidebar */}
+
+
+  {/* When the Admin logs in, he/she will be shown the Admin sidebar */}
+  <AdminSidebar />
 </div>
-          {/* <ul className="p-4 uppercase text-left text-1xl cursor-pointer font-bold ">
-          <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/dataSummary">
-                <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
-                Home
-              </a>
-            </li>
-          <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/about-us">
-                <SummarizeIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
-                Info Summary
-              </a>
-            </li>
-            <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/profile">
-                <PersonIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
-                My Profile
-              </a>
-            </li>
-           
-            <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-              <a href="/meals">
-                <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
-                Add Meal
-              </a>
-            </li>
-           
-            
-            
-          </ul> */}
+         
         </div>
       
     

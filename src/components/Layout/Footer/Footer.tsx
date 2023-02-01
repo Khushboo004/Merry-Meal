@@ -8,7 +8,7 @@ import Phone from "../../../assets/Logo/phone.png";
 const Footer = () => {
   return (
     <div>
-      <div className="bg-slate-900 lg:p-14 m-0 text-white">
+      <div className="bg-slate-900 pb-5 lg:p-14 m-0 text-white">
         <Container maxWidth="lg" className="pb-5">
           <Grid container spacing={4}>
             <Grid item lg={4} md={4} sm={12} xs={12}>

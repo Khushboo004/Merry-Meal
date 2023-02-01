@@ -9,22 +9,30 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 type Props = {};
 
-const Profile = (props: Props) => {
+const EditProfile = (props: Props) => {
   const birth = new Date(2002, 4, 4);
   const bornOn = dayjs(birth);
   const gender = ["Male", "Female"];
   return (
-    <div className="p-10">
-       
-      <div className="flex justify-center">
-        <Avatar sx={{ bgcolor: deepOrange[500], width: 55, height: 55 }}>
+    <div className="p-10 mb-32 mt-7 ">
+        <Container maxWidth={'lg'} className="shadow-md">
+      <div className="my-3 ">
+     
+      <div className="flex justify-center ">
+        <Avatar sx={{ bgcolor: deepOrange[500], width: 150, height: 150 }}>
           N
         </Avatar>
+        
       </div>
-      <Container maxWidth={'lg'}>
+      <div className="flex justify-center mt-2">
+								<input type="file" name="profileImage"
+									placeholder="Change Photo" id="profileImage"/>
+							</div>
+      </div>
+      {/* <Container maxWidth={'lg'}> */}
       <Grid container mt={2} spacing={2} >
       <Grid item  xs={4}>
-        <div className="p-3 font-bold">Name</div>
+        <div className="p-3 font-bold  ">Name</div>
         </Grid>
         <Grid item  xs={8}>
         <div className="">
@@ -120,10 +128,15 @@ const Profile = (props: Props) => {
           />
         </div>
      </Grid>
+     <Grid item  xs={12}>
+     <div className="flex justify-center p-3 my-2">
+      <button className="p-3 bg-orange-800 text-xl font-bold hover:bg-orange-700 text-white rounded-lg">Change</button>
+      </div>
+      </Grid>
      </Grid>
     </Container>
     </div>
   );
 };
 
-export default Profile;
+export default EditProfile;

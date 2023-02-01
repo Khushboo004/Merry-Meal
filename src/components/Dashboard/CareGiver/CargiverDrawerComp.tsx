@@ -4,7 +4,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import PersonIcon from "@mui/icons-material/Person";
 import SummarizeIcon from "@mui/icons-material/Summarize";
-const PartnerDrawerComp = () => {
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+const CargiverDrawerComp = () => {
   return (
     <div>
          <div className=" fixed left-0 top-0 h-screen lg:w-[4%] sm:w-[7%] md:w-[8%] w-[10%] bg-opacity-100 ease-in-out duration-500 py-1 bg-green-400  ">
@@ -14,18 +15,19 @@ const PartnerDrawerComp = () => {
   
             <ul className="py-20 uppercase text-left text-2xl cursor-pointer font-bold ">
               <li className="p-2 border-b text-center border-t-2 border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <AiOutlineMenu className="inline-block mr-2 mb-2 text-gray-900 " />
+                
+                  <AiOutlineMenu className="inline-block mr-2 mb-2 text-gray-900 " />
   
                
               </li> <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard">
+                <a href="/dashboard/caregiver">
                   <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
               </li>
                <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
                 <a href="/dashboard">
-                  <SummarizeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
+                  <AccessTimeFilledIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
                 </a>
                 </li>
@@ -35,12 +37,7 @@ const PartnerDrawerComp = () => {
                   
                 </a>
               </li>
-              <li className="py-3 border-b border-gray-600 text-center dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/dashboard/add-meal">
-                  <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
-                  
-                </a>
-              </li>
+             
              
               
             </ul>
@@ -50,4 +47,4 @@ const PartnerDrawerComp = () => {
   )
 }
 
-export default PartnerDrawerComp
+export default CargiverDrawerComp
