@@ -1,3 +1,8 @@
 const getAllMeals = () => {
-  return axios.post("/api/v1/partners/meals");
+  const token = localStorage.getItem("token");
+  return axios.post("/api/v1/partners/meals", {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
 };
