@@ -212,10 +212,10 @@ const Navbar = (props: Props) => {
           <div
             className={
               !nav
-                ? "fixed left-0 top-0 z-20 h-full md:w-[30%] sm:w-[40%] w-[55%] bg-opacity-100 ease-in-out duration-500 bg-green-400 lg:hidden"
+                ? "fixed left-0 top-0 z-20 h-full md:w-[30%] sm:w-[40%] w-[55%]  ease-in-out duration-500 bg-white shadow-md backdrop-filter backdrop-blur-lg bg-opacity-60 lg:hidden"
                 : "fixed left-[-100%]"
             }
-          >
+          > <div className="bg-white left-0 top-0 z-20 shadow-md backdrop-filter backdrop-blur-lg bg-opacity-60">
             <h1 className="w-full text-3xl font-bold m-4  cursor-pointer font-serif">
               Merry Meal
             </h1>
@@ -235,7 +235,7 @@ const Navbar = (props: Props) => {
                 </div>
               </li>
             </ul>
-
+           
             {role === "MEMBER" ? (
               <ul className="p-4 uppercase text-left text-xl cursor-pointer font-bold ">
                 <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
@@ -318,6 +318,7 @@ const Navbar = (props: Props) => {
             ) : (
               <></>
             )}
+            </div>
           </div>
         </div>
       </div>

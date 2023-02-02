@@ -27,8 +27,8 @@ const DashboardNav = (props: Props) => {
     navigate(`/${role?.toLowerCase()}`);
   };
   return (
-    <div className="sticky top-0 z-20 bg-green-400 backdrop-filter backdrop-blur-lg  p-2 text-bold text-xl flex justify-end ">
-      <h1 className="w-full text-3xl text-white font-bold m-4  cursor-pointer font-serif">
+    <div className="sticky top-0 z-20 bg-white left-0 border-b border--600  backdrop-filter backdrop-blur-lg bg-opacity-60   p-2 text-bold text-xl flex justify-end ">
+      <h1 className="w-full text-3xl text-green-400 font-bold m-4  cursor-pointer font-serif">
             Merry Meal
           </h1>
       <Tooltip title="Account Nav">
