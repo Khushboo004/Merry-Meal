@@ -1,24 +1,21 @@
-import React from 'react'
-import "../styles/Login.css"
-import {  Grid } from '@mui/material';
-import FormLogin from '../components/Auth/Login/FormLogin';
+import React from "react";
+import "../styles/Login.css";
+import { Grid } from "@mui/material";
+import FormLogin from "../components/Auth/Login/FormLogin";
 export default function Login() {
-    return (
-        <div>
-           
-   <div className=' background '>
-   <Grid container spacing={2}>
-   <Grid item xs={2} md={3} lg={4} className=''></Grid>
-      <Grid item lg={4} md={6} xs={8}  className='m-3'>
-        
-      
-        <div className='pt-20'><FormLogin/></div>
-       
-      </Grid>
-      <Grid item xs={2} md={3} lg={4} className=''></Grid>
-    </Grid>
-   </div>
-
-        </div>
-    )
+  return (
+    <div>
+      <div className=" background ">
+        <Grid container spacing={2}>
+          <Grid item xs={2} md={3} lg={4} className=""></Grid>
+          <Grid item lg={4} md={6} xs={8} className="m-3">
+            <div className="pt-20">
+              <FormLogin />
+            </div>
+          </Grid>
+          <Grid item xs={2} md={3} lg={4} className=""></Grid>
+        </Grid>
+      </div>
+    </div>
+  );
 }

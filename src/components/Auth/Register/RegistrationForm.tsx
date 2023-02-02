@@ -1,22 +1,23 @@
 import { Box, Grid, Typography } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import React, { useState } from "react";
-import Google  from "../../../assets/google.png";
+import Google from "../../../assets/google.png";
+import { register } from "../../../services/AuthService";
 
 interface FormData {
-    name: string;
-    email: string;
-    password: string;
-  }
-  
-  const initialFormData: FormData = {
-    name: "",
-    email: "",
-    password: "",
-  };
-  
+  name: string;
+  email: string;
+  password: string;
+}
+
+const initialFormData: FormData = {
+  name: "",
+  email: "",
+  password: "",
+};
+
 const RegistrationForm: React.FC = () => {
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [submitting, setSubmitting] = useState<boolean>(false);
 
@@ -39,8 +40,13 @@ const RegistrationForm: React.FC = () => {
     event.preventDefault();
     setSubmitting(true);
     if (validate()) {
-      console.log("Form is valid, send data to the server");
-      // Do something with the form data here
+      register(formData.email, formData.password)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
     setSubmitting(false);
   };
@@ -56,7 +62,10 @@ const RegistrationForm: React.FC = () => {
   return (
     <div className="shadow-lg  bg-white  ">
       <div className=" rounded-lg w-full mb-72">
-        <Typography variant="h6" className="text-center text-3xl py-5 pt-10 font-bold uppercase font-serif">
+        <Typography
+          variant="h6"
+          className="text-center text-3xl py-5 pt-10 font-bold uppercase font-serif"
+        >
           Register
         </Typography>
 
@@ -140,69 +149,70 @@ const RegistrationForm: React.FC = () => {
             {formErrors.password && <div>{formErrors.password}</div>}
           </div>
           <Box className="sm:pl-20 pl-10">
-          <button className=" bg-sky-600 mt-2 py-2 font-bold  hover:bg-sky-700  700   w-10/12   text-white rounded-md  ">
-            Submit
-          </button>
-        
+            <button className=" bg-sky-600 mt-2 py-2 font-bold  hover:bg-sky-700  700   w-10/12   text-white rounded-md  ">
+              Submit
+            </button>
           </Box>
-          <Box className="sm:pl-20 pl-10" >
-          <Grid container  className=" text-center inline-block 700  w-10/12">
-          <Grid item xs={12} className="">
-                                      <Box className="mx-3 my-2">
-                                        <Box
-                                          sx={{ display: "flex" }}
-                                        ><Grid container>
-                                          <Grid item xs={5.5}>
-                                          <div style={{ borderTop: "2px solid gray " }} className="mt-2"></div>
-
-                                          </Grid>
-                                          <Grid item xs={1} >
-                                          <div className="text-[14px] text-center top-0">
-                                            OR
-                                          </div>
-                                          </Grid>
-                                          <Grid item xs={5.5}>
-                                          <div style={{ borderTop: "2px solid gray " }} className="mt-2"></div>
-
-                                          </Grid>
-                                          </Grid>
-                                        </Box>
-                                      </Box>
-                                    </Grid>
-                                  </Grid>
+          <Box className="sm:pl-20 pl-10">
+            <Grid container className=" text-center inline-block 700  w-10/12">
+              <Grid item xs={12} className="">
+                <Box className="mx-3 my-2">
+                  <Box sx={{ display: "flex" }}>
+                    <Grid container>
+                      <Grid item xs={5.5}>
+                        <div
+                          style={{ borderTop: "2px solid gray " }}
+                          className="mt-2"
+                        ></div>
+                      </Grid>
+                      <Grid item xs={1}>
+                        <div className="text-[14px] text-center top-0">OR</div>
+                      </Grid>
+                      <Grid item xs={5.5}>
+                        <div
+                          style={{ borderTop: "2px solid gray " }}
+                          className="mt-2"
+                        ></div>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
           </Box>
-          <h1 className=" font-serif text-center mb-2 underline underline-offset-4">Sign In with social media account</h1>
+          <h1 className=" font-serif text-center mb-2 underline underline-offset-4">
+            Sign In with social media account
+          </h1>
           <Box className=" sm:pl-20 pl-10">
-          <a href="/meal-details">
-              <button className=" bg-gray-50  mb-2 py-2 font-bold  shadow-md hover:bg-gray-100 w-10/12 rounded-lg  ">
-              <img
-                        className="w-[30px] inline-block h-8 mr-2"
-                        src={Google}
-                        alt="/"
-                      />{" "} Sign in with Google
-              </button>
-            </a>
-          
             <a href="/meal-details">
-            <button className=" bg-blue-600 mt-2 py-2 font-bold w-10/12 hover:bg-blue-700  700     text-white rounded-md  ">
-
-              {/* <button className=" bg-green-600 py-2  my-1 font-bold  sm:text-[15px] text-[12px] mr-2 hover:bg-green-700  w-[56px]  text-white rounded-md mx-auto "> */}
-              <FacebookIcon className="mr-3"/>Log in with facebook
+              <button className=" bg-gray-50  mb-2 py-2 font-bold  shadow-md hover:bg-gray-100 w-10/12 rounded-lg  ">
+                <img
+                  className="w-[30px] inline-block h-8 mr-2"
+                  src={Google}
+                  alt="/"
+                />{" "}
+                Sign in with Google
               </button>
-  
             </a>
-           
-           
+
+            <a href="/meal-details">
+              <button className=" bg-blue-600 mt-2 py-2 font-bold w-10/12 hover:bg-blue-700  700     text-white rounded-md  ">
+                {/* <button className=" bg-green-600 py-2  my-1 font-bold  sm:text-[15px] text-[12px] mr-2 hover:bg-green-700  w-[56px]  text-white rounded-md mx-auto "> */}
+                <FacebookIcon className="mr-3" />
+                Log in with facebook
+              </button>
+            </a>
           </Box>
         </form>
         <Box className="pb-2 mb-2">
-        <p className="text-gray-800 mt-4  text-center">
-        Already have an account ?
+          <p className="text-gray-800 mt-4  text-center">
+            Already have an account ?
             <a
               href="/login"
               className="text-blue-600 hover:text-blue-700 ml-2 focus:text-blue-700 transition duration-200 ease-in-out"
-            > Login
-              
+            >
+              {" "}
+              Login
             </a>
           </p>
         </Box>
@@ -210,4 +220,4 @@ const RegistrationForm: React.FC = () => {
     </div>
   );
 };
-export default RegistrationForm
+export default RegistrationForm;
