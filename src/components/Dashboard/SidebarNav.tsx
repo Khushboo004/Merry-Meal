@@ -28,11 +28,11 @@ const SidebarNav = (props: Props) => {
       <div
         className={
           !nav
-            ? "fixed left-0 top-0 z-20 h-full lg:w-[20%] md:w-[28%] sm:w-[32%] w-[43%]  backdrop-filter backdrop-blur-lg  ease-in-out duration-500 bg-green-400 lg:visible"
+            ? "fixed  h-full lg:w-[20%] md:w-[28%] sm:w-[32%] w-[43%]  ease-in-out duration-500  bg-white left-0 top-0 z-20 shadow-md backdrop-filter backdrop-blur-lg bg-opacity-60 lg:visible"
             : "fixed left-[-100%]"
         }
       >
-        <h1 className="w-full text-3xl text-green-400 font-bold m-6 text-center  cursor-pointer font-serif">
+        <h1 className="w-full text-3xl text-white font-bold m-6 text-center  cursor-pointer font-serif">
           Merry Meal
         </h1>
         <hr className="border-b"></hr>
