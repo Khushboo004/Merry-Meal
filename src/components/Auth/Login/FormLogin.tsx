@@ -3,6 +3,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import React, { useState } from "react";
 import Google from "../../../assets/google.png";
 import { login } from "../../../services/AuthService";
+import { useNavigate } from "react-router-dom";
 
 interface FormData {
   email: string;
@@ -15,11 +16,13 @@ const initialFormData: FormData = {
 };
 
 const FormLogin: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [submitting, setSubmitting] = useState<boolean>(false);
 
   const validate = (): boolean => {
+   
     const errors: Partial<FormData> = {};
 
     if (!formData.email) {
@@ -39,6 +42,7 @@ const FormLogin: React.FC = () => {
       login(formData.email, formData.password)
         .then((res) => {
           localStorage.setItem("token", res.data.accessToken);
+          
         })
         .catch((error) => {
           console.log(error);

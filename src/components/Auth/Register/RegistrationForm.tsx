@@ -3,6 +3,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import React, { useState } from "react";
 import Google from "../../../assets/google.png";
 import { register } from "../../../services/AuthService";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface FormData {
   name: string;
@@ -17,9 +19,11 @@ const initialFormData: FormData = {
 };
 
 const RegistrationForm: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const [registerStatus, setRegisterStatus] = useState("");
 
   const validate = (): boolean => {
     const errors: Partial<FormData> = {};
@@ -43,6 +47,8 @@ const RegistrationForm: React.FC = () => {
       register(formData.email, formData.password)
         .then((res) => {
           console.log(res);
+          toast.success("Registered successfully !!");
+          navigate("/member/edit-pro");
         })
         .catch((error) => {
           console.log(error);
@@ -70,6 +76,7 @@ const RegistrationForm: React.FC = () => {
         </Typography>
 
         <form onSubmit={handleSubmit}>
+          
           <div className="form-group mb-1 sm:pl-20 pl-10">
             <label htmlFor="name">Name:</label>
             <input
