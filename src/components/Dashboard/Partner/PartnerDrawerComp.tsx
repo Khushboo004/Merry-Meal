@@ -4,6 +4,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import PersonIcon from "@mui/icons-material/Person";
 import SummarizeIcon from "@mui/icons-material/Summarize";
+import {NavLink} from "react-router-dom"
+
 const PartnerDrawerComp = () => {
   return (
     <div>
@@ -18,28 +20,28 @@ const PartnerDrawerComp = () => {
   
                
               </li> <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/partner">
+                 <NavLink to="/partner">
                   <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>
                <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/partner">
+                 <NavLink to="/partner">
                   <SummarizeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
                 </li>
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/partner/profile">
+                 <NavLink to="/partner/profile">
                   <PersonIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>
               <li className="py-3 border-b border-gray-600 text-center dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/partner/add-meal">
+                 <NavLink to="/partner/add-meal">
                   <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>
              
               

@@ -1,10 +1,10 @@
 import React from 'react'
 import {  AiOutlineMenu } from "react-icons/ai";
 import HomeIcon from '@mui/icons-material/Home';
-import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import PersonIcon from "@mui/icons-material/Person";
-import SummarizeIcon from "@mui/icons-material/Summarize";
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import {NavLink} from "react-router-dom"
+
 const CargiverDrawerComp = () => {
   return (
     <div>
@@ -20,22 +20,22 @@ const CargiverDrawerComp = () => {
   
                
               </li> <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/caregiver/dashborad">
+                <NavLink to="/caregiver/dashborad">
                   <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>
                <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/caregiver/time-table">
+                <NavLink to="/caregiver/time-table">
                   <AccessTimeFilledIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
                 </li>
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/caregiver/profile">
+                <NavLink to="/caregiver/profile">
                   <PersonIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>
              
              

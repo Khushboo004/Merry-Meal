@@ -12,6 +12,7 @@ import "./Navbar.css";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuProfile from "./MenuProfile";
 import { FaUserNurse} from "react-icons/fa";
+import {NavLink} from "react-router-dom"
 type Props = {
   role: String;
 };
@@ -57,16 +58,16 @@ const Navbar  = (props: Props) => {
            
            
             <li className="lg:p-4 md:px-2 pt-1 dark:hover:text-green-700 md:pt-1">
-              <a href="/member">
-                <HomeIcon className="inline-block md:border-none ml-0 mr-2 mb-1 text-gray-900 " />
-                Home
-              </a>
+              {/* <a href="/member" > */}
+              <NavLink to="/member" > <HomeIcon className="inline-block md:border-none ml-0 mr-2 mb-1 text-gray-900 " />
+                Home </NavLink>
+                
             </li>
             <li className="lg:p-4 md:px-2 dark:hover:text-green-700 md:pt-1">
-              <a href="/member/meals">
+              <NavLink to="/member/meals">
                 <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
                 Meals
-              </a>
+              </NavLink>
             </li>
            
             <li
@@ -79,26 +80,26 @@ const Navbar  = (props: Props) => {
                 <div className="md:absolute bg-green-500 border p-2 rounded-lg  right-0">
                   <ul className="space-y-2 l md:w-48">
                   <li className="lg:p-4 md:p-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                      <a href="/member/caregiverReq">
+                  <NavLink to="/member/caregiverReq">
                         <FaUserNurse className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
                         <span className=" md:inline-block">CareGivers</span>
-                      </a>
+                      </NavLink>
                     </li>
 
 
 
                     <li className="lg:p-4 md:p-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                      <a href="/member/about-us">
+                    <NavLink to="/member/about-us">
                         <InfoIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
                         <span className=" md:inline-block">About Us</span>
-                      </a>
+                      </NavLink>
                     </li>
 
                     <li className="lg:p-4 md:px-2 dark:hover:text-green-700">
-                      <a href="/member/contact-us">
+                    <NavLink to="/member/contact-us">
                         <ContactsIcon className="inline-block ml-0 mr-1 mb-2 text-gray-900 " />{" "}
                         <span className=" md:inline-block">Contact Us</span>
-                      </a>
+                      </NavLink>
                     </li>
                   </ul>
                 </div>
@@ -108,9 +109,9 @@ const Navbar  = (props: Props) => {
            
 
             <li className="lg:p-4 md:px-2 mt-3 lg:mb-1 justify-center h-10 items-center  text-white dark:hover:text-green-700 ">
-              <a href="/membermember//add-cart" className="bg-orange-600 p-2 hover:bg-orange-700">
+            <NavLink to="/member/add-cart" className="bg-orange-600 p-2 hover:bg-orange-700">
               <ShoppingCartIcon className=" text-white" />
-              </a>
+              </NavLink>
             </li >
 
           <li>
@@ -149,16 +150,16 @@ const Navbar  = (props: Props) => {
           
           
            <li className="lg:p-4 md:px-2 pt-1 dark:hover:text-green-700 md:pt-1">
-             <a href="/">
+           <NavLink to="/">
                <HomeIcon className="inline-block md:border-none ml-0 mr-2 mb-1 text-gray-900 " />
                Home
-             </a>
+             </NavLink>
            </li>
            <li className="lg:p-4 md:px-2 dark:hover:text-green-700 md:pt-1">
-             <a href="/meals">
+              <NavLink to="/meals">
                <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
                Meals
-             </a>
+             </NavLink>
            </li>
           
            <li
@@ -175,40 +176,40 @@ const Navbar  = (props: Props) => {
 
 
                    <li className="lg:p-4 md:p-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                     <a href="/about-us">
+                      <NavLink to="/about-us">
                        <InfoIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
                        <span className=" md:inline-block">About Us</span>
-                     </a>
+                     </NavLink>
                    </li>
 
                    <li className="lg:p-4 md:px-2 dark:hover:text-green-700">
-                     <a href="/contact-us">
+                      <NavLink to="/contact-us">
                        <ContactsIcon className="inline-block ml-0 mr-1 mb-2 text-gray-900 " />{" "}
                        <span className=" md:inline-block">Contact Us</span>
-                     </a>
+                     </NavLink>
                    </li>
                  </ul>
                </div>
              )}
            </li>
            <li className="lg:p-4 md:px-2 dark:hover:text-green-700">
-             <a href="/login">
+              <NavLink to="/login">
                <LoginIcon className="inline-block ml-0 mr-2 mb-1 text-gray-900 " />
                Login
-             </a>
+             </NavLink>
            </li>
            <li className="lg:p-4 px-2 md:px-2 dark:hover:text-green-700 ">
-             <a href="/register" >
+              <NavLink to="/register" >
                <AppRegistrationIcon className="inline-block ml-0 mr-1 mb-2 text-gray-900 " />
                Registration
-             </a>
+             </NavLink>
            </li>
           
 
            <li className="lg:p-4 md:px-2 mt-3 lg:mb-1 justify-center h-10 items-center  text-white dark:hover:text-green-700 ">
-             <a href="/add-cart" className="bg-orange-600 p-2 hover:bg-orange-700">
+              <NavLink to="/add-cart" className="bg-orange-600 p-2 hover:bg-orange-700">
              <ShoppingCartIcon className=" text-white" />
-             </a>
+             </NavLink>
            </li >
          </ul>
           ) : (
@@ -252,28 +253,34 @@ const Navbar  = (props: Props) => {
             {role === "MEMBER" ? (
             <ul className="p-4 uppercase text-left text-xl cursor-pointer font-bold ">
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/member">
+                 <NavLink to="/member">
                   <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   Home
-                </a>
+                </NavLink>
               </li>
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/member/meals">
+                 <NavLink to="/member/meals">
                   <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   Meals
-                </a>
+                </NavLink>
               </li>
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/member/about-us">
+                 <NavLink to="/member/meals">
+                  <FaUserNurse className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
+                  Caregivers
+                </NavLink>
+              </li>
+              <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                 <NavLink to="/member/about-us">
                   <InfoIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   About Us
-                </a>
+                </NavLink>
               </li>
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/member/contact-us">
+                 <NavLink to="/member/contact-us">
                   <ContactsIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   Contact Us
-                </a>
+                </NavLink>
               </li>
               <li>
               <MenuProfile role={role} />
@@ -288,40 +295,40 @@ const Navbar  = (props: Props) => {
 {role === "" ? (
             <ul className="p-4 uppercase text-left text-xl cursor-pointer font-bold ">
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/">
+                 <NavLink to="/">
                   <HomeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   Home
-                </a>
+                </NavLink>
               </li>
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/meals">
+                 <NavLink to="/meals">
                   <RestaurantMenuIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   Meals
-                </a>
+                </NavLink>
               </li>
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/about-us">
+                 <NavLink to="/about-us">
                   <InfoIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   About Us
-                </a>
+                </NavLink>
               </li>
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/contact-us">
+                 <NavLink to="/contact-us">
                   <ContactsIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   Contact Us
-                </a>
+                </NavLink>
               </li>
               <li className="p-4 border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/login">
+                 <NavLink to="/login">
                   <LoginIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   Login
-                </a>
+                </NavLink>
               </li>
               <li className="p-4 border-gray-600 hover:border-b dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/register">
+                 <NavLink to="/register">
                   <AppRegistrationIcon className="inline-block ml-0 mr-2 mb-2 text-gray-900 " />
                   Registration
-                </a>
+                </NavLink>
               </li>
             </ul>
              ) : (

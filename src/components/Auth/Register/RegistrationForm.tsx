@@ -54,8 +54,8 @@ const RegistrationForm: React.FC = () => {
   };
 
   return (
-    <div className="shadow-lg bg-white ">
-      <div className=" rounded-lg w-full">
+    <div className="shadow-lg  bg-white  ">
+      <div className=" rounded-lg w-full mb-72">
         <Typography variant="h6" className="text-center text-3xl py-5 pt-10 font-bold uppercase font-serif">
           Register
         </Typography>

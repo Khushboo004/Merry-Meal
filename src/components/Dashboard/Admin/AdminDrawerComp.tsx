@@ -6,6 +6,8 @@ import RecentActorsIcon from "@mui/icons-material/RecentActors";
 import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import {NavLink} from "react-router-dom"
+
 const AdminDrawerComp = () => {
   return (
     <div>
@@ -21,42 +23,42 @@ const AdminDrawerComp = () => {
   
                
               </li> <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/admin/dataSummary">
+                <NavLink to="/admin/dataSummary">
                   <SummarizeIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>
               <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/admin/profile">
+                <NavLink to="/admin/profile">
                   <PersonIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>
                <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/admin/userinfo">
+                <NavLink to="/admin/userinfo">
                   <RecentActorsIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
                 </li>
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/admin/mealinfo">
+                <NavLink to="/admin/mealinfo">
                   <DinnerDiningIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li> 
                
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/admin/deliinfo">
+                <NavLink to="/admin/deliinfo">
                   <DeliveryDiningIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>  
              
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/admin/donateinfo">
+                <NavLink to="/admin/donateinfo">
                   <VolunteerActivismIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>
              
              

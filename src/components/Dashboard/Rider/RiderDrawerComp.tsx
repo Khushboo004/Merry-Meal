@@ -2,6 +2,8 @@ import React from 'react'
 import {  AiOutlineMenu } from "react-icons/ai";
 import PersonIcon from "@mui/icons-material/Person";
 import RecentActorsIcon from "@mui/icons-material/RecentActors";
+import {NavLink} from "react-router-dom"
+
 const RiderDrawerComp = () => {
   return (
     <div>
@@ -18,16 +20,16 @@ const RiderDrawerComp = () => {
                
               </li>
                  <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/rider/profile">
+                <NavLink to="/rider/profile">
                   <PersonIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>
               <li className="py-2 text-center border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
-                <a href="/rider/deliveries">
+                <NavLink to="/rider/deliveries">
                   <RecentActorsIcon className="inline-block mr-2 mb-2 text-gray-900 " />
                   
-                </a>
+                </NavLink>
               </li>
              
              

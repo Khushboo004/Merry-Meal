@@ -7,7 +7,7 @@ import RegistrationForm from '../components/Auth/Register/RegistrationForm';
 const Registration = () => {
   return (
     <div>
-         <div  className='backgroundImg'>  
+         <div  className='pb-10 backgroundImg'>  
         <Grid container spacing={2}>
    <Grid item xs={2} md={3} lg={4} className=''></Grid>
       <Grid item lg={4} md={6} xs={8}  className='m-3'>

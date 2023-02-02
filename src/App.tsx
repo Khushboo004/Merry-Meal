@@ -46,6 +46,7 @@ function App() {
           element={<ProtectedRoute isAllowed={auth.role.includes("ADMIN")} />}
         >
         <Route path={"/admin"} element={<Dashboard role={"ADMIN"} />}>
+        <Route index element={<DataSummary />}></Route>
         <Route path={"dataSummary"} element={<DataSummary />}></Route>
           <Route path={"userinfo"} element={<UserInfo />}></Route>
           <Route path={"mealinfo"} element={<MealManagement />}></Route>
@@ -97,7 +98,7 @@ function App() {
           <Route path={"add-cart"} element={<AddCart />} />
           <Route path={'about-us'} element={<AboutUs />}/>
           <Route path={'meals'} element={<Meal />}/>
-        <Route path={'contact-us'} element={<ContactUs />}/>
+          <Route path={'contact-us'} element={<ContactUs />}/>
           <Route path={'caregiverReq'} element={<CaregiverReq />}/>
           <Route path={"edit-pro"} element={<EditProfile />}></Route>
             </Route>
@@ -146,15 +147,6 @@ function App() {
           </Route>
         </Route>
       
-
-
-
-          {/* <Route path={"edit-pro"} element={<EditProfile />}/> */}
-
-
-
-          
-          {/* </Route> */}
         </Routes>
         </BrowserRouter>
     
