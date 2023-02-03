@@ -2,10 +2,9 @@ import { Box, Grid, Typography } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import React, { useState } from "react";
 import Google from "../../../assets/google.png";
-import { register } from "../../../services/AuthService";
+import { getRoles, register } from "../../../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
 
 interface FormData {
   name: string;
@@ -18,13 +17,15 @@ const initialFormData: FormData = {
   email: "",
   password: "",
 };
-
-const RegistrationForm: React.FC = () => {
-  const navigate = useNavigate();
+type Props = {
+  auth: any;
+};
+const RegistrationForm = (props: Props) => {
+  const { auth } = props;
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [submitting, setSubmitting] = useState<boolean>(false);
-
+  const navigate = useNavigate();
   const validate = (): boolean => {
     const errors: Partial<FormData> = {};
     if (!formData.name) {
@@ -44,15 +45,31 @@ const RegistrationForm: React.FC = () => {
     event.preventDefault();
     setSubmitting(true);
     if (validate()) {
+      const toastId = toast.loading("Registering, please Wait");
       register(formData.email, formData.password)
         .then((res) => {
-
-          toast.success("Registered successfully !!");
           localStorage.setItem("token", res.data.accessToken);
-          navigate("/creatProfile", { replace: true });
+          getRoles(res.data.accessToken).then((res) => {
+            const auths: any = [];
+            res.data.roleResponses.forEach((role: { role: string }) => {
+              auths.push(role.role.replace("ROLE_", ""));
+            });
+            auth({
+              role: auths,
+            });
+            console.log(auths);
+            localStorage.setItem("authorization", JSON.stringify(auths));
+            navigate("/creatProfile", { replace: true });
+          });
+
+         toast.success("Registered successfully !!");
+          toast.dismiss(toastId);
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response.status === 409) {
+            toast.error("Account has been created, please consider to login!");
+          }
+          console.error(error);
         });
     }
     setSubmitting(false);
@@ -77,7 +94,6 @@ const RegistrationForm: React.FC = () => {
         </Typography>
 
         <form onSubmit={handleSubmit}>
-          
           <div className="form-group mb-1 sm:pl-20 pl-10">
             <label htmlFor="name">Name:</label>
             <input

@@ -15,8 +15,10 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { forwardRef, ReactElement, useRef, useState } from "react";
 import { TransitionProps } from "@mui/material/transitions";
-import { createProfile } from "../services/AuthService";
+import { createProfile, getRoles } from "../services/AuthService";
 import { uploadImage } from "../services/ProfileService";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   action: string;
@@ -51,6 +53,7 @@ const EditProfile = (props: Props) => {
   const [bornOn, setBornOn] = useState(bornOnDemo);
   const [error, setError] = useState("");
   const profileRef = useRef<null | HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const formData: ProfileData = {
     name: name,
@@ -79,10 +82,14 @@ const EditProfile = (props: Props) => {
       detail.length <= 0 ||
       phone_number.length <= 0
     ) {
+      console.log(name + " " + gender + " " + detail + " " + phone_number);
+
       setError("Please fill in all required Data");
+      toast.error(error);
       profileRef?.current?.scrollIntoView();
       return;
     }
+    const toastId = toast.loading("Creating profile, please wait ...");
     const token = localStorage.getItem("token");
     if (token) {
       let year = bornOn.get("y");
@@ -96,6 +103,11 @@ const EditProfile = (props: Props) => {
               console.log(res);
             });
           }
+          let roles: any = localStorage.getItem("authorization");
+          let firstRole = JSON.parse(roles)[0];
+          navigate(`/${firstRole.toLowerCase()}`, { replace: true });
+          toast.success("Profile Created successfully");
+          toast.dismiss(toastId);
         })
         .catch((res) => {
           setError(res.message);
@@ -129,9 +141,6 @@ const EditProfile = (props: Props) => {
   };
   return (
     <div className="p-10" ref={profileRef}>
-      <div className="flex justify-center text-lg text-red-400 pt-8">
-        {error}
-      </div>
       <div className="flex justify-center">
         <Avatar
           sx={{ bgcolor: deepOrange[500], width: 55, height: 55 }}

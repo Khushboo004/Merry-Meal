@@ -34,12 +34,11 @@ import DeliverOrderForm from "./pages/DeliverOrderForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function App() {
   let roles: any = localStorage.getItem("authorization");
   let arrayRoles = JSON.parse(roles);
   const [auth, setAuth] = useState({
-    role: arrayRoles,
+    role: arrayRoles ? arrayRoles : [],
   });
 
   useEffect(() => {
@@ -47,10 +46,10 @@ function App() {
   }, []);
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-       <ToastContainer position="bottom-center" />
+      <ToastContainer position="bottom-center" />
       <Routes>
         <Route
-          element={<ProtectedRoute isAllowed={auth.role.includes("ADMIN")} />}
+          element={<ProtectedRoute isAllowed={auth.role?.includes("ADMIN")} />}
         >
           <Route path={"/admin"} element={<Dashboard role={"ADMIN"} />}>
             <Route index element={<DataSummary />}></Route>
@@ -63,13 +62,14 @@ function App() {
               element={<EditProfile action="edit" />}
             ></Route>
             <Route path={"profile"} element={<Profile />}></Route>
-            <Route path={"profile"} element={<Profile />}></Route>
             <Route path={"donateinfo"} element={<DonationManagement />}></Route>
           </Route>
         </Route>
 
         <Route
-          element={<ProtectedRoute isAllowed={auth.role.includes("PARTNER")} />}
+          element={
+            <ProtectedRoute isAllowed={auth.role?.includes("PARTNER")} />
+          }
         >
           <Route path={"/partner"} element={<Dashboard role={"PARTNER"} />}>
             <Route index element={<UserHome />}></Route>
@@ -86,7 +86,7 @@ function App() {
 
         <Route
           element={
-            <ProtectedRoute isAllowed={auth.role.includes("CAREGIVER")} />
+            <ProtectedRoute isAllowed={auth.role?.includes("CAREGIVER")} />
           }
         >
           <Route path={"/caregiver"} element={<Dashboard role={"CAREGIVER"} />}>
@@ -102,7 +102,7 @@ function App() {
         </Route>
 
         <Route
-          element={<ProtectedRoute isAllowed={auth.role.includes("MEMBER")} />}
+          element={<ProtectedRoute isAllowed={auth.role?.includes("MEMBER")} />}
         >
           <Route path={"/member"} element={<Home role={"MEMBER"} />}>
             <Route index element={<MemberHome />}></Route>
@@ -130,7 +130,7 @@ function App() {
           <Route path={"login"} element={<Login auth={setAuth} />} />
           <Route path={"about-us"} element={<AboutUs />} />
           <Route path={"contact-us"} element={<ContactUs />} />
-          <Route path={"register"} element={<Registration />} />
+          <Route path={"register"} element={<Registration auth={setAuth}/>} />
           <Route path={"donation"} element={<Donation />} />
           <Route
             path={"creatProfile"}
@@ -139,7 +139,7 @@ function App() {
         </Route>
 
         <Route
-          element={<ProtectedRoute isAllowed={auth.role.includes("RIDER")} />}
+          element={<ProtectedRoute isAllowed={auth.role?.includes("RIDER")} />}
         >
           <Route path={"/rider"} element={<Dashboard role={"RIDER"} />}>
             <Route index element={<Profile />}></Route>
@@ -153,7 +153,7 @@ function App() {
 
         <Route
           element={
-            <ProtectedRoute isAllowed={auth.role.includes("VOLUNTEER")} />
+            <ProtectedRoute isAllowed={auth.role?.includes("VOLUNTEER")} />
           }
         >
           <Route path={"/volunteer"} element={<Dashboard role={"VOLUNTEER"} />}>
