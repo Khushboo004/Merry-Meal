@@ -6,6 +6,7 @@ import { register } from "../../../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+
 interface FormData {
   name: string;
   email: string;
@@ -23,7 +24,7 @@ const RegistrationForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [submitting, setSubmitting] = useState<boolean>(false);
-  const [registerStatus, setRegisterStatus] = useState("");
+  const navigate = useNavigate();
 
   const validate = (): boolean => {
     const errors: Partial<FormData> = {};
@@ -46,9 +47,10 @@ const RegistrationForm: React.FC = () => {
     if (validate()) {
       register(formData.email, formData.password)
         .then((res) => {
-          console.log(res);
+
           toast.success("Registered successfully !!");
-          navigate("/member/edit-pro");
+          localStorage.setItem("token", res.data.accessToken);
+          navigate("/creatProfile", { replace: true });
         })
         .catch((error) => {
           console.log(error);

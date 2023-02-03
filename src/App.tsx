@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Meal from "./pages/Meal";
 import AboutUs from "./pages/AboutUs";
@@ -36,10 +36,15 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
+  let roles: any = localStorage.getItem("authorization");
+  let arrayRoles = JSON.parse(roles);
   const [auth, setAuth] = useState({
-    name: "Aung Thiha Tun",
-    role: ["ADMIN", "VOLUNTEER", "RIDER", "CAREGIVER", "PARTNER", "MEMBER"],
+    role: arrayRoles,
   });
+
+  useEffect(() => {
+    setAuth({ role: arrayRoles });
+  }, []);
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
        <ToastContainer position="bottom-center" />
@@ -53,7 +58,10 @@ function App() {
             <Route path={"userinfo"} element={<UserInfo />}></Route>
             <Route path={"mealinfo"} element={<MealManagement />}></Route>
             <Route path={"deliinfo"} element={<DeliManagement />}></Route>
-            <Route path={"edit-pro"} element={<EditProfile />}></Route>
+            <Route
+              path={"edit-pro"}
+              element={<EditProfile action="edit" />}
+            ></Route>
             <Route path={"profile"} element={<Profile />}></Route>
             <Route path={"profile"} element={<Profile />}></Route>
             <Route path={"donateinfo"} element={<DonationManagement />}></Route>
@@ -68,7 +76,10 @@ function App() {
             <Route path={"dashbord"} element={<UserHome />}></Route>
             <Route path={"profile"} element={<Profile />}></Route>
             <Route path={"add-meal"} element={<AddMeal />}></Route>
-            <Route path={"edit-pro"} element={<EditProfile />}></Route>
+            <Route
+              path={"edit-pro"}
+              element={<EditProfile action="edit" />}
+            ></Route>
             <Route path={"meals"} element={<Meal />} />
           </Route>
         </Route>
@@ -83,7 +94,10 @@ function App() {
             <Route path={"dashborad"} element={<CareGiverHome />} />
             <Route path={"profile"} element={<Profile />}></Route>
             <Route path={"time-table"} element={<TimeTable />} />
-            <Route path={"edit-pro"} element={<EditProfile />}></Route>
+            <Route
+              path={"edit-pro"}
+              element={<EditProfile action="edit" />}
+            ></Route>
           </Route>
         </Route>
 
@@ -101,7 +115,10 @@ function App() {
             <Route path={"meals"} element={<Meal />} />
             <Route path={"contact-us"} element={<ContactUs />} />
             <Route path={"caregiverReq"} element={<CaregiverReq />} />
-            <Route path={"edit-pro"} element={<EditProfile />}></Route>
+            <Route
+              path={"edit-pro"}
+              element={<EditProfile action="edit" />}
+            ></Route>
           </Route>
         </Route>
 
@@ -110,11 +127,15 @@ function App() {
           <Route path={"meals"} element={<Meal />} />
           <Route path={"meal-details"} element={<MealDetails />} />
           <Route path={"add-cart"} element={<AddCart />} />
-          <Route path={"login"} element={<Login />} />
+          <Route path={"login"} element={<Login auth={setAuth} />} />
           <Route path={"about-us"} element={<AboutUs />} />
           <Route path={"contact-us"} element={<ContactUs />} />
           <Route path={"register"} element={<Registration />} />
           <Route path={"donation"} element={<Donation />} />
+          <Route
+            path={"creatProfile"}
+            element={<EditProfile action="submit" />}
+          ></Route>
         </Route>
 
         <Route

@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import React, { useState } from "react";
 import Google from "../../../assets/google.png";
-import { login } from "../../../services/AuthService";
+import { getRoles, login } from "../../../services/AuthService";
 import { useNavigate } from "react-router-dom";
 
 interface FormData {
@@ -15,11 +15,17 @@ const initialFormData: FormData = {
   password: "",
 };
 
-const FormLogin: React.FC = () => {
-  const navigate = useNavigate();
+type Props = {
+  auth: any;
+};
+
+const FormLogin = (props: Props) => {
+  const { auth } = props;
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const [unAuthorizedMsg, setunAuthorizedMsg] = useState("");
+  const navigate = useNavigate();
 
   const validate = (): boolean => {
    
@@ -42,10 +48,22 @@ const FormLogin: React.FC = () => {
       login(formData.email, formData.password)
         .then((res) => {
           localStorage.setItem("token", res.data.accessToken);
-          
+
+          getRoles(res.data.accessToken).then((res) => {
+            const auths: any = [];
+            res.data.roleResponses.forEach((role: { role: string }) => {
+              auths.push(role.role.replace("ROLE_", ""));
+            });
+            auth({
+              role: auths,
+            });
+            localStorage.setItem("authorization", JSON.stringify(auths));
+
+            navigate(`/${auths[0].toLowerCase()}`);
+          });
         })
         .catch((error) => {
-          console.log(error);
+          setunAuthorizedMsg("Incorrect Credentials, please renter!");
         });
     }
     setSubmitting(false);
@@ -71,6 +89,9 @@ const FormLogin: React.FC = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-1 sm:pl-20 pl-10">
+            <div>
+              <p className="text-red-500 text-lg">{unAuthorizedMsg}</p>
+            </div>
             <label htmlFor="email">Email:</label>
             <input
               type="email"
