@@ -62,7 +62,7 @@ const Meal = () => {
       category: "Vegetable",
       header:"Vegetable"
     },
-
+    
     {
       image: 949943949349,
       status: "Safe",

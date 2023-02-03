@@ -82,8 +82,6 @@ const EditProfile = (props: Props) => {
       detail.length <= 0 ||
       phone_number.length <= 0
     ) {
-      console.log(name + " " + gender + " " + detail + " " + phone_number);
-
       setError("Please fill in all required Data");
       toast.error(error);
       profileRef?.current?.scrollIntoView();
@@ -109,8 +107,13 @@ const EditProfile = (props: Props) => {
           toast.success("Profile Created successfully");
           toast.dismiss(toastId);
         })
-        .catch((res) => {
-          setError(res.message);
+        .catch((error) => {
+          const errorObject = error.response.data;
+          let errors = Object.keys(errorObject);
+          toast.dismiss(toastId);
+          errors.forEach((key) => {
+            toast.error(errorObject[key]);
+          });
           profileRef?.current?.scrollIntoView();
         });
     }

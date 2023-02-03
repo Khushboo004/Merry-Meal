@@ -51,18 +51,17 @@ const RegistrationForm = (props: Props) => {
           localStorage.setItem("token", res.data.accessToken);
           getRoles(res.data.accessToken).then((res) => {
             const auths: any = [];
-            res.data.roleResponses.forEach((role: { role: string }) => {
-              auths.push(role.role.replace("ROLE_", ""));
+            res.data.roleResponses.forEach((role: string ) => {
+              auths.push(role.replace("ROLE_", ""));
             });
             auth({
               role: auths,
             });
-            console.log(auths);
             localStorage.setItem("authorization", JSON.stringify(auths));
             navigate("/creatProfile", { replace: true });
           });
 
-         toast.success("Registered successfully !!");
+          toast.success("Registered successfully !!");
           toast.dismiss(toastId);
         })
         .catch((error) => {
