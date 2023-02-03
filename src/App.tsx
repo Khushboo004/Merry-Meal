@@ -36,7 +36,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   let roles: any = localStorage.getItem("authorization");
-  let arrayRoles = JSON.parse(roles);
+  let arrayRoles = roles ? JSON.parse(roles) : null;
   const [auth, setAuth] = useState({
     role: arrayRoles ? arrayRoles : [],
   });
@@ -46,7 +46,7 @@ function App() {
   }, []);
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <ToastContainer position="bottom-center" />
+      <ToastContainer />
       <Routes>
         <Route
           element={<ProtectedRoute isAllowed={auth.role?.includes("ADMIN")} />}
@@ -130,7 +130,7 @@ function App() {
           <Route path={"login"} element={<Login auth={setAuth} />} />
           <Route path={"about-us"} element={<AboutUs />} />
           <Route path={"contact-us"} element={<ContactUs />} />
-          <Route path={"register"} element={<Registration auth={setAuth}/>} />
+          <Route path={"register"} element={<Registration auth={setAuth} />} />
           <Route path={"donation"} element={<Donation />} />
           <Route
             path={"creatProfile"}

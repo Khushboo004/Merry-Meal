@@ -17,6 +17,15 @@ export async function getRoles(token) {
   return response;
 }
 
+export async function getOtherUserRoles(token, userid) {
+  const response = axios.get("/api/v1/role/" + userid, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+  return response;
+}
+
 export async function register(emailAddress, password) {
   const response = axios.post("/auth/signUp", {
     email: emailAddress,
@@ -34,9 +43,8 @@ export async function retrieveProfileInformation(token) {
   return response;
 }
 
-
 export async function createProfile(token, formData, birth) {
-  const response = axios.put(
+  const response = axios.post(
     "/api/v1/users/register",
     { ...formData, birth: birth },
     {
@@ -48,3 +56,14 @@ export async function createProfile(token, formData, birth) {
   return response;
 }
 
+export async function assignRoles(token, roles, userid) {
+  const response = axios.post("/api/v1/role/" + userid, null, {
+    params: {
+      assignRoles: roles,
+    },
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+  return response;
+}
