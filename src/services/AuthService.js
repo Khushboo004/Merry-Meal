@@ -34,6 +34,7 @@ export async function retrieveProfileInformation(token) {
   return response;
 }
 
+
 export async function createProfile(token, formData, birth) {
   const response = axios.put(
     "/api/v1/users/register",
@@ -46,3 +47,4 @@ export async function createProfile(token, formData, birth) {
   );
   return response;
 }
+

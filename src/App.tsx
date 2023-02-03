@@ -30,6 +30,10 @@ import Deliveries from "./pages/Rider/Deliveries";
 import DeliverList from "./pages/Rider/DeliverList";
 import DeliverDetail from "./pages/Rider/DeliverDetail";
 import MealAssess from "./pages/Volunteer/MealAssess";
+import DeliverOrderForm from "./pages/DeliverOrderForm";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   let roles: any = localStorage.getItem("authorization");
@@ -43,6 +47,7 @@ function App() {
   }, []);
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
+       <ToastContainer position="bottom-center" />
       <Routes>
         <Route
           element={<ProtectedRoute isAllowed={auth.role.includes("ADMIN")} />}
@@ -105,6 +110,7 @@ function App() {
             <Route path={"meal-details"} element={<MealDetails />} />
             <Route path={"profile"} element={<Profile />}></Route>
             <Route path={"add-cart"} element={<AddCart />} />
+            <Route path={"delivery-form"} element={<DeliverOrderForm />} />
             <Route path={"about-us"} element={<AboutUs />} />
             <Route path={"meals"} element={<Meal />} />
             <Route path={"contact-us"} element={<ContactUs />} />

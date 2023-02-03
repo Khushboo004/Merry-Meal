@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Google from "../../../assets/google.png";
 import { register } from "../../../services/AuthService";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 interface FormData {
   name: string;
@@ -18,6 +20,7 @@ const initialFormData: FormData = {
 };
 
 const RegistrationForm: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -44,6 +47,8 @@ const RegistrationForm: React.FC = () => {
     if (validate()) {
       register(formData.email, formData.password)
         .then((res) => {
+
+          toast.success("Registered successfully !!");
           localStorage.setItem("token", res.data.accessToken);
           navigate("/creatProfile", { replace: true });
         })
@@ -73,6 +78,7 @@ const RegistrationForm: React.FC = () => {
         </Typography>
 
         <form onSubmit={handleSubmit}>
+          
           <div className="form-group mb-1 sm:pl-20 pl-10">
             <label htmlFor="name">Name:</label>
             <input

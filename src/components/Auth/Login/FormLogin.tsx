@@ -28,6 +28,7 @@ const FormLogin = (props: Props) => {
   const navigate = useNavigate();
 
   const validate = (): boolean => {
+   
     const errors: Partial<FormData> = {};
 
     if (!formData.email) {
@@ -47,6 +48,7 @@ const FormLogin = (props: Props) => {
       login(formData.email, formData.password)
         .then((res) => {
           localStorage.setItem("token", res.data.accessToken);
+
           getRoles(res.data.accessToken).then((res) => {
             const auths: any = [];
             res.data.roleResponses.forEach((role: { role: string }) => {
