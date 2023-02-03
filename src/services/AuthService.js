@@ -48,3 +48,12 @@ export async function createProfile(token, formData, birth) {
   return response;
 }
 
+export const retrieveProfileInfo=(token) =>{
+  const response = axios.get("/profile/me", {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+  return response;
+}
+

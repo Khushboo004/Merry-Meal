@@ -24,7 +24,6 @@ const RegistrationForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [submitting, setSubmitting] = useState<boolean>(false);
-  const navigate = useNavigate();
 
   const validate = (): boolean => {
     const errors: Partial<FormData> = {};
