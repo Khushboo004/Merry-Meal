@@ -48,12 +48,22 @@ export async function createProfile(token, formData, birth) {
   return response;
 }
 
-export const retrieveProfileInfo=(token) =>{
-  const response = axios.get("/profile/me", {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-  return response;
+export const isLoggedIn=()=>{
+  let data = localStorage.getItem("token");
+  if(data == null){
+      return false;
+  }else{
+      return true;
+  }
+}
+
+export const getCurrentUserDetails=()=>{
+  if(isLoggedIn()){
+      return (localStorage.getItem("token")).user;
+  }else{
+      return undefined;
+  }
+
+ 
 }
 

@@ -1,8 +1,10 @@
 import axios from "axios";
 
-const getAllMeals = () => {
-  return axios.post("/api/v1/partners/meals");
-};
+
+
+export const getAllMeals = ()=>{
+  return axios.post("/api/v1/partners/meals").then(response=>response.data)
+}
 
 
 export const addMealDetails=(MealData ,userId, token) =>{

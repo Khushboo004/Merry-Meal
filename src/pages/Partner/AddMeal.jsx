@@ -3,13 +3,13 @@ import {Box, Container, Grid, Typography} from "@mui/material"
 import { toast } from 'react-toastify';
 import { addMealDetails } from "../../services/MealService";
 import { uploadImage } from "../../services/ProfileService";
-import { retrieveProfileInfo } from "../../services/AuthService";
+import { getCurrentUserDetails, retrieveProfileInfo } from "../../services/AuthService";
 
 
 
 const AddMeal = () => {
   const token = localStorage.getItem("token");
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState({});
     const [imageFile, setImageFile] = useState();
     const [meal, setMeal] = useState({
       meal_name: "",
@@ -21,7 +21,7 @@ const AddMeal = () => {
       setMeal({ ...meal, [event.target.name]: event.target.value });
     };
     useEffect(() => {
-      setUser(retrieveProfileInfo());
+      setUser(getCurrentUserDetails());
     }, []);
 
     const addMeal = (event) => {
@@ -45,9 +45,9 @@ const AddMeal = () => {
       }
   
       // submit the form on surver
-      addMealDetails(meal, user.user_id,token)
+      addMealDetails(meal, user.account_id,token)
         .then((res) => {
-          uploadImage(res.data.user_id, imageFile, token)
+          uploadImage(res.data.account_id, imageFile, token)
             .then((data) => {
               toast.success("Image uploaded");
             })
