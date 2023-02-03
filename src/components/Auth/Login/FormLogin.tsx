@@ -28,7 +28,6 @@ const FormLogin = (props: Props) => {
   const navigate = useNavigate();
 
   const validate = (): boolean => {
-   
     const errors: Partial<FormData> = {};
 
     if (!formData.email) {
@@ -102,7 +101,6 @@ const FormLogin = (props: Props) => {
               className="form-control block
           w-10/12
           px-3
-    
           py-1.5
           text-base
           font-normal
