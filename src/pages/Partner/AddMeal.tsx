@@ -14,11 +14,11 @@ const AddMeal = () => {
     category: "",
     meal_desc: "",
   });
-  const fieldChanged = (event) => {
+  const fieldChanged = (event:any) => {
     setMeal({ ...meal, [event.target.name]: event.target.value });
   };
 
-  const addMeal = (event) => {
+  const addMeal = (event:any) => {
     event.preventDefault();
     // console.log(post);
     if (meal.meal_name.trim() === "") {
@@ -65,7 +65,7 @@ const AddMeal = () => {
       });
   };
   // handling file change image
-  const handleFileChage = (event) => {
+  const handleFileChage = (event:any) => {
     console.log(event.target.files[0]);
     setImageFile(event.target.files[0]);
   };
