@@ -37,7 +37,6 @@ const MealManagement = (props: Props) => {
     deleteMeals(token, e.target.value)
       .then((res: any) => {
         setMealRows(newMeals);
-        toast.success(res.data.message);
       })
       .catch((error: any) => {
         toast.error("Delete Meal Fail, Please retry later!");
@@ -81,12 +80,9 @@ const MealManagement = (props: Props) => {
                   onChange={(e) => filterMeal(e)}
                 >
                   <option value={"all"}>All</option>
-                  <option value={"Fruit"}>Fruits</option>
+                  <option value={"Fruit"}>Fruit</option>
                   <option value={"Vegetable"}>Vegetables</option>
-                  <option value={"Healthy Food"}>Healthy Foods</option>
-                  <option value={"Drink"}>Drinks</option>
-                  <option value={"Unhealthy Food"}>Unhealthy Foods</option>
-                  <option value={"Sweet"}>Sweets</option>
+                  <option value={"Drinks"}>Drinks</option>
                 </NativeSelect>
               </FormControl>
             </div>
