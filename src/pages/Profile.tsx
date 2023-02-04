@@ -47,7 +47,11 @@ export default function Profile(props: Props) {
                             >
                               <div>
                                 <img
-                                  src={`http://localhost:8080/api/v1/users/image/${user.profile_image}`}
+                                  src={
+                                    user.profile_image?.startsWith("http")
+                                      ? user.profile_image
+                                      : `http://localhost:8080/api/v1/users/image/${user.profile_image}`
+                                  }
                                   className=" text-center"
                                   alt="example"
                                 />

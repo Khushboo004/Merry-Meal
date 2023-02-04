@@ -33,6 +33,7 @@ import MealAssess from "./pages/Volunteer/MealAssess";
 import DeliverOrderForm from "./pages/DeliverOrderForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OAuthRedirect from "./components/Security/OAuthRedirect";
 
 function App() {
   let roles: any = localStorage.getItem("authorization");
@@ -48,6 +49,10 @@ function App() {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ToastContainer />
       <Routes>
+        <Route
+          path={"/oauth2/redirect"}
+          element={<OAuthRedirect auth={setAuth} />}
+        />
         <Route
           element={<ProtectedRoute isAllowed={auth.role?.includes("ADMIN")} />}
         >

@@ -18,6 +18,7 @@ import { TransitionProps } from "@mui/material/transitions";
 import { createProfile, getRoles } from "../services/AuthService";
 import {
   editProfile,
+  getPersonalProfile,
   getProfile,
   uploadImage,
 } from "../services/ProfileService";
@@ -46,14 +47,14 @@ const EditProfile = (props: Props) => {
     return <Slide direction="up" ref={ref} {...props} />;
   });
   const [searchParams, setSearchParams] = useSearchParams();
-  const userId = searchParams.get("userId");
+  const [userId, setUserId] = useState(searchParams.get("userId"));
   const { action } = props;
   const birth = new Date(2002, 4, 4);
   const bornOnDemo = dayjs(birth);
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [imageFile, setImageFile] = useState();
-  const [image, setImage] = useState();
+  const [image, setImage] = useState<any>();
   const [detail, setdetail] = useState("");
   const [phone_number, setphone_number] = useState("");
   const [bornOn, setBornOn] = useState(bornOnDemo);
@@ -64,6 +65,40 @@ const EditProfile = (props: Props) => {
   useEffect(() => {
     if (action === "edit") {
       const token = localStorage.getItem("token");
+      if (userId === null) {
+        getPersonalProfile(token)
+          .then((res) => {
+            const {
+              name,
+              gender,
+              profile_image,
+              detail,
+              phone_number,
+              birth,
+              user_id,
+            } = res.data;
+            setName(name);
+            setGender(gender);
+            setImage(profile_image);
+            setdetail(detail);
+            setphone_number(phone_number);
+            setUserId(user_id);
+
+            let born = birth.split("/");
+            let year = born[0];
+            let month = born[1];
+            let day = born[2];
+            console.log(born);
+            let date = new Date(year, month + 1, day);
+            let bornOn = dayjs(date);
+            setBornOn(bornOn);
+            return;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+
       getProfile(token, userId)
         .then((res) => {
           const { name, gender, profile_image, detail, phone_number, birth } =
@@ -199,7 +234,11 @@ const EditProfile = (props: Props) => {
       <div className="flex justify-center">
         <Avatar
           sx={{ bgcolor: deepOrange[500], width: 55, height: 55 }}
-          src={image}
+          src={
+            image?.startsWith("http")
+              ? image
+              : `http://localhost:8080/api/v1/users/image/${image}`
+          }
         >
           {action === "edit" ? name.charAt(0) : "N"}
         </Avatar>

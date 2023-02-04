@@ -3,7 +3,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import React, { useState } from "react";
 import Google from "../../../assets/google.png";
 import { getRoles, login } from "../../../services/AuthService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface FormData {
   email: string;
@@ -174,27 +174,31 @@ const FormLogin = (props: Props) => {
           <h1 className=" font-serif text-center mb-2 underline underline-offset-4">
             Login with social media account
           </h1>
-          <Box className=" sm:pl-20 pl-10">
-            <a href="/meal-details">
-              <button className=" bg-gray-50  mb-2 py-2 font-bold  shadow-md hover:bg-gray-100 w-10/12 rounded-lg  ">
-                <img
-                  className="w-[30px] inline-block h-8 mr-2"
-                  src={Google}
-                  alt="/"
-                />{" "}
-                Sign in with Google
-              </button>
-            </a>
-
-            <a href="/meal-details">
-              <button className=" bg-blue-600 mt-2 py-2 font-bold w-10/12 hover:bg-blue-700  700     text-white rounded-md  ">
-                {/* <button className=" bg-green-600 py-2  my-1 font-bold  sm:text-[15px] text-[12px] mr-2 hover:bg-green-700  w-[56px]  text-white rounded-md mx-auto "> */}
-                <FacebookIcon className="mr-3" />
-                Log in with facebook
-              </button>
-            </a>
-          </Box>
         </form>
+        <Box className=" sm:pl-20 pl-10">
+          <a href="http://localhost:8080/oauth2/authorize/google?redirectUrl=http://localhost:3000/oauth2/redirect">
+            <button className=" bg-gray-50  mb-2 py-2 font-bold  shadow-md hover:bg-gray-100 w-10/12 rounded-lg  ">
+              <img
+                className="w-[30px] inline-block h-8 mr-2"
+                src={Google}
+                alt="/"
+              />{" "}
+              Sign in with Google
+            </button>
+          </a>
+
+          <a
+            href={
+              "http://localhost:8080/oauth2/authorize/facebook?redirectUrl=http://localhost:3000/oauth2/redirect"
+            }
+          >
+            <button className=" bg-blue-600 mt-2 py-2 font-bold w-10/12 hover:bg-blue-700  700     text-white rounded-md  ">
+              {/* <button className=" bg-green-600 py-2  my-1 font-bold  sm:text-[15px] text-[12px] mr-2 hover:bg-green-700  w-[56px]  text-white rounded-md mx-auto "> */}
+              <FacebookIcon className="mr-3" />
+              Log in with facebook
+            </button>
+          </a>
+        </Box>
         <Box className="pb-2 mb-2">
           <p className="text-gray-800 mt-4  text-center">
             Not a member?
