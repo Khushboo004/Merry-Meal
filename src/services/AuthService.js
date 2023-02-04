@@ -61,6 +61,9 @@ export async function assignRoles(token, roles, userid) {
     params: {
       assignRoles: roles,
     },
+    headers: {
+      Authorization: "Bearer " + token,
+    },
   });
   return response;
 }
