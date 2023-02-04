@@ -50,7 +50,7 @@ const MealDetails = () => {
            <TableRow>
              <TableCell colSpan={2} align="center" style={{borderBottom:'0px'}}>
                <div className="flex text-center" style={{ display:'flex', justifyContent:'center' }}>
-               <NavLink to="/member/meal-details/delivery-form"><button className="bg-orange-700 mr-2 p-3 rounded-lg font-bold text-white w-[150px] text-[16px] hover:bg-orange-800 ">Order Now</button> </NavLink>
+               <NavLink to="/delivery-form"><button className="bg-orange-700 mr-2 p-3 rounded-lg font-bold text-white w-[150px] text-[16px] hover:bg-orange-800 ">Order Now</button> </NavLink>
                <button className="bg-sky-700 mr-2 p-3 rounded-lg font-bold text-white w-[150px] text-[16px] hover:bg-sky-800">Add To Cart</button> 
                </div>
                

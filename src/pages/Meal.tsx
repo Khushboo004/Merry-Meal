@@ -80,13 +80,16 @@ const Meal = () => {
                     ? meals.map((meal: any, index: any) => (
                         <Grid item lg={2} md={4} sm={6} xs={6}>
                           <Card elevation={10}>
-                            <CardMedia
+                          <Box  style={{ display:'flex', justifyContent:'center' }} pt={1}>
+                            <CardMedia 
+                            
                               sx={{ width: "90%" }}
                               component="img"
                               alt="green iguana"
                               height="90"
-                              image={Pic}
+                              image={"/api/v1/partners/meals/image/"+meal.image}
                             />
+                            </Box>
                             <CardContent>
                               <Typography gutterBottom>
                                 <div className="md:text-xl">
@@ -98,7 +101,7 @@ const Meal = () => {
                                 className="text-xl"
                                 color="text.secondary"
                               >
-                                <h2>{meal.name}</h2>
+                                <h2>{meal.meal_name}</h2>
                                 <h3> {meal.status}</h3>
                               </Typography>
                             </CardContent>
