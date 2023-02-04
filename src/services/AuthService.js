@@ -56,11 +56,11 @@ export async function createProfile(token, formData, birth) {
   return response;
 }
 
-
 export async function assignRoles(token, roles, userid) {
   const response = axios.post("/api/v1/role/" + userid, null, {
     params: {
       assignRoles: roles,
     },
-    
-
+  });
+  return response;
+}
