@@ -39,9 +39,9 @@ const AddMeal = () => {
     }
 
     // submit the form on surver
-    addMealDetails(meal, user.user_id, token)
+    addMealDetails(meal, token)
       .then((res) => {
-        uploadImage(res.data.user_id, imageFile, token)
+        uploadImage(res.data.mealId, imageFile, token)
           .then((data) => {
             toast.success("Image uploaded");
           })
@@ -162,7 +162,10 @@ const AddMeal = () => {
                       </div>
 
                       <div>
-                        <button className="bg-blue-700 p-2 rounded-md hover:bg-blue-600 text-white font-bold">
+                        <button
+                          className="bg-blue-700 p-2 rounded-md hover:bg-blue-600 text-white font-bold"
+                          onClick={(e) => addMeal(e)}
+                        >
                           Add Meal
                         </button>
                       </div>
