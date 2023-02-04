@@ -58,3 +58,12 @@ export async function assignRoles(token, roles, userid) {
   });
   return response;
 }
+
+
+export const doLogout=(next)=>{
+  localStorage.removeItem("token");
+  localStorage.removeItem("authorization");
+  next();
+}
+
+

@@ -12,12 +12,18 @@ import {
   NativeSelect,
   Typography,
 } from "@mui/material";
-import Pic from "../assets/public/home.jpeg";
-import filteringMeal from "../Utils/filteringMeal";
-import { getAllMeals } from "../services/MealService";
-
-const Meal = () => {
+import DeleteIcon from '@mui/icons-material/Delete';import filteringMeal from "../Utils/filteringMeal";
+import { deleteMeals, getAllMeals } from "../services/MealService";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { getUsers } from "../services/ProfileService";
+type Props = {
+  role: String;
+};
+const Meal = (props: Props) => {
+  const { role } = props;
   const [allMeals, setAllMeals] = useState<any>();
+  const [users, setUsers] = useState<null>();
   const [meals, setMeals] = useState<any>();
   useEffect(() => {
     getAllMeals()
@@ -27,20 +33,41 @@ const Meal = () => {
       })
       .catch((error) => {});
   }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    getUsers(token)
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   const filterMeal = (e: React.ChangeEvent<HTMLSelectElement>) => {
     filteringMeal(e, setMeals, allMeals);
   };
 
+  const token = localStorage.getItem("token");
+  // function to delete meal
+  function deleteMeal(meal: any) {
+    if(window.confirm('Are you sure')){
+      deleteMeals(meal.mealId, token)
+      .then((data) => {
+        console.log(data);
+        toast.success("Meal Details is delete");
+        let newCarContent = meals.filter((m: any) => m.mealId != meal.mealId);
+        setMeals([...newCarContent]);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Error in deleting post");
+      });
+    }
+  }
+
   return (
     <div className="sm:m-4 ">
-      {/* <ul className="w-48 text-sm font-medium   border border-gray-200 rounded-lg0  shadow-sm " >
-    <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">Profile</li>
-    <li className="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">Settings</li>
-    <li className="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">Messages</li>
-    <li className="w-full px-4 py-2 rounded-b-lg">Download</li>
-</ul> */}
-
-      {/* <Container > */}
       <div className="">
         <h3 className="pt-2 text-2xl font-bold text-center underline ">
           Meals
@@ -80,13 +107,23 @@ const Meal = () => {
                     ? meals.map((meal: any, index: any) => (
                         <Grid item lg={2} md={4} sm={6} xs={6}>
                           <Card elevation={10}>
-                            <CardMedia
-                              sx={{ width: "90%" }}
-                              component="img"
-                              alt="green iguana"
-                              height="90"
-                              image={Pic}
-                            />
+                            <Box
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                              pt={1}
+                            >
+                              <CardMedia
+                                sx={{ width: "90%" }}
+                                component="img"
+                                alt="green iguana"
+                                height="90"
+                                image={
+                                  "/api/v1/partners/meals/image/" + meal.image
+                                }
+                              />
+                            </Box>
                             <CardContent>
                               <Typography gutterBottom>
                                 <div className="md:text-xl">
@@ -98,17 +135,45 @@ const Meal = () => {
                                 className="text-xl"
                                 color="text.secondary"
                               >
-                                <h2>{meal.name}</h2>
+                                <h2>{meal.meal_name}</h2>
                                 <h3> {meal.status}</h3>
                               </Typography>
                             </CardContent>
                             <CardActions>
-                              <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
-                                Details
-                              </button>
-                              <button className=" bg-gray-700 md:py-2 py-1 hover:bg-gray-800 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
-                                Update
-                              </button>
+                              {role === "" ? (
+                                <Link to={"/meal-details/" + meal.mealId}>
+                                  <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
+                                    Details
+                                  </button>
+                                </Link>
+                              ) : (
+                                <></>
+                              )}
+
+
+                              {role === "PARTNER" ? (
+                                <>
+                                  <Link to={"/partner/meal-details/" + meal.mealId}>
+                                    <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
+                                      Details
+                                    </button>
+                                  </Link>
+                                  <Link to={"/partner/update-meal/" + meal.mealId}>
+                                  <button className=" bg-gray-700 md:py-2 py-1 mr-2 hover:bg-gray-800 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
+                                    Update
+                                  </button>
+                                  </Link>
+
+                                  <button
+                                    onClick={() => deleteMeal(meal)}
+                                    className=" bg-red-700 md:py-2 py-1 hover:bg-red-800 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto "
+                                  >
+                                    <DeleteIcon />
+                                  </button>
+                                </>
+                              ) : (
+                                <></>
+                              )}
                             </CardActions>
                           </Card>
                         </Grid>
