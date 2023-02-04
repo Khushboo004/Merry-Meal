@@ -67,7 +67,7 @@ export default function MultipleSelectRole(props: Props) {
     const roles: any = typeof value === "string" ? "" : value?.join(",");
     const token = localStorage.getItem("token");
     if (roles.length > 0) {
-      assignRoles(token, roles, 2).then((res) => {
+      assignRoles(token, roles, userId).then((res) => {
         toast.success("Assign User Role Successfully!");
       });
     }
