@@ -17,3 +17,39 @@ export async function getUsers(token) {
     },
   });
 }
+
+export async function editProfile(token, userId, formData, birth) {
+  return axios.put(
+    "/api/v1/users/update/" + userId,
+    { ...formData, birth: birth },
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+}
+
+export async function deleUser(token, userId) {
+  return axios.delete(`/api/v1/users` + userId, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+}
+
+export async function getProfile(token, userId) {
+  return axios.get("/api/v1/users/" + userId, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+}
+
+export async function getPersonalProfile(token) {
+  return axios.get("/api/v1/users/profile", {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+}

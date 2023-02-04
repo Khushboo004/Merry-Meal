@@ -11,3 +11,11 @@ export const addMealDetails = (MealData, token) => {
     },
   });
 };
+
+export const deleMeal = (token, mealId) => {
+  return axios.delete(`/api/v1/partners/meals/${mealId}`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+};
