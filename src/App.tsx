@@ -34,6 +34,7 @@ import DeliverOrderForm from "./pages/DeliverOrderForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OAuthRedirect from "./components/Security/OAuthRedirect";
+import UpdateMeal from "./pages/Partner/UpdateMeal";
 
 function App() {
   let roles: any = localStorage.getItem("authorization");
@@ -92,10 +93,18 @@ function App() {
             ></Route>
             <Route path={"add-meal"} element={<AddMeal />}></Route>
             <Route
+              path={"update-meal/:mealId"}
+              element={<UpdateMeal />}
+            ></Route>
+            <Route
               path={"edit-pro"}
               element={<EditProfile action="edit" />}
             ></Route>
-            <Route path={"meals"} element={<Meal />} />
+            <Route path={"meals"} element={<Meal role={"PARTNER"} />} />
+            <Route
+              path={"meal-details/:mealId"}
+              element={<MealDetails role={"PARTNER"} />}
+            />
           </Route>
         </Route>
 
@@ -125,7 +134,10 @@ function App() {
           <Route path={"/member"} element={<Home role={"MEMBER"} />}>
             <Route index element={<MemberHome />}></Route>
             <Route path={"home"} element={<MemberHome />} />
-            <Route path={"meal-details"} element={<MealDetails />} />
+            <Route
+              path={"meal-details/:mealId"}
+              element={<MealDetails role={"MEMBER"} />}
+            />
             <Route
               path={"profile"}
               element={<Profile role={"MEMBER"} />}
@@ -133,7 +145,7 @@ function App() {
             <Route path={"add-cart"} element={<AddCart />} />
             <Route path={"delivery-form"} element={<DeliverOrderForm />} />
             <Route path={"about-us"} element={<AboutUs />} />
-            <Route path={"meals"} element={<Meal />} />
+            <Route path={"meals"} element={<Meal role={"MEMBER"} />} />
             <Route path={"contact-us"} element={<ContactUs />} />
             <Route path={"caregiverReq"} element={<CaregiverReq />} />
             <Route
@@ -145,14 +157,18 @@ function App() {
 
         <Route path="/" element={<Home role={""} />}>
           <Route index element={<PublicUser />}></Route>
-          <Route path={"meals"} element={<Meal />} />
-          <Route path={"meal-details"} element={<MealDetails />} />
+          <Route path={"meals"} element={<Meal role={""} />} />
+          <Route
+            path={"meal-details/:mealId"}
+            element={<MealDetails role={""} />}
+          />
           <Route path={"add-cart"} element={<AddCart />} />
           <Route path={"login"} element={<Login auth={setAuth} />} />
           <Route path={"about-us"} element={<AboutUs />} />
           <Route path={"contact-us"} element={<ContactUs />} />
           <Route path={"register"} element={<Registration auth={setAuth} />} />
           <Route path={"donation"} element={<Donation />} />
+          <Route path={"delivery-form"} element={<DeliverOrderForm />} />
           <Route
             path={"creatProfile"}
             element={<EditProfile action="submit" />}

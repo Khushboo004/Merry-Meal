@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import { addMealDetails } from "../../services/MealService";
-import { uploadImage } from "../../services/ProfileService";
+import { uploadImage, uploadMealImage } from "../../services/ProfileService";
 
 const AddMeal = () => {
   const token = localStorage.getItem("token");
@@ -14,11 +14,11 @@ const AddMeal = () => {
     category: "",
     meal_desc: "",
   });
-  const fieldChanged = (event) => {
+  const fieldChanged = (event:any) => {
     setMeal({ ...meal, [event.target.name]: event.target.value });
   };
 
-  const addMeal = (event) => {
+  const addMeal = (event:any) => {
     event.preventDefault();
     // console.log(post);
     if (meal.meal_name.trim() === "") {
@@ -26,7 +26,7 @@ const AddMeal = () => {
       return;
     }
     if (meal.status.trim() === "") {
-      toast.error("Meal Model is Required");
+      toast.error("Meal Status is Required");
       return;
     }
     if (meal.category.trim() === "") {
@@ -41,7 +41,7 @@ const AddMeal = () => {
     // submit the form on surver
     addMealDetails(meal, token)
       .then((res) => {
-        uploadImage(res.data.mealId, imageFile, token)
+        uploadMealImage(res.data.mealId, imageFile, token)
           .then((data) => {
             toast.success("Image uploaded");
           })
@@ -65,7 +65,7 @@ const AddMeal = () => {
       });
   };
   // handling file change image
-  const handleFileChage = (event) => {
+  const handleFileChage = (event:any) => {
     console.log(event.target.files[0]);
     setImageFile(event.target.files[0]);
   };
@@ -90,7 +90,7 @@ const AddMeal = () => {
                     <input type="hidden" name="remember" value="true" />
                     <div className="-space-y-px rounded-md shadow-sm m-4">
                       <div className="">
-                        <label htmlFor="meal_name">Meal Name</label>
+                        
                         <input
                           id="meal_name"
                           name="meal_name"
@@ -102,29 +102,21 @@ const AddMeal = () => {
                       </div>
 
                       <div className="pt-2">
-                        <label htmlFor="status" className="sr-only">
-                          Status
-                        </label>
-
                         <select
                           onChange={fieldChanged}
                           name="status"
                           defaultValue={0}
-                          className='relative block w-full appearance-none rounded-none bg-white  border border-gray-300 px-3 py-2 focus:z-10 focus:outline-none sm:text-sm" placeholder="Give the catagory'
+                          className='relative block w-full appearance-none rounded-none  bg-white border border-gray-300 px-3 py-2 focus:z-10 focus:outline-none sm:text-sm" placeholder="Give the catagory'
                         >
                           <option disabled value={0}>
-                            --- Give Status --
+                            -- Give Status --
                           </option>
-                          <option color="green">SAFE</option>
-                          <option color="red">UNSAFE</option>
-                          <option color="blue">PENDING</option>
+                          <option className="text-green-700 font-bold hover:text-green-800">SAFE</option>
+                          <option className="text-red-700 font-bold hover:text-red-800">UNSAFE</option>
+                          <option className="text-blue-700 font-bold hover:text-blue-800">PENDING</option>
                         </select>
                       </div>
                       <div className="pt-2">
-                        <label htmlFor="category" className="sr-only">
-                          Catagory
-                        </label>
-
                         <select
                           onChange={fieldChanged}
                           name="category"
@@ -140,30 +132,35 @@ const AddMeal = () => {
                         </select>
                       </div>
 
-                      <div className="mt-3">
+                      
+
+                      <div className="pt-2">
+                        <div className="mt-1 card bg-white shadow justify-center">
+                          <textarea
+                            id="meal_desc"
+                            name="meal_desc"
+                            className="border relative block w-full appearance-none hover:bg- rounded-none bg-white px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm "
+                            placeholder="Meal Description"
+                            onChange={fieldChanged}
+                          />
+                        </div>
+                      </div>
+                      <div className="my-3 text-left">
                         <label htmlFor="image" className="fw-bold">
                           Select Image
                         </label>
-                        <input
+                       <div>
+                       <input
                           id="image"
                           type="file"
                           onChange={handleFileChage}
                         />
-                      </div>
-
-                      <div className="pt-2">
-                        <textarea
-                          id="meal_desc"
-                          name="meal_desc"
-                          onChange={fieldChanged}
-                          // className='border relative block w-full appearance-none hover:bg- rounded-none bg-white px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm '
-                          placeholder="meal_desc"
-                        />
+                       </div>
                       </div>
 
                       <div>
                         <button
-                          className="bg-blue-700 p-2 rounded-md hover:bg-blue-600 text-white font-bold"
+                          className="bg-blue-700 p-2 my-2 rounded-md hover:bg-blue-600 text-white font-bold"
                           onClick={(e) => addMeal(e)}
                         >
                           Add Meal

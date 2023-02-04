@@ -18,6 +18,17 @@ export async function getUsers(token) {
   });
 }
 
+export async function uploadMealImage(mealId, imagefile, token) {
+  let formData = new FormData();
+  formData.append("file", imagefile);
+  return axios.post(`/api/v1/partners/meals/${mealId}/upload-meal-image`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: "Bearer " + token,
+    },
+  });
+}
+
 export async function editProfile(token, userId, formData, birth) {
   return axios.put(
     "/api/v1/users/update/" + userId,
