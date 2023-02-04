@@ -9,7 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import filteringMeal from "../../Utils/filteringMeal";
 import ViewMore from "../ViewMore";
-import { deleMeal, getAllMeals } from "../../services/MealService";
+import { deleteMeals, getAllMeals } from "../../services/MealService";
 import { toast } from "react-toastify";
 
 type Props = {};
@@ -34,12 +34,12 @@ const MealManagement = (props: Props) => {
     const token = localStorage.getItem("token");
     const index = e.target.dataset.index;
     const newMeals = mealRows.slice(0, index).concat(mealRows.slice(index + 1));
-    deleMeal(token, e.target.value)
-      .then((res) => {
+    deleteMeals(token, e.target.value)
+      .then((res: any) => {
         setMealRows(newMeals);
         toast.success(res.data.message);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         toast.error("Delete Meal Fail, Please retry later!");
         console.error(error);
       });

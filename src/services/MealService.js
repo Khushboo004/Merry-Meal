@@ -5,7 +5,9 @@ export const getAllMeals = () => {
 };
 
 export const getMealSingleDetails = (mealId) => {
-  return axios.get("/api/v1/partners/meals/" + mealId).then((reponse) => reponse.data);
+  return axios
+    .get("/api/v1/partners/meals/" + mealId)
+    .then((reponse) => reponse.data);
 };
 
 export const addMealDetails = (MealData, token) => {
@@ -16,13 +18,12 @@ export const addMealDetails = (MealData, token) => {
   });
 };
 
-export function deleteMeals(mealId,token){
-  return axios.delete(`/api/v1/partners/meals/${mealId}`,{
+export function deleteMeals(mealId, token) {
+  return axios.delete(`/api/v1/partners/meals/${mealId}`, {
     headers: {
       Authorization: "Bearer " + token,
     },
-  }
-  )
+  });
 }
 
 export const updateMeals = (MealData, token) => {
