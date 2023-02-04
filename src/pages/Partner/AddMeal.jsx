@@ -21,7 +21,7 @@ const AddMeal = () => {
       setMeal({ ...meal, [event.target.name]: event.target.value });
     };
     useEffect(() => {
-      setUser(retrieveProfileInfo());
+      // setUser(retrieveProfileInfo());
     }, []);
 
     const addMeal = (event) => {
