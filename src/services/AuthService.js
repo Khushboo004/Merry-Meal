@@ -34,15 +34,6 @@ export async function register(emailAddress, password) {
   return response;
 }
 
-export async function retrieveProfileInformation(token) {
-  const response = axios.get("/profile/me", {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-  return response;
-}
-
 export async function createProfile(token, formData, birth) {
   const response = axios.post(
     "/api/v1/users/register",

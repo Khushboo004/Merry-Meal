@@ -9,7 +9,7 @@ import {
   Divider,
 } from "@mui/material";
 import { Logout } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 type Props = {
   role: String;
 };
@@ -29,13 +29,11 @@ const DashboardNav = (props: Props) => {
   return (
     <div className="sticky top-0 z-20 bg-white left-0 border-b border--600  backdrop-filter backdrop-blur-lg bg-opacity-60   p-2 text-bold text-xl flex justify-end ">
       <h1 className="w-full text-3xl text-green-400 font-bold m-4  cursor-pointer font-serif">
-            Merry Meal
-          </h1>
+        Merry Meal
+      </h1>
       <Tooltip title="Account Nav">
         <IconButton onClick={(e) => handleClick(e)}>
-          
           <Avatar sx={{ width: 40, height: 40 }}>N</Avatar>
-          
         </IconButton>
       </Tooltip>
       <Menu
@@ -78,12 +76,14 @@ const DashboardNav = (props: Props) => {
         </MenuItem>
         <Divider />
 
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+        <a href={`${window.location.protocol}//${window.location.host}/login`}>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
+        </a>
       </Menu>
     </div>
   );

@@ -56,13 +56,20 @@ function App() {
             <Route index element={<DataSummary />}></Route>
             <Route path={"dataSummary"} element={<DataSummary />}></Route>
             <Route path={"userinfo"} element={<UserInfo />}></Route>
+            <Route
+              path={"userinfo/edit"}
+              element={<EditProfile action="edit" />}
+            ></Route>
             <Route path={"mealinfo"} element={<MealManagement />}></Route>
             <Route path={"deliinfo"} element={<DeliManagement />}></Route>
             <Route
               path={"edit-pro"}
               element={<EditProfile action="edit" />}
             ></Route>
-            <Route path={"profile"} element={<Profile />}></Route>
+            <Route
+              path={"profile"}
+              element={<Profile role={"ADMIN"} />}
+            ></Route>
             <Route path={"donateinfo"} element={<DonationManagement />}></Route>
           </Route>
         </Route>
@@ -75,7 +82,10 @@ function App() {
           <Route path={"/partner"} element={<Dashboard role={"PARTNER"} />}>
             <Route index element={<UserHome />}></Route>
             <Route path={"dashbord"} element={<UserHome />}></Route>
-            <Route path={"profile"} element={<Profile />}></Route>
+            <Route
+              path={"profile"}
+              element={<Profile role={"PARTNER"} />}
+            ></Route>
             <Route path={"add-meal"} element={<AddMeal />}></Route>
             <Route path={"update-meal/:mealId"} element={<UpdateMeal />}></Route>
             <Route path={"edit-pro"} element={<EditProfile action="edit" />}></Route>
@@ -92,7 +102,10 @@ function App() {
           <Route path={"/caregiver"} element={<Dashboard role={"CAREGIVER"} />}>
             <Route index element={<CareGiverHome />}></Route>
             <Route path={"dashborad"} element={<CareGiverHome />} />
-            <Route path={"profile"} element={<Profile />}></Route>
+            <Route
+              path={"profile"}
+              element={<Profile role={"CAREGIVER"} />}
+            ></Route>
             <Route path={"time-table"} element={<TimeTable />} />
             <Route
               path={"edit-pro"}
@@ -108,7 +121,10 @@ function App() {
             <Route index element={<MemberHome />}></Route>
             <Route path={"home"} element={<MemberHome />} />
             <Route path={"meal-details/:mealId"} element={<MealDetails role={"MEMBER"} />} />
-            <Route path={"profile"} element={<Profile />}></Route>
+            <Route
+              path={"profile"}
+              element={<Profile role={"MEMBER"} />}
+            ></Route>
             <Route path={"add-cart"} element={<AddCart />} />
             <Route path={"delivery-form"} element={<DeliverOrderForm />} />
             <Route path={"about-us"} element={<AboutUs />} />
@@ -143,8 +159,15 @@ function App() {
           element={<ProtectedRoute isAllowed={auth.role?.includes("RIDER")} />}
         >
           <Route path={"/rider"} element={<Dashboard role={"RIDER"} />}>
-            <Route index element={<Profile />}></Route>
-            <Route path={"profile"} element={<Profile />}></Route>
+            <Route index element={<Profile role="RIDER" />}></Route>
+            <Route
+              path={"profile"}
+              element={<Profile role={"RIDER"} />}
+            ></Route>
+            <Route
+              path={"edit-pro"}
+              element={<EditProfile action="edit" />}
+            ></Route>
             <Route path={"deliveries"} element={<Deliveries />}>
               <Route index element={<DeliverList />}></Route>
               <Route path={"detail"} element={<DeliverDetail />}></Route>
@@ -158,8 +181,11 @@ function App() {
           }
         >
           <Route path={"/volunteer"} element={<Dashboard role={"VOLUNTEER"} />}>
-            <Route index element={<Profile />}></Route>
-            <Route path={"profile"} element={<Profile />}></Route>
+            <Route index element={<Profile role={"VOLUNTEER"} />}></Route>
+            <Route
+              path={"profile"}
+              element={<Profile role={"VOLUNTEER"} />}
+            ></Route>
             <Route path={"assessfood"} element={<MealAssess />}></Route>
           </Route>
         </Route>

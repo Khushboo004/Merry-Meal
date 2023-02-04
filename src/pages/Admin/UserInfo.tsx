@@ -6,7 +6,9 @@ import ViewMore from "../ViewMore";
 import { Container, Grid } from "@mui/material";
 import MultipleSelectRole from "../../components/Security/MultipleSelectRole";
 import { useEffect, useState } from "react";
-import { getUsers } from "../../services/ProfileService";
+import { deleUser, getUsers } from "../../services/ProfileService";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 type Props = {};
 const UserInfo = (props: Props) => {
   const [users, setUsers] = useState<any>();
@@ -20,6 +22,22 @@ const UserInfo = (props: Props) => {
         console.error(error);
       });
   }, []);
+
+  const deleteUser = (e: any) => {
+    const token = localStorage.getItem("token");
+    const index = e.target.dataset.index;
+    const newUsers = users.slice(0, index).concat(users.slice(index + 1));
+    deleUser(token, e.target.value)
+      .then((res) => {
+        setUsers(newUsers);
+        toast.success(res.data.message);
+      })
+      .catch((error) => {
+        toast.error("Delete Meal Fail, Please retry later!");
+        console.error(error);
+      });
+  };
+
   return (
     <div className="py-5">
       <h1 className="text-4xl font-bold text-green-400 text-center">
@@ -100,11 +118,20 @@ const UserInfo = (props: Props) => {
                           <td className="p-2">
                             <MultipleSelectRole userId={user.user_id} />
                           </td>
-                          <td className="p-2">
-                            <button className="p-2 bg-green-500 rounded-md text-white mr-3">
-                              Edit
-                            </button>
-                            <button className="p-2 bg-red-500 rounded-md text-white ">
+                          <td className="p-2 flex space-x-4">
+                            <Link
+                              to={"/admin/userinfo/edit?userId=" + user.user_id}
+                            >
+                              <button className="p-2 bg-green-500 rounded-md text-white mr-3">
+                                Edit
+                              </button>
+                            </Link>
+                            <button
+                              className="p-2 bg-red-500 rounded-md text-white"
+                              value={user.user_id}
+                              data-index={index}
+                              onClick={(e) => deleteUser(e)}
+                            >
                               Delete
                             </button>
                           </td>

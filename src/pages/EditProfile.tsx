@@ -13,12 +13,16 @@ import {
   LocalizationProvider,
 } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { forwardRef, ReactElement, useRef, useState } from "react";
+import { forwardRef, ReactElement, useEffect, useRef, useState } from "react";
 import { TransitionProps } from "@mui/material/transitions";
 import { createProfile, getRoles } from "../services/AuthService";
-import { uploadImage } from "../services/ProfileService";
+import {
+  editProfile,
+  getProfile,
+  uploadImage,
+} from "../services/ProfileService";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 type Props = {
   action: string;
@@ -41,6 +45,8 @@ const EditProfile = (props: Props) => {
   ) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const userId = searchParams.get("userId");
   const { action } = props;
   const birth = new Date(2002, 4, 4);
   const bornOnDemo = dayjs(birth);
@@ -55,6 +61,33 @@ const EditProfile = (props: Props) => {
   const profileRef = useRef<null | HTMLDivElement>(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (action === "edit") {
+      const token = localStorage.getItem("token");
+      getProfile(token, userId)
+        .then((res) => {
+          const { name, gender, profile_image, detail, phone_number, birth } =
+            res.data;
+          setName(name);
+          setGender(gender);
+          setImage(profile_image);
+          setdetail(detail);
+          setphone_number(phone_number);
+
+          let born = birth.split("/");
+          let year = born[0];
+          let month = born[1];
+          let day = born[2];
+          console.log(born);
+          let date = new Date(year, month + 1, day);
+          let bornOn = dayjs(date);
+          setBornOn(bornOn);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, []);
   const formData: ProfileData = {
     name: name,
     bornOn: bornOn,
@@ -70,8 +103,27 @@ const EditProfile = (props: Props) => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleCancel = () => {
     setOpen(false);
+  };
+
+  const handleSave = () => {
+    const token = localStorage.getItem("token");
+    let year = bornOn.get("y");
+    let month = bornOn.get("M");
+    let day = bornOn.get("D");
+    let birth = `${year}/${month}/${day}`;
+    const toastId = toast.loading("Uploading Profile ...");
+    editProfile(token, userId, formData, birth)
+      .then((res) => {
+        toast.dismiss(toastId);
+        toast.success("Profile Has Been Successfully updated!");
+        setOpen(false);
+      })
+      .catch((res) => {
+        toast.error("Update Profile Fail, please retry!");
+        setOpen(false);
+      });
   };
 
   const handleSubmit = (e: any) => {
@@ -149,17 +201,21 @@ const EditProfile = (props: Props) => {
           sx={{ bgcolor: deepOrange[500], width: 55, height: 55 }}
           src={image}
         >
-          N
+          {action === "edit" ? name.charAt(0) : "N"}
         </Avatar>
       </div>
       <div className="flex justify-center mt-2">
-        <input
-          type="file"
-          name="profileImage"
-          placeholder="Change Photo"
-          id="profileImage"
-          onChange={(e) => preview(e)}
-        />
+        {action === "edit" ? (
+          ""
+        ) : (
+          <input
+            type="file"
+            name="profileImage"
+            placeholder="Change Photo"
+            id="profileImage"
+            onChange={(e) => preview(e)}
+          />
+        )}
       </div>
       <div className="grid grid-cols-2 lg:px-36 mt-8">
         <div className="p-3 font-bold">Name</div>
@@ -216,7 +272,7 @@ const EditProfile = (props: Props) => {
           <TextField
             id="outlined-number"
             label="Phone No."
-            type="number"
+            type="text"
             value={formData.phone_number}
             InputLabelProps={{
               shrink: true,
@@ -265,7 +321,7 @@ const EditProfile = (props: Props) => {
           open={open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={handleClose}
+          onClose={handleCancel}
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle>{"Confirmation for Edit"}</DialogTitle>
@@ -276,8 +332,8 @@ const EditProfile = (props: Props) => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Save Changes</Button>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleSave}>Save Changes</Button>
+            <Button onClick={handleCancel}>Cancel</Button>
           </DialogActions>
         </Dialog>
       </div>
