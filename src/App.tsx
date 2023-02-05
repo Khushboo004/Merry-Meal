@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, useNavigate } from "react-router-dom";
 import Meal from "./pages/Meal";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
@@ -39,12 +39,15 @@ function App() {
   let roles: any = localStorage.getItem("authorization");
   let arrayRoles = roles ? JSON.parse(roles) : null;
   const [auth, setAuth] = useState({
-    role: arrayRoles ? arrayRoles : [],
+    role: arrayRoles != null && arrayRoles.length > 0 ? arrayRoles : [],
   });
 
   useEffect(() => {
-    setAuth({ role: arrayRoles });
+    setAuth({
+      role: arrayRoles != null && arrayRoles.length > 0 ? arrayRoles : [],
+    });
   }, []);
+
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ToastContainer />
@@ -153,7 +156,10 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="/" element={<Home role={""} />}>
+        <Route
+          path="/"
+          element={<Home role={auth.role.length > 0 ? auth.role[0] : ""} />}
+        >
           <Route index element={<PublicUser />}></Route>
           <Route path={"meals"} element={<Meal role={""} />} />
           <Route

@@ -27,7 +27,7 @@ export function deleteMeals(mealId, token) {
 }
 
 export const updateMeals = (MealData, token) => {
-  return axios.post(`/api/v1/partners/meals`, MealData, {
+  return axios.put(`/api/v1/partners/meals`, MealData, {
     headers: {
       Authorization: "Bearer " + token,
     },
