@@ -4,7 +4,6 @@ import Meal from "./pages/Meal";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import MealDetails from "./pages/MealDetails";
-import AddCart from "./pages/AddCart";
 import Dashboard from "./pages/Dashboard";
 import UserHome from "./pages/Partner/UserHome";
 import Profile from "./pages/Profile";
@@ -142,7 +141,6 @@ function App() {
               path={"profile"}
               element={<Profile role={"MEMBER"} />}
             ></Route>
-            <Route path={"add-cart"} element={<AddCart />} />
             <Route path={"delivery-form"} element={<DeliverOrderForm />} />
             <Route path={"about-us"} element={<AboutUs />} />
             <Route path={"meals"} element={<Meal role={"MEMBER"} />} />
@@ -162,7 +160,6 @@ function App() {
             path={"meal-details/:mealId"}
             element={<MealDetails role={""} />}
           />
-          <Route path={"add-cart"} element={<AddCart />} />
           <Route path={"login"} element={<Login auth={setAuth} />} />
           <Route path={"about-us"} element={<AboutUs />} />
           <Route path={"contact-us"} element={<ContactUs />} />
