@@ -122,7 +122,7 @@ function App() {
               path={"profile"}
               element={<Profile role={"CAREGIVER"} />}
             ></Route>
-            <Route path={"time-table"} element={<TimeTable />} />
+            <Route path={"time-table"} element={<TimeTable role={"CAREGIVER"}/>} />
             <Route
               path={"edit-pro"}
               element={<EditProfile action="edit" />}

@@ -20,6 +20,8 @@ import { deleteMeals, getAllMeals } from "../services/MealService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getPersonalProfile, getUsers } from "../services/ProfileService";
+import Allsession from "./CareGiver/Allsession";
+
 
 type Props = {
   role: String;
@@ -28,7 +30,6 @@ const Meal = (props: Props) => {
   const { role } = props;
 
   const [allMeals, setAllMeals] = useState<any>();
-  const [users, setUsers] = useState<null>();
   const [meals, setMeals] = useState<any>();
   const token: any = localStorage.getItem("token");
 
@@ -130,14 +131,19 @@ const Meal = (props: Props) => {
                               style={{
                                 display: "flex",
                                 justifyContent: "center",
+                                
                               }}
                               pt={1}
                             >
                               <CardMedia
-                                sx={{ width: "90%" }}
+                               
                                 component="img"
-                                alt="green iguana"
-                                height="90"
+                                alt="Not Uploaded"
+                                
+                                style={{
+                                 
+                                  backgroundSize:"cover",height:"200px",width: "90%" 
+                                }}
                                 image={
                                   "/api/v1/partners/meals/image/" + meal.image
                                 }
@@ -158,13 +164,19 @@ const Meal = (props: Props) => {
                                 <h3> {meal.status}</h3>
                               </Typography>
                             </CardContent>
-                            <CardActions>
+                            <CardActions   style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                
+                              }}>
                               {role === "" ? (
-                                <Link to={"/meal-details/" + meal.mealId}>
-                                  <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
+                                <Box >
+                                  <Link to={"/meal-details/" + meal.mealId} >
+                                  <button className=" bg-green-700 md:py-2 py-1  hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
                                     Details
                                   </button>
                                 </Link>
+                                </Box>
                               ) : (
                                 <></>
                               )}
@@ -186,19 +198,41 @@ const Meal = (props: Props) => {
                                   <Link
                                     to={"/partner/meal-details/" + meal.mealId}
                                   >
-                                    <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
+                                    <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600  w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
                                       Details
                                     </button>
                                   </Link>
                                   <Link
                                     to={"/partner/update-meal/" + meal.mealId}
                                   >
-                                    <button className=" bg-gray-700 md:py-2 py-1 mr-2 hover:bg-gray-800 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
+                                    <button className=" bg-gray-700 md:py-2 py-1  hover:bg-gray-800 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
                                       Update
                                     </button>
                                   </Link>
-
-   {/* <MealPagination /> */}
+                                  
+                                  <button
+                                    onClick={() => deleteMeal(meal)}
+                                    className=" bg-red-700 md:py-2 py-1 hover:bg-red-800 w-[60px] border hover:border-black  text-white rounded-md mx-auto "
+                                  >
+                                    <DeleteIcon />
+                                  </button>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </CardActions>
+                          </Card>
+                        </Grid>
+                      ))
+                    : ""}
+                </Grid>
+              </Box>
+            </Grid>
+          </Grid>
+         
+        </Container>
+      </div>
+      {/* </Container> */}
     </div>
   );
 };

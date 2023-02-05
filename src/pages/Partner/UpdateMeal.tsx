@@ -41,66 +41,21 @@ const UpdateMeal = () => {
     });
   };
 
-  const addMeal = (event: any) => {
-    event.preventDefault();
-    // console.log(post);
-    if (meal.meal_name.trim() === "") {
-      toast.error("Meal is Required");
-      return;
-    }
-    if (meal.status.trim() === "") {
-      toast.error("Meal Status is Required");
-      return;
-    }
-    if (meal.category.trim() === "") {
-      toast.error("Meal category is Required");
-      return;
-    }
-    if (meal.meal_desc.trim() === "") {
-      toast.error("Meal meal description is Required");
-      return;
-    }
-
-    // submit the form on surver
-    addMealDetails(meal, token)
-      .then((res) => {
-        uploadMealImage(res.data.mealId, imageFile, token)
-          .then((data) => {
-            toast.success("Image uploaded");
-          })
-          .catch((error) => {
-            toast.error("error in uploading image");
-            console.log(error);
-          });
-
-        toast.success("Meal Details Uploaded");
-        console.log(meal);
-        setMeal({
-          meal_name: "",
-          status: "",
-          category: "",
-          meal_desc: "",
-        });
-      })
-      .catch((error) => {
-        toast.error("Meal Details not  Uploaded due to some error !! ");
-        console.log(error);
-      });
-  };
-
   const updateMealDetails = (event: any) => {
     event.preventDefault();
     // console.log(car)
     updateMeals({ ...meal }, token)
       .then((res) => {
-        uploadMealImage(res.data.mealId, imageFile, token)
-          .then((data) => {
-            toast.success("Image uploaded");
-          })
-          .catch((error) => {
-            toast.error("error in uploading image");
-            console.log(error);
-          });
+        if (imageFile) {
+          uploadMealImage(mealId, imageFile, token)
+            .then((data) => {
+              toast.success("Image uploaded");
+            })
+            .catch((error) => {
+              toast.error("error in uploading image");
+              console.log(error);
+            });
+        }
         console.log(res);
         toast.success("Meal details updated");
       })
@@ -224,7 +179,7 @@ const UpdateMeal = () => {
                       <div>
                         <button
                           className="bg-blue-700 p-2 my-2 rounded-md hover:bg-blue-600 text-white font-bold"
-                          onClick={(e) => addMeal(e)}
+                          onClick={(e) => updateMealDetails(e)}
                         >
                           Add Meal
                         </button>
