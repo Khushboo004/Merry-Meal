@@ -46,14 +46,16 @@ const UpdateMeal = () => {
     // console.log(car)
     updateMeals({ ...meal }, token)
       .then((res) => {
-        uploadMealImage(res.data.mealId, imageFile, token)
-          .then((data) => {
-            toast.success("Image uploaded");
-          })
-          .catch((error) => {
-            toast.error("error in uploading image");
-            console.log(error);
-          });
+        if (imageFile) {
+          uploadMealImage(mealId, imageFile, token)
+            .then((data) => {
+              toast.success("Image uploaded");
+            })
+            .catch((error) => {
+              toast.error("error in uploading image");
+              console.log(error);
+            });
+        }
         console.log(res);
         toast.success("Meal details updated");
       })
