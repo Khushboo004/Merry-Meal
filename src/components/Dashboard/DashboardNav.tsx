@@ -26,6 +26,11 @@ const DashboardNav = (props: Props) => {
     setAnchorEl(null);
     navigate(`/${role?.toLowerCase()}`);
   };
+
+  const handleLogout = (e: any) => {
+    localStorage.setItem("token", "");
+    localStorage.setItem("authorization", "");
+  };
   return (
     <div className="sticky top-0 z-20 bg-white left-0 border-b border--600  backdrop-filter backdrop-blur-lg bg-opacity-60   p-2 text-bold text-xl flex justify-end ">
       <h1 className="w-full text-3xl text-green-400 font-bold m-4  cursor-pointer font-serif">
@@ -76,7 +81,10 @@ const DashboardNav = (props: Props) => {
         </MenuItem>
         <Divider />
 
-        <a href={`${window.location.protocol}//${window.location.host}/login`}>
+        <a
+          href={`${window.location.protocol}//${window.location.host}/login`}
+          onClick={(e) => handleLogout(e)}
+        >
           <MenuItem onClick={handleClose}>
             <ListItemIcon>
               <Logout fontSize="small" />

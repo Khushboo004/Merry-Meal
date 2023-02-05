@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, useNavigate } from "react-router-dom";
 import Meal from "./pages/Meal";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import MealDetails from "./pages/MealDetails";
-import AddCart from "./pages/AddCart";
 import Dashboard from "./pages/Dashboard";
 import UserHome from "./pages/Partner/UserHome";
 import Profile from "./pages/Profile";
@@ -40,12 +39,15 @@ function App() {
   let roles: any = localStorage.getItem("authorization");
   let arrayRoles = roles ? JSON.parse(roles) : null;
   const [auth, setAuth] = useState({
-    role: arrayRoles ? arrayRoles : [],
+    role: arrayRoles != null && arrayRoles.length > 0 ? arrayRoles : [],
   });
 
   useEffect(() => {
-    setAuth({ role: arrayRoles });
+    setAuth({
+      role: arrayRoles != null && arrayRoles.length > 0 ? arrayRoles : [],
+    });
   }, []);
+
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ToastContainer />
@@ -142,7 +144,6 @@ function App() {
               path={"profile"}
               element={<Profile role={"MEMBER"} />}
             ></Route>
-            <Route path={"add-cart"} element={<AddCart />} />
             <Route path={"delivery-form"} element={<DeliverOrderForm />} />
             <Route path={"about-us"} element={<AboutUs />} />
             <Route path={"meals"} element={<Meal role={"MEMBER"} />} />
@@ -155,14 +156,16 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="/" element={<Home role={""} />}>
+        <Route
+          path="/"
+          element={<Home role={auth.role.length > 0 ? auth.role[0] : ""} />}
+        >
           <Route index element={<PublicUser />}></Route>
           <Route path={"meals"} element={<Meal role={""} />} />
           <Route
             path={"meal-details/:mealId"}
             element={<MealDetails role={""} />}
           />
-          <Route path={"add-cart"} element={<AddCart />} />
           <Route path={"login"} element={<Login auth={setAuth} />} />
           <Route path={"about-us"} element={<AboutUs />} />
           <Route path={"contact-us"} element={<ContactUs />} />

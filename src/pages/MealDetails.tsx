@@ -34,22 +34,22 @@ const MealDetails = (props: Props) => {
       });
   }, []);
 
-  const token = localStorage.getItem("token");
+  const token: any = localStorage.getItem("token");
   // function to delete meal
   function deleteMeal(meal: any) {
-    if(window.confirm('Are you sure')){
-    deleteMeals(meal.mealId, token)
-      .then((data) => {
-        console.log(data);
-        toast.success("Meal Details is delete");
-        navigate("/partner/meals");
-        let newCarContent = meal.filter((m: any) => m.mealId != meal.mealId);
-        setMeal([...newCarContent]);
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Error in deleting post");
-      });
+    if (window.confirm("Are you sure")) {
+      deleteMeals(meal.mealId, token)
+        .then((data) => {
+          console.log(data);
+          toast.success("Meal Details is delete");
+          navigate("/partner/meals");
+          let newCarContent = meal.filter((m: any) => m.mealId != meal.mealId);
+          setMeal([...newCarContent]);
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Error in deleting post");
+        });
     }
   }
 
@@ -82,7 +82,7 @@ const MealDetails = (props: Props) => {
                       onClick={() => deleteMeal(meal)}
                       className=" bg-red-700 md:py-2 py-1 hover:bg-red-800 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto "
                     >
-                      Delets
+                      Delete
                     </button>
                   </>
                 ) : (
@@ -128,7 +128,7 @@ const MealDetails = (props: Props) => {
                             scope="row"
                             className="text-green-600 font-bold"
                           >
-                            SAFE
+                            {meal.status}
                           </TableCell>
                         </TableRow>
                         <TableRow>
@@ -152,14 +152,19 @@ const MealDetails = (props: Props) => {
                                 justifyContent: "center",
                               }}
                             >
-                              <NavLink to="/delivery-form">
-                                <button className="bg-orange-700 mr-2 p-3 rounded-lg font-bold text-white w-[150px] text-[16px] hover:bg-orange-800 ">
-                                  Order Now
-                                </button>{" "}
-                              </NavLink>
-                              <button className="bg-sky-700 mr-2 p-3 rounded-lg font-bold text-white w-[150px] text-[16px] hover:bg-sky-800">
-                                Add To Cart
-                              </button>
+                              {token?.length > 0 ? (
+                                <NavLink to="/delivery-form">
+                                  <button className="bg-orange-700 mr-2 p-3 rounded-lg font-bold text-white w-[150px] text-[16px] hover:bg-orange-800 ">
+                                    Order Now
+                                  </button>
+                                </NavLink>
+                              ) : (
+                                <NavLink to="/register">
+                                  <button className="bg-orange-700 mr-2 p-3 rounded-lg font-bold text-white w-[150px] text-[16px] hover:bg-orange-800 ">
+                                    Register To Order
+                                  </button>
+                                </NavLink>
+                              )}
                             </div>
                           </TableCell>
                         </TableRow>

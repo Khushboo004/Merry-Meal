@@ -33,7 +33,8 @@ const UpdateMeal = () => {
       });
   }, []);
 
-  const handleChange = (event: any, fieldName:any) => {
+  const handleChange = (event: any, fieldName: any) => {
+    console.log(fieldName + " " + event.target.value);
     setMeal({
       ...meal,
       [fieldName]: event.target.value,
@@ -87,19 +88,19 @@ const UpdateMeal = () => {
       });
   };
 
-  const updateMealDetails = (event:any) => {
+  const updateMealDetails = (event: any) => {
     event.preventDefault();
     // console.log(car)
     updateMeals({ ...meal }, token)
       .then((res) => {
         uploadMealImage(res.data.mealId, imageFile, token)
-        .then((data) => {
-          toast.success("Image uploaded");
-        })
-        .catch((error) => {
-          toast.error("error in uploading image");
-          console.log(error);
-        });
+          .then((data) => {
+            toast.success("Image uploaded");
+          })
+          .catch((error) => {
+            toast.error("error in uploading image");
+            console.log(error);
+          });
         console.log(res);
         toast.success("Meal details updated");
       })
@@ -156,13 +157,22 @@ const UpdateMeal = () => {
                           <option disabled value={0}>
                             -- Give Status --
                           </option>
-                          <option className="text-green-700 font-bold hover:text-green-800">
+                          <option
+                            value={"SAFE"}
+                            className="text-green-700 font-bold hover:text-green-800"
+                          >
                             SAFE
                           </option>
-                          <option className="text-red-700 font-bold hover:text-red-800">
+                          <option
+                            value={"UNSAFE"}
+                            className="text-red-700 font-bold hover:text-red-800"
+                          >
                             UNSAFE
                           </option>
-                          <option className="text-blue-700 font-bold hover:text-blue-800">
+                          <option
+                            value={"PENDING"}
+                            className="text-blue-700 font-bold hover:text-blue-800"
+                          >
                             PENDING
                           </option>
                         </select>
