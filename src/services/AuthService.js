@@ -66,4 +66,22 @@ export const doLogout=(next)=>{
   next();
 }
 
+export const isLoggedIn=()=>{
+  let data = localStorage.getItem("token");
+  if(data == null){
+      return false;
+  }else{
+      return true;
+  }
+}
 
+// get currentUser
+export const getCurrentUserDetails=()=>{
+  if(isLoggedIn()){
+      return localStorage.getItem("token").users;
+  }else{
+      return undefined;
+  }
+
+ 
+}

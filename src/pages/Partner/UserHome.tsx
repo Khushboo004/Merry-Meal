@@ -5,6 +5,7 @@ import Funds from '../../components/Public/Home/Funds';
 import AvailableFruit from '../../components/Public/Home/AvailableFruit';
 type Props = {};
 const UserHome = (props: Props) => {
+  
   return (
     <div>
         <AvaliableMeal />

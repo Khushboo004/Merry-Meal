@@ -27,9 +27,18 @@ export function deleteMeals(mealId, token) {
 }
 
 export const updateMeals = (MealData, token) => {
-  return axios.post(`/api/v1/partners/meals`, MealData, {
+  return axios.put(`/api/v1/partners/meals`, MealData, {
     headers: {
       Authorization: "Bearer " + token,
     },
   });
+};
+
+
+export const loadAllMeals = (pageNumber, pageSize) => {
+  return axios
+    .get(
+      `/posts?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=addedDate&sortDir=desc`
+    )
+    .then((response) => response.data);
 };
