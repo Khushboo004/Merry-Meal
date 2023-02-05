@@ -33,3 +33,12 @@ export const updateMeals = (MealData, token) => {
     },
   });
 };
+
+
+export const loadAllMeals = (pageNumber, pageSize) => {
+  return axios
+    .get(
+      `/posts?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=addedDate&sortDir=desc`
+    )
+    .then((response) => response.data);
+};

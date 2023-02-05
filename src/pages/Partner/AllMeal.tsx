@@ -1,5 +1,3 @@
-import AllMeal from "./Partner/AllMeal";
-import MealPagination from "./Partner/MealPagination";
 import React, { useEffect, useState } from "react";
 import {
   Box,
@@ -14,74 +12,58 @@ import {
   NativeSelect,
   Typography,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import filteringMeal from "../Utils/filteringMeal";
-import { deleteMeals, getAllMeals } from "../services/MealService";
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getPersonalProfile, getUsers } from "../services/ProfileService";
-
+import { deleteMeals, getAllMeals } from "../../services/MealService";
+import { getUsers } from "../../services/ProfileService";
+import filteringMeal from "../../Utils/filteringMeal";
 type Props = {
   role: String;
 };
-const Meal = (props: Props) => {
+const AllMeal = (props: Props) => {
   const { role } = props;
-
   const [allMeals, setAllMeals] = useState<any>();
   const [users, setUsers] = useState<null>();
   const [meals, setMeals] = useState<any>();
-  const token: any = localStorage.getItem("token");
-
   useEffect(() => {
-    if (role === "MEMBER" || role === "") {
-      getAllMeals()
-        .then((res) => {
-          let safeFood = res.data.filter((meal: any) => meal.status === "SAFE");
-          setAllMeals(safeFood);
-          setMeals(safeFood);
-          return;
-        })
-        .catch((error) => {});
-      return;
-    }
-
-    getPersonalProfile(token)
+    getAllMeals()
       .then((res) => {
-        const user = res.data;
-        getAllMeals()
-          .then((res) => {
-            let partnerFood = res.data.filter(
-              (meal: any) => meal.user.user_id === user.user_id
-            );
-            setAllMeals(partnerFood);
-            setMeals(partnerFood);
-            return;
-          })
-          .catch((error) => {
-            toast.error("Error While Fetching, Please retry later!");
-          });
+        setAllMeals(res.data);
+        setMeals(res.data);
+      })
+      .catch((error) => {});
+  }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    getUsers(token)
+      .then((res) => {
+        setUsers(res.data);
       })
       .catch((error) => {
-        toast.error("Error While Fetching, Please retry later!");
+        console.error(error);
       });
   }, []);
 
   const filterMeal = (e: React.ChangeEvent<HTMLSelectElement>) => {
     filteringMeal(e, setMeals, allMeals);
   };
+
+  const token = localStorage.getItem("token");
   // function to delete meal
   function deleteMeal(meal: any) {
-    if (window.confirm("Are you sure")) {
+    if(window.confirm('Are you sure')){
       deleteMeals(meal.mealId, token)
-        .then((data) => {
-          toast.success("Meal Details is delete");
-          let newCarContent = meals.filter((m: any) => m.mealId != meal.mealId);
-          setMeals([...newCarContent]);
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error("Error in deleting post");
-        });
+      .then((data) => {
+        console.log(data);
+        toast.success("Meal Details is delete");
+        let newCarContent = meals.filter((m: any) => m.mealId != meal.mealId);
+        setMeals([...newCarContent]);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Error in deleting post");
+      });
     }
   }
 
@@ -169,38 +151,44 @@ const Meal = (props: Props) => {
                                 <></>
                               )}
 
-                              {role === "MEMBER" ? (
-                                <Link
-                                  to={"/member/meal-details/" + meal.mealId}
-                                >
-                                  <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
-                                    Details
-                                  </button>
-                                </Link>
-                              ) : (
-                                <></>
-                              )}
 
                               {role === "PARTNER" ? (
                                 <>
-                                  <Link
-                                    to={"/partner/meal-details/" + meal.mealId}
-                                  >
+                                  <Link to={"/partner/meal-details/" + meal.mealId}>
                                     <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
                                       Details
                                     </button>
                                   </Link>
-                                  <Link
-                                    to={"/partner/update-meal/" + meal.mealId}
-                                  >
-                                    <button className=" bg-gray-700 md:py-2 py-1 mr-2 hover:bg-gray-800 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
-                                      Update
-                                    </button>
+                                  <Link to={"/partner/update-meal/" + meal.mealId}>
+                                  <button className=" bg-gray-700 md:py-2 py-1 mr-2 hover:bg-gray-800 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
+                                    Update
+                                  </button>
                                   </Link>
 
-   {/* <MealPagination /> */}
+                                  <button
+                                    onClick={() => deleteMeal(meal)}
+                                    className=" bg-red-700 md:py-2 py-1 hover:bg-red-800 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto "
+                                  >
+                                    <DeleteIcon />
+                                  </button>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </CardActions>
+                          </Card>
+                        </Grid>
+                      ))
+                    : ""}
+                </Grid>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </div>
+      {/* </Container> */}
     </div>
   );
 };
 
-export default Meal;
+export default AllMeal;
