@@ -89,7 +89,10 @@ function App() {
         >
           <Route path={"/partner"} element={<Dashboard role={"PARTNER"} />}>
             <Route index element={<UserHome role={"PARTNER"} />}></Route>
-            <Route path={"dashbord"} element={<UserHome role={"PARTNER"} />}></Route>
+            <Route
+              path={"dashbord"}
+              element={<UserHome role={"PARTNER"} />}
+            ></Route>
             <Route
               path={"profile"}
               element={<Profile role={"PARTNER"} />}
@@ -227,10 +230,7 @@ function App() {
               path={"profile"}
               element={<Profile role={"VOLUNTEER"} />}
             ></Route>
-            <Route
-              path={"meal-details/:mealId"}
-              element={<MealDetails role={""} />}
-            />
+            <Route path={"update-meal/:mealId"} element={<UpdateMeal />} />
             <Route
               path={"edit-pro"}
               element={<EditProfile action="edit" />}

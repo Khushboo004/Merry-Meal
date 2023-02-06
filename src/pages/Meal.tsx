@@ -21,7 +21,6 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getPersonalProfile, getUsers } from "../services/ProfileService";
 
-
 type Props = {
   role: String;
 };
@@ -130,18 +129,16 @@ const Meal = (props: Props) => {
                               style={{
                                 display: "flex",
                                 justifyContent: "center",
-                                
                               }}
                               pt={1}
                             >
                               <CardMedia
-                               
                                 component="img"
                                 alt="Not Uploaded"
-                                
                                 style={{
-                                 
-                                  backgroundSize:"cover",height:"200px",width: "90%" 
+                                  backgroundSize: "cover",
+                                  height: "200px",
+                                  width: "90%",
                                 }}
                                 image={
                                   "/api/v1/partners/meals/image/" + meal.image
@@ -163,18 +160,20 @@ const Meal = (props: Props) => {
                                 <h3> {meal.status}</h3>
                               </Typography>
                             </CardContent>
-                            <CardActions   style={{
+                            <CardActions
+                              style={{
                                 display: "flex",
                                 justifyContent: "center",
-                                
-                              }}>
+                                flexWrap: "wrap",
+                              }}
+                            >
                               {role === "" ? (
-                                <Box >
-                                  <Link to={"/meal-details/" + meal.mealId} >
-                                  <button className=" bg-green-700 md:py-2 py-1  hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
-                                    Details
-                                  </button>
-                                </Link>
+                                <Box>
+                                  <Link to={"/meal-details/" + meal.mealId}>
+                                    <button className=" bg-green-700 md:py-2 py-1  hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
+                                      Details
+                                    </button>
+                                  </Link>
                                 </Box>
                               ) : (
                                 <></>
@@ -208,7 +207,7 @@ const Meal = (props: Props) => {
                                       Update
                                     </button>
                                   </Link>
-                                  
+
                                   <button
                                     onClick={() => deleteMeal(meal)}
                                     className=" bg-red-700 md:py-2 py-1 hover:bg-red-800 w-[60px] border hover:border-black  text-white rounded-md mx-auto "
@@ -228,7 +227,6 @@ const Meal = (props: Props) => {
               </Box>
             </Grid>
           </Grid>
-         
         </Container>
       </div>
       {/* </Container> */}

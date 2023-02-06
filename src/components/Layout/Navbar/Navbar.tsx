@@ -14,6 +14,7 @@ import MenuProfile from "./MenuProfile";
 import { FaUserNurse } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import MerryMealLogo from "../../../assets/merry meal.png";
+import { SearchOutlined } from "@mui/icons-material";
 type Props = {
   role: String;
 };
@@ -44,13 +45,13 @@ const Navbar = (props: Props) => {
                     className="block w-full px-2 py-1  bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     placeholder="Search..."
                   />
-                  <button className="px-4 text-white bg-green-400 border-l rounded ">
-                    Search
+                  <button className="ml-2 px-2 text-white bg-green-400 border-l rounded ">
+                    <SearchOutlined />
                   </button>
                 </div>
               </li>
 
-              <li className="lg:p-4 md:px-2 pt-1 dark:hover:text-green-700 md:pt-1">
+              <li className="lg:p-4 md:px-2 dark:hover:text-green-700 md:pt-1">
                 {/* <a href="/member" > */}
                 <NavLink to="/member">
                   {" "}
@@ -75,14 +76,14 @@ const Navbar = (props: Props) => {
                 {showOption && (
                   <div className="md:absolute bg-white border p-2 rounded-lg  right-0">
                     <ul className="space-y-2 l md:w-48">
-                      <li className="lg:p-4 md:p-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                      <li className="lg:p-4 md:px-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
                         <NavLink to="/member/caregiverReq">
                           <FaUserNurse className="inline-block ml-0 mr-2 mb-1 text-green-400 " />
                           <span className=" md:inline-block">CareGivers</span>
                         </NavLink>
                       </li>
 
-                      <li className="lg:p-4 md:p-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
+                      <li className="lg:p-4 md:px-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
                         <NavLink to="/member/about-us">
                           <InfoIcon className="inline-block ml-0 mr-2 mb-1 text-green-400 " />
                           <span className=" md:inline-block">About Us</span>
@@ -100,16 +101,7 @@ const Navbar = (props: Props) => {
                 )}
               </li>
 
-              <li className="lg:p-4 md:px-2 mt-3 lg:mb-1 justify-center h-10 items-center  text-white dark:hover:text-green-700 ">
-                <NavLink
-                  to="/member/add-cart"
-                  className="bg-orange-600 p-2 hover:bg-orange-700"
-                >
-                  <ShoppingCartIcon className=" text-white" />
-                </NavLink>
-              </li>
-
-              <li>
+              <li className="flex flex-col justify-center">
                 <MenuProfile role={role} />
               </li>
             </ul>
@@ -129,11 +121,11 @@ const Navbar = (props: Props) => {
                     placeholder="Search..."
                   />
                   <button
-                    className="px-4 
+                    className="px-2
                   shadow-green-300 shadow-md
                   text-white bg-green-400 border-l rounded "
                   >
-                    Search
+                    <SearchOutlined />
                   </button>
                 </div>
               </li>

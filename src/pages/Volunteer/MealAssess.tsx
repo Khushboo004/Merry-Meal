@@ -10,8 +10,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import filteringMeal from "../../Utils/filteringMeal";
 import ViewMore from "../ViewMore";
-import { deleteMeals, getAllMeals } from "../../services/MealService";
-import { toast } from "react-toastify";
+import { getAllMeals } from "../../services/MealService";
+import { Link } from "react-router-dom";
 type Props = {};
 
 const MealAssess = (props: Props) => {
@@ -111,9 +111,11 @@ const MealAssess = (props: Props) => {
                           </td>
                           <td className="p-5">{meal.meal_desc}</td>
                           <td className="p-2" id={meal.mealId}>
-                            <Button className="p-2 bg-green-500 rounded-md text-white mr-3">
-                              Edit
-                            </Button>
+                            <Link to={"/volunteer/update-meal/" + meal.mealId}>
+                              <Button className="p-2 bg-green-500 rounded-md text-white mr-3">
+                                Edit
+                              </Button>
+                            </Link>
                           </td>
                         </tr>
                       ))

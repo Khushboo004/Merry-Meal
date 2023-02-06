@@ -83,7 +83,7 @@ const UpdateMeal = () => {
                       variant="h5"
                       className="text-center p-2 font-bold font-serif uppercase"
                     >
-                      Add Meal Form
+                      Edit Meal Form
                     </Typography>
                   </div>
                   <form onSubmit={updateMealDetails}>
@@ -181,7 +181,7 @@ const UpdateMeal = () => {
                           className="bg-blue-700 p-2 my-2 rounded-md hover:bg-blue-600 text-white font-bold"
                           onClick={(e) => updateMealDetails(e)}
                         >
-                          Add Meal
+                          Edit Meal
                         </button>
                       </div>
                     </div>

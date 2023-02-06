@@ -41,11 +41,12 @@ const MenuProfile = (props: Props) => {
       {role === "MEMBER" ? (
         <li
           onClick={handleClick}
-          className="lg:ml-2 mt-5 relative  "
+          className="lg:ml-2 relative"
           x-data="{dropdownIpen:false}"
         >
-          <div className="flex justify-between items-center">
-            <img className="w-[50px] h-12 " src={Pic} alt="/" />          </div>
+          <div className="flex-col flex justify-center">
+            <img className="w-[50px] h-12 " src={Pic} alt="/" />{" "}
+          </div>
           {showOption && (
             <div className="md:absolute bg-white border p-2 rounded-lg  right-0">
               <ul className="space-y-2 md:w-48">

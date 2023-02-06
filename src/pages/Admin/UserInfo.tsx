@@ -59,11 +59,6 @@ const UserInfo = (props: Props) => {
                 />
               </div>
             </div>
-            <div className="add flex justify-end">
-              <button className="px-5 py-2 bg-blue-500 text-white rounded-lg mr-16">
-                Add
-              </button>
-            </div>
           </Grid>
           <Grid item lg={2} xs={0.1}></Grid>
           <Grid item lg={2} xs={0.1}></Grid>
