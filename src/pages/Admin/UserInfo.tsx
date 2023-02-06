@@ -3,7 +3,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import ViewMore from "../ViewMore";
-import { Container, Grid } from "@mui/material";
+import { Button, Container, Grid } from "@mui/material";
 import MultipleSelectRole from "../../components/Security/MultipleSelectRole";
 import { useEffect, useState } from "react";
 import { deleUser, getUsers } from "../../services/ProfileService";
@@ -27,10 +27,12 @@ const UserInfo = (props: Props) => {
     const token = localStorage.getItem("token");
     const index = e.target.dataset.index;
     const newUsers = users.slice(0, index).concat(users.slice(index + 1));
+    console.log("Hi delete");
+
     deleUser(token, e.target.value)
       .then((res) => {
         setUsers(newUsers);
-        toast.success(res.data.message);
+        toast.success(res.data);
       })
       .catch((error) => {
         toast.error("Delete Meal Fail, Please retry later!");
@@ -122,18 +124,18 @@ const UserInfo = (props: Props) => {
                             <Link
                               to={"/admin/userinfo/edit?userId=" + user.user_id}
                             >
-                              <button className="p-2 bg-green-500 rounded-md text-white mr-3">
+                              <Button className="p-2 bg-green-500 rounded-md text-white mr-3">
                                 Edit
-                              </button>
+                              </Button>
                             </Link>
-                            <button
+                            <Button
                               className="p-2 bg-red-500 rounded-md text-white"
                               value={user.user_id}
                               data-index={index}
                               onClick={(e) => deleteUser(e)}
                             >
                               Delete
-                            </button>
+                            </Button>
                           </td>
                         </tr>
                       ))

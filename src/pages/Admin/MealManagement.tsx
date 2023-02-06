@@ -1,4 +1,5 @@
 import {
+  Button,
   Container,
   FormControl,
   Grid,
@@ -34,9 +35,10 @@ const MealManagement = (props: Props) => {
     const token = localStorage.getItem("token");
     const index = e.target.dataset.index;
     const newMeals = mealRows.slice(0, index).concat(mealRows.slice(index + 1));
-    deleteMeals(token, e.target.value)
+    deleteMeals(e.target.value, token)
       .then((res: any) => {
         setMealRows(newMeals);
+        toast.success("Meal has been deleted!");
       })
       .catch((error: any) => {
         toast.error("Delete Meal Fail, Please retry later!");
@@ -121,17 +123,17 @@ const MealManagement = (props: Props) => {
                           </td>
                           <td className="p-5">{meal.meal_desc}</td>
                           <td className="p-2" id={meal.mealId}>
-                            <button className="p-2 bg-green-500 rounded-md text-white mr-3">
+                            <Button className="p-2 bg-green-500 rounded-md text-white mr-3">
                               Edit
-                            </button>
-                            <button
+                            </Button>
+                            <Button
                               className="p-2 bg-red-500 rounded-md text-white"
                               value={meal.mealId}
                               data-index={index}
                               onClick={(e) => deleteMeal(e)}
                             >
                               Delete
-                            </button>
+                            </Button>
                           </td>
                         </tr>
                       ))
