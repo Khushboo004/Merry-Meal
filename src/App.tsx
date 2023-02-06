@@ -88,8 +88,8 @@ function App() {
           }
         >
           <Route path={"/partner"} element={<Dashboard role={"PARTNER"} />}>
-            <Route index element={<UserHome />}></Route>
-            <Route path={"dashbord"} element={<UserHome />}></Route>
+            <Route index element={<UserHome role={"PARTNER"} />}></Route>
+            <Route path={"dashbord"} element={<UserHome role={"PARTNER"} />}></Route>
             <Route
               path={"profile"}
               element={<Profile role={"PARTNER"} />}
@@ -142,8 +142,8 @@ function App() {
           element={<ProtectedRoute isAllowed={auth.role?.includes("MEMBER")} />}
         >
           <Route path={"/member"} element={<Home role={"MEMBER"} />}>
-            <Route index element={<MemberHome />}></Route>
-            <Route path={"home"} element={<MemberHome />} />
+            <Route index element={<MemberHome role={"MEMBER"} />}></Route>
+            <Route path={"home"} element={<MemberHome role={"MEMBER"} />} />
             <Route
               path={"meal-details/:mealId"}
               element={<MealDetails role={"MEMBER"} />}

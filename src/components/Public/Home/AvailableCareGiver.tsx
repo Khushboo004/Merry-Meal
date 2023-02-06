@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Pic from "../../../assets/caregiver.png";
 import {
   Box,
@@ -9,8 +9,55 @@ import {
   CardMedia,
   Grid,
   Typography,
+  Button,
 } from "@mui/material";
-const AvailableCareGiver = () => {
+import { getAllSession } from "../../../services/SessionService";
+import { getPersonalProfile } from "../../../services/ProfileService";
+import { toast } from "react-toastify";
+type Props = {
+  role: String;
+};
+
+const AvailableCareGiver  = (props: Props) => {
+  const { role } = props;
+  const [sessions, setSessions] = useState<any>();
+  const token: any = localStorage.getItem("token");
+  const [allMeals, setAllMeals] = useState<any>();
+
+  const BreakError = {};
+  useEffect(() => {
+        // if (role === "MEMBER" ) {
+      // getAllSession(token)
+      //   .then((res) => {
+      //     let avaliableCaregiver = res.data.filter((sessionStatus: any) => sessionStatus.status === "Available"
+      //     );
+      //     setSessions(avaliableCaregiver);
+      //     return;
+      //   })
+      //   .catch((error) => {
+      //     toast.error("Error While Fetching, Please retry later!");
+      //   });
+      // }
+      getAllSession(token)
+        .then((res) => {
+          console.log(res)
+          
+          const newArray =  res.data.slice(0, 4);
+          setSessions(newArray);
+          
+          return;
+        })
+        .catch((error) => {
+          toast.error("=========");
+          console.log(error)
+        });
+      return;
+      
+    }, []);
+  
+
+ 
+  
   return (
     <div>
       <div className="py-3 bg-slate-100">
@@ -37,192 +84,65 @@ const AvailableCareGiver = () => {
           <div className="lg:px-5">
             <Box margin={2}>
               <Grid container spacing={4}>
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10} className="shadow-xl">
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Name: Abc
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-             <h1><span className='font-bold'>Gender: </span>Female</h1>
-           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
-           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
-                      </Typography>
-                    </CardContent>
-                    <CardActions
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a href="/meal-details">
-                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                          Details
-                        </button>
-                      </a>
-                    </CardActions>
-                  </Card>
-                </Grid>
+              {sessions != undefined
+                    ? sessions.map((session: any, index: any) => (
 
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10} className="shadow-xl">
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Name: Abc
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-             <h1><span className='font-bold'>Gender: </span>Female</h1>
-           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
-           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
-                      </Typography>
-                    </CardContent>
-                    <CardActions
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a href="/meal-details">
-                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                          Details
-                        </button>
-                      </a>
-                    </CardActions>
-                  </Card>
-                </Grid>
+                        
+                        <Grid item lg={3} md={4} sm={4} xs={6}  direction="row-reverse">
+                        <Card elevation={10} className="shadow-xl">
+                        <Box style={{ display: "flex", justifyContent: "center"}} className="pt-1">
+    
+                        
+                          <CardMedia
+                            style={{
+                                       
+                              backgroundSize:"cover",width: "30%", height:"50%"}}
+                            component="img"
+                            alt="green iguana"
+                            height="90"
+                            image={Pic}
+                          />
+                          </Box>
+                         
+                        <Typography style={{justifyContent: "center" }} className="p-3"
+                         
+                          color="text.dark"
+                        >
+                           <h1>
+                            <span className="font-bold">Name: </span>{session.user.name}
+                          </h1>
+                          <h1>
+                            <span className="font-bold">Date: </span>{session.date}
+                          </h1>
+                          <h1>
+                            <span className="font-bold">Session: </span>{session.session}
+                          </h1>
+                          <h1>
+                            <span className="font-bold text-green-700">Status: </span>{session.status}
+                          </h1>
+                          <h1>
+                            <span className="font-bold">Phone No: </span>{session.user.phone_number}
+                          </h1>
+                        </Typography>
+                      
+                      <CardActions
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                       
+                          <Box className="justify-between items-center lg:text-no md:text-center sm:text-center xs:text-center">
+      <Button  className='  w-full  my-2 font-bold ' color='info' variant='contained' >Send Request</Button>
+      
+      <a href="/profile"><Button className=' w-full   font-bold bg-gray-700'   variant='contained'>Details</Button>
+      </a>      </Box>
+                        
+                      </CardActions>
+                        </Card>
+                      </Grid>
+                      )
+                    )
+                 : ""}
 
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10} className="shadow-xl">
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
-                    <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Name: Abc
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-             <h1><span className='font-bold'>Gender: </span>Female</h1>
-           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
-           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
-                      </Typography>
-                    </CardContent>
-                    <CardActions
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a href="/meal-details">
-                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                          Details
-                        </button>
-                      </a>
-                    </CardActions>
-                  </Card>
-                </Grid>
-
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10} className="shadow-xl">
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
-                    <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Name: Abc
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-             <h1><span className='font-bold'>Gender: </span>Female</h1>
-           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
-           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
-                      </Typography>
-                    </CardContent>
-                    <CardActions
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a href="/meal-details">
-                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                          Details
-                        </button>
-                      </a>
-                    </CardActions>
-                  </Card>
-                </Grid>
-
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10} className="shadow-xl">
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
-                    <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Name: Abc
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-             <h1><span className='font-bold'>Gender: </span>Female</h1>
-           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
-           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
-                      </Typography>
-                    </CardContent>
-                    <CardActions
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a href="/meal-details">
-                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                          Details
-                        </button>
-                      </a>
-                    </CardActions>
-                  </Card>
-                </Grid>
-
-                <Grid item lg={2} md={4} sm={4} xs={6}>
-                  <Card elevation={10} className="shadow-xl">
-                    <CardMedia
-                      sx={{ width: "90%" }}
-                      component="img"
-                      alt="green iguana"
-                      height="90"
-                      image={Pic}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom className="text-[16px] font-bold" component="div">
-                        Name: Abc
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-             <h1><span className='font-bold'>Gender: </span>Female</h1>
-           <h1><span className='font-bold'>Phone No: </span>29843738764673</h1>
-           <h1><span className='font-bold'>session: </span>11:00am-1:00pm</h1>
-                      </Typography>
-                    </CardContent>
-                    <CardActions
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a href="/meal-details">
-                        <button className=" bg-green-700 py-2 hover:bg-green-600 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
-                          Details
-                        </button>
-                      </a>
-                    </CardActions>
-                  </Card>
-                </Grid>
-               
+                
                
 
 

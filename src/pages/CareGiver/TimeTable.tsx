@@ -156,79 +156,66 @@ const TimeTable = (props: Props) => {
             My Time Table
           </h1>
           <Grid container spacing={3}>
-            {sessions != undefined
-              ? sessions.map((session: any, index: any) => (
-                  <Grid item lg={2.5} md={4} sm={6} xs={6}>
-                    <Card elevation={10}>
-                      <Box
-                        style={{ display: "flex", justifyContent: "center" }}
-                        className="pt-1"
-                      >
-                        <CardMedia
-                          component="img"
-                          alt="green iguana"
-                          style={{
-                            backgroundSize: "cover",
-                            width: "30%",
-                            height: "50%",
-                          }}
-                          image={Time}
-                        />
-                      </Box>
-                      <CardContent>
-                        <Typography
-                          className="sm:text-[15px] text-[14px]"
-                          color="text.dark"
-                        >
-                          <h1>
-                            <span className="font-bold">Name: </span>
-                            {session.user.name}
-                          </h1>
-                          <h1>
-                            <span className="font-bold">Date: </span>
-                            {session.date}
-                          </h1>
-                          <h1>
-                            <span className="font-bold">Session: </span>
-                            {session.session}
-                          </h1>
-                          <h1>
-                            <span className="font-bold text-green-700">
-                              Status:{" "}
-                            </span>
-                            {session.status}
-                          </h1>
-                          <h1>
-                            <span className="font-bold">Phone No: </span>
-                            {session.user.phone_number}
-                          </h1>
-                        </Typography>
-                      </CardContent>
-                      <CardActions
-                        style={{ display: "flex", justifyContent: "center" }}
-                      >
-                        <Box
-                          textAlign={"center"}
-                          display={"block"}
-                          style={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <Link
-                            to={"/caregiver/edit-session/" + session.session_id}
-                          >
-                            <Button
-                              className="mr-5 text-[15px] font-bold"
-                              color="info"
-                              variant="contained"
-                            >
-                              EDIT
-                            </Button>
-                          </Link>
-                        </Box>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))
-              : ""}
+          {sessions != undefined
+                    ? sessions.map((session: any, index: any) => (
+            <Grid item lg={2.5} md={4} sm={6} xs={6}>
+              <Card elevation={10}>
+                <Box style={{ display: "flex", justifyContent: "center"}} className="pt-1">
+                  <CardMedia
+                    component="img"
+                    alt="green iguana"
+                    style={{
+                                 
+                      backgroundSize:"cover",width: "30%", height:"50%"}}
+                    image={Time}
+                  />
+                </Box>
+                <CardContent>
+                  <Typography
+                    className="sm:text-[15px] text-[14px]"
+                    color="text.dark"
+                  >
+                     <h1>
+                      <span className="font-bold">Name: </span>{session.user.name}
+                    </h1>
+                    <h1>
+                      <span className="font-bold">Date: </span>{session.date}
+                    </h1>
+                    <h1>
+                      <span className="font-bold">Session: </span>{session.session}
+                    </h1>
+                    <h1>
+                      <span className="font-bold text-green-700">Status: </span>{session.status}
+                    </h1>
+                    <h1>
+                      <span className="font-bold">Phone No: </span>{session.user.phone_number}
+                    </h1>
+                  </Typography>
+                </CardContent>
+                <CardActions
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Box
+                    textAlign={"center"}
+                    display={"block"}
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                     <Link to={"/caregiver/edit-session/"+session.session_id} >
+                    <Button
+                      className="mr-5 text-[15px] font-bold"
+                      color="info"
+                      variant="contained"
+                    >
+                      EDIT
+                    </Button>
+                    </Link>
+                  </Box>
+                </CardActions>
+                </Card>
+            </Grid>
+            ))
+             : ""}
+             </Grid>
           </Grid>
         </Grid>
       </Grid>
