@@ -34,7 +34,6 @@ export const updateMeals = (MealData, token) => {
   });
 };
 
-
 export const loadAllMeals = (pageNumber, pageSize) => {
   return axios
     .get(

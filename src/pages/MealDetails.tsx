@@ -152,8 +152,10 @@ const MealDetails = (props: Props) => {
                                 justifyContent: "center",
                               }}
                             >
-                              {token?.length > 0 ? (
-                                <NavLink to="/delivery-form">
+                              {token?.length > 0 && role === "MEMBER" ? (
+                                <NavLink
+                                  to={"/member/delivery-form/" + mealId}
+                                >
                                   <button className="bg-orange-700 mr-2 p-3 rounded-lg font-bold text-white w-[150px] text-[16px] hover:bg-orange-800 ">
                                     Order Now
                                   </button>

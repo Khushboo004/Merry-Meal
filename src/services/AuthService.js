@@ -9,6 +9,7 @@ export async function login(emailAddress, password) {
 }
 
 export async function getRoles(token) {
+  console.log(token);
   const response = axios.get("/api/v1/role/userRoles", {
     headers: {
       Authorization: "Bearer " + token,
@@ -59,29 +60,26 @@ export async function assignRoles(token, roles, userid) {
   return response;
 }
 
-
-export const doLogout=(next)=>{
+export const doLogout = (next) => {
   localStorage.removeItem("token");
   localStorage.removeItem("authorization");
   next();
-}
+};
 
-export const isLoggedIn=()=>{
+export const isLoggedIn = () => {
   let data = localStorage.getItem("token");
-  if(data == null){
-      return false;
-  }else{
-      return true;
+  if (data == null) {
+    return false;
+  } else {
+    return true;
   }
-}
+};
 
 // get currentUser
-export const getCurrentUserDetails=()=>{
-  if(isLoggedIn()){
-      return localStorage.getItem("token").users;
-  }else{
-      return undefined;
+export const getCurrentUserDetails = () => {
+  if (isLoggedIn()) {
+    return localStorage.getItem("token").users;
+  } else {
+    return undefined;
   }
-
- 
-}
+};

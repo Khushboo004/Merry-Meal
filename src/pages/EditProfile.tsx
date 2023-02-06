@@ -46,6 +46,7 @@ const EditProfile = (props: Props) => {
   ) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [userId, setUserId] = useState(searchParams.get("userId"));
   const { action } = props;
@@ -140,9 +141,13 @@ const EditProfile = (props: Props) => {
 
   const handleCancel = () => {
     setOpen(false);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   const handleSave = () => {
+    setOpen(false);
     const token = localStorage.getItem("token");
     let year = bornOn.get("y");
     let month = bornOn.get("M");
@@ -153,11 +158,12 @@ const EditProfile = (props: Props) => {
       .then((res) => {
         toast.dismiss(toastId);
         toast.success("Profile Has Been Successfully updated!");
-        setOpen(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((res) => {
         toast.error("Update Profile Fail, please retry!");
-        setOpen(false);
       });
   };
 

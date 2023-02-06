@@ -13,11 +13,11 @@ const AddMeal = () => {
     category: "",
     meal_desc: "",
   });
-  const fieldChanged = (event:any) => {
+  const fieldChanged = (event: any) => {
     setMeal({ ...meal, [event.target.name]: event.target.value });
   };
 
-  const addMeal = (event:any) => {
+  const addMeal = (event: any) => {
     event.preventDefault();
     // console.log(post);
     if (meal.meal_name.trim() === "") {
@@ -36,12 +36,15 @@ const AddMeal = () => {
       toast.error("Meal meal description is Required");
       return;
     }
+    if (imageFile === null) {
+      toast.error("Meal image is required!");
+      return;
+    }
 
     // submit the form on surver
     addMealDetails(meal, token)
       .then((res) => {
         console.log(res.data.mealId);
-        
         uploadMealImage(res.data.mealId, imageFile, token)
           .then((data) => {
             toast.success("Image uploaded");
@@ -66,7 +69,7 @@ const AddMeal = () => {
       });
   };
   // handling file change image
-  const handleFileChage = (event:any) => {
+  const handleFileChage = (event: any) => {
     console.log(event.target.files[0]);
     setImageFile(event.target.files[0]);
   };
@@ -91,7 +94,6 @@ const AddMeal = () => {
                     <input type="hidden" name="remember" value="true" />
                     <div className="-space-y-px rounded-md shadow-sm m-4">
                       <div className="">
-                        
                         <input
                           id="meal_name"
                           name="meal_name"
@@ -112,9 +114,15 @@ const AddMeal = () => {
                           <option disabled value={0}>
                             -- Give Status --
                           </option>
-                          <option className="text-green-700 font-bold hover:text-green-800">SAFE</option>
-                          <option className="text-red-700 font-bold hover:text-red-800">UNSAFE</option>
-                          <option className="text-blue-700 font-bold hover:text-blue-800">PENDING</option>
+                          <option className="text-green-700 font-bold hover:text-green-800">
+                            SAFE
+                          </option>
+                          <option className="text-red-700 font-bold hover:text-red-800">
+                            UNSAFE
+                          </option>
+                          <option className="text-blue-700 font-bold hover:text-blue-800">
+                            PENDING
+                          </option>
                         </select>
                       </div>
                       <div className="pt-2">
@@ -133,8 +141,6 @@ const AddMeal = () => {
                         </select>
                       </div>
 
-                      
-
                       <div className="pt-2">
                         <div className="mt-1 card bg-white shadow justify-center">
                           <textarea
@@ -150,13 +156,13 @@ const AddMeal = () => {
                         <label htmlFor="image" className="fw-bold">
                           Select Image
                         </label>
-                       <div>
-                       <input
-                          id="image"
-                          type="file"
-                          onChange={handleFileChage}
-                        />
-                       </div>
+                        <div>
+                          <input
+                            id="image"
+                            type="file"
+                            onChange={handleFileChage}
+                          />
+                        </div>
                       </div>
 
                       <div>

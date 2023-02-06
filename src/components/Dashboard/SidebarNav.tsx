@@ -32,7 +32,6 @@ const SidebarNav = (props: Props) => {
             : "fixed left-[-100%]"
         }
       >
-        
         <h1 className="w-full text-3xl text-white font-bold m-6 text-center  cursor-pointer font-serif">
           Merry Meal
         </h1>
@@ -79,7 +78,6 @@ const SidebarNav = (props: Props) => {
           {role === "RIDER" ? <RiderSidebar /> : <></>}
 
           {role === "VOLUNTEER" ? <VolunteerSidebar /> : <></>}
-
         </div>
       </div>
 
