@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getPersonalProfile, getUsers } from "../services/ProfileService";
 
+
 type Props = {
   role: String;
 };
@@ -28,7 +29,6 @@ const Meal = (props: Props) => {
   const { role } = props;
 
   const [allMeals, setAllMeals] = useState<any>();
-  const [users, setUsers] = useState<null>();
   const [meals, setMeals] = useState<any>();
   const token: any = localStorage.getItem("token");
 
@@ -122,72 +122,65 @@ const Meal = (props: Props) => {
             <Grid item xs={12}>
               <Box p={1}>
                 <Grid container spacing={1}>
-                  {meals != undefined ? (
-                    meals.map((meal: any, index: any) => (
-                      <Grid item lg={2} md={4} sm={6} xs={6}>
-                        <Card elevation={10}>
-                          <Box
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                            }}
-                            pt={1}
-                          >
-                            <CardMedia
-                              sx={{ width: "90%" }}
-                              component="img"
-                              alt="green iguana"
-                              height="90"
-                              image={
-                                "/api/v1/partners/meals/image/" + meal.image
-                              }
-                            />
-                          </Box>
-                          <CardContent>
-                            <Typography gutterBottom>
-                              <div className="md:text-xl">
-                                <span className="font-bold">Category</span>:{" "}
-                                {meal.category}
-                              </div>
-                            </Typography>
-                            <Typography
-                              className="text-xl"
-                              color="text.secondary"
+                  {meals != undefined
+                    ? meals.map((meal: any, index: any) => (
+                        <Grid item lg={2} md={4} sm={6} xs={6}>
+                          <Card elevation={10}>
+                            <Box
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                
+                              }}
+                              pt={1}
                             >
-                              <h2>{meal.meal_name}</h2>
-                              <h3> {meal.status}</h3>
-                            </Typography>
-                          </CardContent>
-                          <CardActions>
-                            {role === "" ? (
-                              <Link to={"/meal-details/" + meal.mealId}>
-                                <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
-                                  Details
-                                </button>
-                              </Link>
-                            ) : (
-                              <></>
-                            )}
-
-                            {role === "MEMBER" ? (
-                              <Link to={"/member/meal-details/" + meal.mealId}>
-                                <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
-                                  Details
-                                </button>
-                              </Link>
-                            ) : (
-                              <></>
-                            )}
-
-                            {role === "PARTNER" ? (
-                              <>
-                                <Link
-                                  to={"/partner/meal-details/" + meal.mealId}
-                                >
-                                  <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
+                              <CardMedia
+                               
+                                component="img"
+                                alt="Not Uploaded"
+                                
+                                style={{
+                                 
+                                  backgroundSize:"cover",height:"200px",width: "90%" 
+                                }}
+                                image={
+                                  "/api/v1/partners/meals/image/" + meal.image
+                                }
+                              />
+                            </Box>
+                            <CardContent>
+                              <Typography gutterBottom>
+                                <div className="md:text-xl">
+                                  <span className="font-bold">Category</span>:{" "}
+                                  {meal.category}
+                                </div>
+                              </Typography>
+                              <Typography
+                                className="text-xl"
+                                color="text.secondary"
+                              >
+                                <h2>{meal.meal_name}</h2>
+                                <h3> {meal.status}</h3>
+                              </Typography>
+                            </CardContent>
+                            <CardActions   style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                
+                              }}>
+                              {role === "" ? (
+                                <Box >
+                                  <Link to={"/meal-details/" + meal.mealId} >
+                                  <button className=" bg-green-700 md:py-2 py-1  hover:bg-green-600 md:w-[80px] w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
                                     Details
                                   </button>
                                 </Link>
+                                </Box>
+                              ) : (
+                                <></>
+                              )}
+
+                              {role === "MEMBER" ? (
                                 <Link
                                   to={"/partner/update-meal/" + meal.mealId}
                                 >
@@ -195,23 +188,50 @@ const Meal = (props: Props) => {
                                     Update
                                   </button>
                                 </Link>
-                              </>
-                            ) : (
-                              ""
-                            )}
-                          </CardActions>
-                        </Card>
-                      </Grid>
-                    ))
-                  ) : (
-                    <></>
-                  )}
+                              ) : (
+                                <></>
+                              )}
+
+                              {role === "PARTNER" ? (
+                                <>
+                                  <Link
+                                    to={"/partner/meal-details/" + meal.mealId}
+                                  >
+                                    <button className=" bg-green-700 md:py-2 py-1 hover:bg-green-600  w-[60px] border hover:border-black  text-white rounded-md mx-auto ">
+                                      Details
+                                    </button>
+                                  </Link>
+                                  <Link
+                                    to={"/partner/update-meal/" + meal.mealId}
+                                  >
+                                    <button className=" bg-gray-700 md:py-2 py-1  hover:bg-gray-800 w-[80px] border hover:border-black  text-white rounded-md mx-auto ">
+                                      Update
+                                    </button>
+                                  </Link>
+                                  
+                                  <button
+                                    onClick={() => deleteMeal(meal)}
+                                    className=" bg-red-700 md:py-2 py-1 hover:bg-red-800 w-[60px] border hover:border-black  text-white rounded-md mx-auto "
+                                  >
+                                    <DeleteIcon />
+                                  </button>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </CardActions>
+                          </Card>
+                        </Grid>
+                      ))
+                    : ""}
                 </Grid>
               </Box>
             </Grid>
           </Grid>
+         
         </Container>
       </div>
+      {/* </Container> */}
     </div>
   );
 };

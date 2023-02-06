@@ -62,6 +62,7 @@ export async function getProfile(token, userId) {
 }
 
 export async function getPersonalProfile(token) {
+  console.log(token+"    hdsdjsidhcvdccis")
   return axios.get("/api/v1/users/profile", {
     headers: {
       Authorization: "Bearer " + token,

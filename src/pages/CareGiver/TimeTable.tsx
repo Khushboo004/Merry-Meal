@@ -1,20 +1,103 @@
-import React from "react";
+import React, { useEffect } from "react";
+import {useState} from "react";
 import {
   Button,
-  Grid,
   Card,
-  CardMedia,
-  CardContent,
-  Typography,
   CardActions,
-  Box,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+
 } from "@mui/material";
 import Time from "../../assets/time.png";
-export default function TimeTable() {
+import { toast } from "react-toastify";
+import { addNewSession, getAllSession } from "../../services/SessionService";
+import { getPersonalProfile } from "../../services/ProfileService";
+import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
+type Props = {
+  role: String;
+};
+const  TimeTable=(props: Props) => {
+  const { role } = props;
+
+  const [caregiver, setCaregiver] = useState({
+    session: "",
+    date: "",
+  });
+  const fieldChanged = (event:any) => {
+    setCaregiver({ ...caregiver, [event.target.name]: event.target.value });
+  };
+  const [sessions, setSessions] = useState<any>();
+  const token: any = localStorage.getItem("token");
+
+  useEffect(() => {
+    
+
+    getPersonalProfile(token)
+      .then((res) => {
+        const user = res.data;
+        
+        getAllSession(token)
+          .then((res) => {
+            let cargiverSessions = res.data.filter(
+              (session: any) => session.user.user_id === user.user_id
+            );
+            setSessions(cargiverSessions);
+            return;
+          })
+          .catch((error) => {
+            toast.error("Error While Fetching, Please bnnv bnvbn retry later!");
+          });
+      })
+      .catch((error) => {
+        toast.error("Error While Fetching, Please retry later!");
+      });
+  }, []);
+
+
+
+  const addSession = (event:any) => {
+    event.preventDefault();
+    // console.log(post);
+    if (caregiver.session.trim() === "") {
+      toast.error("Session is Required");
+      return;
+    }
+    if (caregiver.date.trim() === "") {
+      toast.error("Date is Required");
+      return;
+    }
+   
+
+    // submit the form on surver
+    addNewSession(caregiver,token)
+      .then((res) => {
+       
+        console.log(token+"====================================")
+        console.log(res.data.fundId);
+       
+
+        toast.success("Session have  Uploaded Successfully");
+        console.log(caregiver);
+        setCaregiver({
+          session: "",
+          date: "",
+        });
+      })
+      .catch((error) => {
+        toast.error("Session is not uploaded due to some error !! ");
+        console.log(error);
+      });
+  };
+  
   return (
-    <div className="pt-4  ml-3">
+    <div className=" ml-3">
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} lg={3} md={4}>
+      {role === "CAREGIVER" ? (
+      <Grid item xs={12} sm={12} lg={3} md={4}>
+
           <div className="shadow-lg border m-3 mt-0  md:mt-16">
             <div className="flex min-h-full items-center justify-center py-12 px-0 sm:px-6 lg:px-4">
               <div className="w-full max-w-md space-y-8">
@@ -24,7 +107,7 @@ export default function TimeTable() {
                   </h2>
                 </div>
 
-                <form className="mt-8 space-y-6" action="#" method="POST">
+                <form onSubmit={addSession}>
                   <input type="hidden" name="remember" value="true" />
                   <div className="-space-y-px rounded-md shadow-sm">
                     <div>
@@ -32,9 +115,10 @@ export default function TimeTable() {
                         Give Date
                       </label>
                       <input
+                       onChange={fieldChanged}
                         id="date"
                         name="date"
-                        type="text"
+                        type="date"
                         className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         placeholder="Date"
                       />
@@ -44,7 +128,9 @@ export default function TimeTable() {
                         Session Time
                       </label>
                       <select
+                       onChange={fieldChanged}
                         defaultValue={0}
+                        name="session"
                         className='relative block w-full appearance-none rounded-none bg-white  border border-gray-300 px-3 py-2 focus:z-10 focus:outline-none sm:text-sm" placeholder="Give the catagory'
                       >
                         <option disabled value={0}>
@@ -70,22 +156,28 @@ export default function TimeTable() {
               </div>
             </div>
           </div>
+         
+       
         </Grid>
-
+         ) : (
+          <></>
+        )}
         <Grid item xs={12} sm={12} md={8} lg={9}>
           <h1 className="text-center text-xl font-bold my-2 p-2 uppercase font-serif underline underline-offset-4">
             My Time Table
           </h1>
           <Grid container spacing={3}>
+          {sessions != undefined
+                    ? sessions.map((session: any, index: any) => (
             <Grid item lg={2.5} md={4} sm={6} xs={6}>
               <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
+                <Box style={{ display: "flex", justifyContent: "center"}} className="pt-1">
                   <CardMedia
-                    sx={{ width: "90%" }}
                     component="img"
                     alt="green iguana"
-                    height="90"
-                    className="text-center"
+                    style={{
+                                 
+                      backgroundSize:"cover",width: "30%", height:"50%"}}
                     image={Time}
                   />
                 </Box>
@@ -94,11 +186,20 @@ export default function TimeTable() {
                     className="sm:text-[15px] text-[14px]"
                     color="text.dark"
                   >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
+                     <h1>
+                      <span className="font-bold">Name: </span>{session.user.name}
                     </h1>
                     <h1>
-                      <span className="font-bold">Session: </span>
+                      <span className="font-bold">Date: </span>{session.date}
+                    </h1>
+                    <h1>
+                      <span className="font-bold">Session: </span>{session.session}
+                    </h1>
+                    <h1>
+                      <span className="font-bold text-green-700">Status: </span>{session.status}
+                    </h1>
+                    <h1>
+                      <span className="font-bold">Phone No: </span>{session.user.phone_number}
                     </h1>
                   </Typography>
                 </CardContent>
@@ -110,242 +211,26 @@ export default function TimeTable() {
                     display={"block"}
                     style={{ display: "flex", justifyContent: "center" }}
                   >
+                     <Link to={"/caregiver/edit-session/"+session.fundId} >
                     <Button
                       className="mr-5 text-[15px] font-bold"
                       color="info"
                       variant="contained"
                     >
-                      Edit
+                      EDIT
                     </Button>
+                    </Link>
                   </Box>
                 </CardActions>
-              </Card>
+                </Card>
             </Grid>
-
-            <Grid item lg={2.5} md={4} sm={6} xs={6}>
-              <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
-                  <CardMedia
-                    sx={{ width: "90%" }}
-                    component="img"
-                    alt="green iguana"
-                    height="90"
-                    className="text-center"
-                    image={Time}
-                  />
-                </Box>
-                <CardContent>
-                  <Typography
-                    className="sm:text-[15px] text-[14px]"
-                    color="text.dark"
-                  >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
-                    </h1>
-                    <h1>
-                      <span className="font-bold">Session: </span>
-                    </h1>
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Box
-                    textAlign={"center"}
-                    display={"block"}
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Button
-                      className="mr-5 text-[15px] font-bold"
-                      color="info"
-                      variant="contained"
-                    >
-                      Edit
-                    </Button>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
-
-            <Grid item lg={2.5} md={4} sm={6} xs={6}>
-              <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
-                  <CardMedia
-                    sx={{ width: "90%" }}
-                    component="img"
-                    alt="green iguana"
-                    height="90"
-                    className="text-center"
-                    image={Time}
-                  />
-                </Box>
-                <CardContent>
-                  <Typography
-                    className="sm:text-[15px] text-[14px]"
-                    color="text.dark"
-                  >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
-                    </h1>
-                    <h1>
-                      <span className="font-bold">Session: </span>
-                    </h1>
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Box
-                    textAlign={"center"}
-                    display={"block"}
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Button
-                      className="mr-5 text-[15px] font-bold"
-                      color="info"
-                      variant="contained"
-                    >
-                      Edit
-                    </Button>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item lg={2.5} md={4} sm={6} xs={6}>
-              <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
-                  <CardMedia
-                    sx={{ width: "90%" }}
-                    component="img"
-                    alt="green iguana"
-                    height="90"
-                    className="text-center"
-                    image={Time}
-                  />
-                </Box>
-                <CardContent>
-                  <Typography
-                    className="sm:text-[15px] text-[14px]"
-                    color="text.dark"
-                  >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
-                    </h1>
-                    <h1>
-                      <span className="font-bold">Session: </span>
-                    </h1>
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Box
-                    textAlign={"center"}
-                    display={"block"}
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Button
-                      className="mr-5 text-[15px] font-bold"
-                      color="info"
-                      variant="contained"
-                    >
-                      Edit
-                    </Button>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item lg={2.5} md={4} sm={6} xs={6}>
-              <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
-                  <CardMedia
-                    sx={{ width: "90%" }}
-                    component="img"
-                    alt="green iguana"
-                    height="90"
-                    className="text-center"
-                    image={Time}
-                  />
-                </Box>
-                <CardContent>
-                  <Typography
-                    className="sm:text-[15px] text-[14px]"
-                    color="text.dark"
-                  >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
-                    </h1>
-                    <h1>
-                      <span className="font-bold">Session: </span>
-                    </h1>
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Box
-                    textAlign={"center"}
-                    display={"block"}
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Button
-                      className="mr-5 text-[15px] font-bold"
-                      color="info"
-                      variant="contained"
-                    >
-                      Edit
-                    </Button>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item lg={2.5} md={4} sm={6} xs={6}>
-              <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
-                  <CardMedia
-                    sx={{ width: "90%" }}
-                    component="img"
-                    alt="green iguana"
-                    height="90"
-                    className="text-center"
-                    image={Time}
-                  />
-                </Box>
-                <CardContent>
-                  <Typography
-                    className="sm:text-[15px] text-[14px]"
-                    color="text.dark"
-                  >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
-                    </h1>
-                    <h1>
-                      <span className="font-bold">Session: </span>
-                    </h1>
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Box
-                    textAlign={"center"}
-                    display={"block"}
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Button
-                      className="mr-5 text-[15px] font-bold"
-                      color="info"
-                      variant="contained"
-                    >
-                      Edit
-                    </Button>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
+            ))
+             : ""}
+             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+     
     </div>
   );
 }
+export default TimeTable;

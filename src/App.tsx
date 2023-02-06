@@ -34,6 +34,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OAuthRedirect from "./components/Security/OAuthRedirect";
 import UpdateMeal from "./pages/Partner/UpdateMeal";
+import EditSession from "./pages/CareGiver/EditSession";
 
 function App() {
   let roles: any = localStorage.getItem("authorization");
@@ -122,7 +123,14 @@ function App() {
               path={"profile"}
               element={<Profile role={"CAREGIVER"} />}
             ></Route>
-            <Route path={"time-table"} element={<TimeTable />} />
+                        <Route
+              path={"edit-session/:sessionId"}
+              element={<EditSession />}
+            ></Route>
+            <Route
+              path={"time-table"}
+              element={<TimeTable role={"CAREGIVER"} />}
+            />
             <Route
               path={"edit-pro"}
               element={<EditProfile action="edit" />}
@@ -148,7 +156,10 @@ function App() {
             <Route path={"about-us"} element={<AboutUs />} />
             <Route path={"meals"} element={<Meal role={"MEMBER"} />} />
             <Route path={"contact-us"} element={<ContactUs />} />
-            <Route path={"caregiverReq"} element={<CaregiverReq />} />
+            <Route
+              path={"caregiverReq"}
+              element={<CaregiverReq role={"MEMBER"} />}
+            />
             <Route
               path={"delivery-form/:mealId"}
               element={<DeliverOrderForm />}

@@ -1,137 +1,183 @@
-import { Box, Container, Card, CardActions, CardContent, CardMedia, Grid, Typography, Button, FormControl, InputLabel, NativeSelect } from '@mui/material'
-import Pic from "../assets/caregiver.png"
-import filteringMeal from '../Utils/filteringMeal';
-import { useState } from 'react';
-const CaregiverReq = () => {
-  const allSessions = [
-    {
-      session: "11:00am-01:00pm",
-      name:"abc",
-      gender: 'Female',
-      phoneNo: '0123456789'
-    },
-    {
-      session: "01:00pm-03:00pm",
-      name:"abc",
-      gender: 'Female',
-      phoneNo: '0123456789'
-    },
-    {
-      session: "03:00pm-05:00pm",
-      name:"abc",
-      gender: 'Female',
-      phoneNo: '0123456789'
-    },
-    {
-      session: "05:00pm-07:00pm",
-      name:"abc",
-      gender: 'Female',
-      phoneNo: '0123456789'
-    },
-    {
-      session: "07:00am-09:00pm",
-      name:"abc",
-      gender: 'Female',
-      phoneNo: '0123456789'
-    },
+import React, { useEffect, useState } from "react";
 
-   
-  ];
-  const [sessions, SetSessions] = useState(allSessions);
+import { toast } from "react-toastify";
+import {
+  Button,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  CardActions,
+  Box,
+  FormControl,
+  InputLabel,
+  NativeSelect,
+} from "@mui/material";
+import Time from "../assets/time.png";
+import { getAllSession } from "../services/SessionService";
+import { getPersonalProfile } from "../services/ProfileService";
+import filteringMeal from "../Utils/filteringMeal";
+type Props = {
+  role: String;
+};
+
+const CaregiverReq = (props: Props) => {
+  const { role } = props;
+  const [allSessions, setAllSessions] = useState<any>();
+  const [sessions, setSessions] = useState<any>();
+  const token: any = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (role === "MEMBER") {
+      getAllSession(token)
+        .then((res) => {
+          console.log(res)
+          let avaliableCaregiver = res.data.filter((sessionStatus: any) => sessionStatus.status === "Available"
+          );
+          setAllSessions(avaliableCaregiver);
+          setSessions(avaliableCaregiver);
+          return;
+        })
+        .catch((error) => {
+          toast.error("=========");
+          console.log(error)
+        });
+      return;
+    }
+
+    getPersonalProfile(token)
+      .then((res) => {
+        const user = res.data;
+        console.log(user);
+        
+        getAllSession(token)
+          .then((res) => {
+            let cargiverSessions = res.data.filter(
+              (session: any) => session.user.user_id === user.user_id
+            );
+            setAllSessions(cargiverSessions);
+            setSessions(cargiverSessions);
+            return;
+          })
+          .catch((error) => {
+            toast.error("Error While Fetching, Please retry later!");
+          });
+      })
+      .catch((error) => {
+        toast.error("Error While Fetching, Please retry later!");
+      });
+  }, []);
   const filterSession = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    filteringMeal(e, SetSessions, allSessions);
+    filteringMeal(e, setSessions, allSessions);
   };
+
   
 
   return (
     <div className='mb-10'>
-       <Container maxWidth="xl">
-       <div className=''>
-       <h3 className='py-2 text-2xl font-bold text-center underline '>Caregiver List</h3>
+      <div>
+      <h1 className="text-center text-xl font-bold my-2 p-2 uppercase font-serif underline underline-offset-4">
+            My Time Table
+          </h1>
+      <Grid container spacing={3}>
+      {/* {role === "MEMBER" ? ( */}
+      <Grid item xs={12}>
+              <Box pt={6} style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                
+                              }}>
+                                 
+                <FormControl className="w-[200px] ">
+                  <InputLabel
+                    className="text-xl"
+                    variant="standard"
+                    htmlFor="uncontrolled-native"
+                  >
+                    Meals Type
+                  </InputLabel>
+                  <NativeSelect
+                    defaultValue={"all"}
+                    inputProps={{
+                      name: "age",
+                      id: "uncontrolled-native",
+                    }}
+                    onChange={(e) => filterSession(e)}
+                  >
+                    <option value={"all"}>All</option>
+                    <option value={"11:00am-01:00pm"}>11:00am-01:00pm</option>
+                    <option value={"01:00pm-03:00pm"}>01:00pm-03:00pm</option>
+                    <option value={"03:00pm-05:00pm"}>03:00pm-05:00pm</option>
+                    <option value={"05:00pm-07:00pm"}>05:00pm-07:00pm</option>
+                    <option value={"07:00am-09:00pm"}>07:00am-09:00pm</option>
+                  </NativeSelect>
+                </FormControl>
+              </Box>
+            </Grid>
+              {/* ) : (
+                <></>
+              )} */}
 
-  <Grid container px={1}   spacing={1}  >
-       <Grid item xs={12}>
-         <Box   pt={6} >
-         <FormControl>
-          <InputLabel variant="standard" htmlFor="uncontrolled-native">
-            Delivery Status
-          </InputLabel>
-          <NativeSelect
-            defaultValue={"all"}
-            inputProps={{
-              name: "age",
-              id: "uncontrolled-native",
-            }}
-            onChange={(e) => filterSession(e)}
-          >
-            <option value={"all"}>All</option>
-            <option value={"11:00am-01:00pm"}>11:00am-01:00pm</option>
-            <option value={"01:00pm-03:00pm"}>01:00pm-03:00pm</option>
-            <option value={"03:00pm-05:00pm"}>03:00pm-05:00pm</option>
-            <option value={"05:00pm-07:00pm"}>05:00pm-07:00pm</option>
-            <option value={"07:00am-09:00pm"}>07:00am-09:00pm</option>
-          </NativeSelect>
-        </FormControl>
-         </Box>
-       </Grid>
-       <Grid item  xs={12}>
-         <Box  p={1} >
-         <Grid container spacing={1}>
-         {sessions.map((time) => (
-         <Grid item lg={2} md={3} sm={4} xs={6}>
-       
+        <Grid item xs={12} >
          
-   
-       <Card elevation={10} >
-        <Box  style={{ display:'flex', justifyContent:'center' }}>
-         <CardMedia
-          sx={{ width: '90%' }}
-           component="img"
-           alt="green iguana"
-           height="90"
-          
-           className='text-center'
-           image={Pic}
-         />
-         </Box>
-          <CardContent>
-           
-           <Typography className='sm:text-[15px] text-[14px]'  color="text.dark">
-             <h1><span className='font-bold'>Name: </span>{time.name}</h1>
-             <h1><span className='font-bold'>Gender: </span>{time.gender}</h1>
-           <h1><span className='font-bold'>Phone No: </span>{time.phoneNo}</h1>
-           <h1><span className='font-bold'>session: </span>{time.session}</h1>
-           </Typography>
-         </CardContent>
-         <CardActions>
-         <Box className="justify-between items-center lg:text-no md:text-center sm:text-center xs:text-center">
-<Button  className=' text-[12px] mr-2 my-2 font-bold ' color='info' variant='contained' >Send Request</Button>
+          <Grid container spacing={3} >
+          {sessions != undefined
+                    ? sessions.map((session: any, index: any) => (
+            <Grid item lg={2} md={4} sm={4} xs={6}>
+              <Card elevation={10}>
+                <Box style={{ display: "flex", justifyContent: "center"}} className="pt-1">
+                  <CardMedia
+                    component="img"
+                    alt="green iguana"
+                    style={{
+                                 
+                      backgroundSize:"cover",width: "30%", height:"50%"}}
+                    image={Time}
+                  />
+                </Box>
+                <CardContent  >
+                  <Typography style={{justifyContent: "center" }}
+                   
+                    color="text.dark"
+                  >
+                     <h1>
+                      <span className="font-bold">Name: </span>{session.user.name}
+                    </h1>
+                    <h1>
+                      <span className="font-bold">Date: </span>{session.date}
+                    </h1>
+                    <h1>
+                      <span className="font-bold">Session: </span>{session.session}
+                    </h1>
+                    <h1>
+                      <span className="font-bold text-green-700">Status: </span>{session.status}
+                    </h1>
+                    <h1>
+                      <span className="font-bold">Phone No: </span>{session.user.phone_number}
+                    </h1>
+                  </Typography>
+                </CardContent>
+                <CardActions
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                 
+                    <Box className="justify-between items-center lg:text-no md:text-center sm:text-center xs:text-center">
+<Button  className='  w-full  my-2 font-bold ' color='info' variant='contained' >Send Request</Button>
 
-<a href="/profile"><Button className='lg:px-7  px-10 text-[12px]  font-bold bg-gray-700'   variant='contained'>Details</Button>
+<a href="/profile"><Button className=' w-full   font-bold bg-gray-700'   variant='contained'>Details</Button>
 </a>      </Box>
-     </CardActions>
-       </Card>
-   
-   </Grid>
-  ))}
-
-
-
-
-
-
-
-
-  
-    
-     
-     </Grid>
-         </Box>
-       </Grid>
+                  
+                </CardActions>
+              </Card>
+            </Grid>
+             ))
+             : ""}
+          </Grid>
+        </Grid>
        
-     </Grid>
- </div>
-</Container>
+      </Grid>
+   </div>
 
 
 

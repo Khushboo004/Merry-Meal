@@ -6,7 +6,6 @@ import { uploadImage, uploadMealImage } from "../../services/ProfileService";
 
 const AddMeal = () => {
   const token = localStorage.getItem("token");
-  const [user, setUser] = useState(undefined);
   const [imageFile, setImageFile] = useState();
   const [meal, setMeal] = useState({
     meal_name: "",
