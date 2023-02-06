@@ -218,7 +218,6 @@ const TimeTable = (props: Props) => {
              </Grid>
           </Grid>
         </Grid>
-      </Grid>
     </div>
   );
 };
