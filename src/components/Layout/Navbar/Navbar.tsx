@@ -73,7 +73,7 @@ const Navbar = (props: Props) => {
                 <ArrowDropDownCircleIcon className="inline-block ml-0 mr-1 mb-2  text-green-400 " />
                 More
                 {showOption && (
-                  <div className="md:absolute bg-green-500 border p-2 rounded-lg  right-0">
+                  <div className="md:absolute bg-white border p-2 rounded-lg  right-0">
                     <ul className="space-y-2 l md:w-48">
                       <li className="lg:p-4 md:p-2  border-b border-gray-600 dark:hover:border-gray-400 dark:hover:text-green-700">
                         <NavLink to="/member/caregiverReq">

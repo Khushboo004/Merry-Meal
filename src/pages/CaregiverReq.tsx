@@ -15,9 +15,10 @@ import {
   NativeSelect,
 } from "@mui/material";
 import Time from "../assets/time.png";
-import { getAllSession } from "../services/SessionService";
+import { getAllSession, requestForCaregiver } from "../services/SessionService";
 import { getPersonalProfile } from "../services/ProfileService";
 import filteringMeal from "../Utils/filteringMeal";
+import { useParams } from "react-router-dom";
 type Props = {
   role: String;
 };
@@ -27,6 +28,7 @@ const CaregiverReq = (props: Props) => {
   const [allSessions, setAllSessions] = useState<any>();
   const [sessions, setSessions] = useState<any>();
   const token: any = localStorage.getItem("token");
+  
 
   useEffect(() => {
     if (role === "MEMBER") {
@@ -45,6 +47,8 @@ const CaregiverReq = (props: Props) => {
         });
       return;
     }
+
+   
 
     getPersonalProfile(token)
       .then((res) => {
@@ -70,6 +74,21 @@ const CaregiverReq = (props: Props) => {
   }, []);
   const filterSession = (e: React.ChangeEvent<HTMLSelectElement>) => {
     filteringMeal(e, setSessions, allSessions);
+  };
+ 
+  function requestForCareGiver (session: any){
+    
+    // console.log(car)
+    requestForCaregiver(session.session_id,token)
+    .then((res)=>{
+      console.log(token+"+++++++++++++frtrytytyt+++++++++++"+res);
+      toast.success("sended request");
+      
+    })
+    .catch((error) => {
+      console.log(error);
+      toast.error("Error in loading session");
+    });
   };
 
   
@@ -163,7 +182,7 @@ const CaregiverReq = (props: Props) => {
                 >
                  
                     <Box className="justify-between items-center lg:text-no md:text-center sm:text-center xs:text-center">
-<Button  className='  w-full  my-2 font-bold ' color='info' variant='contained' >Send Request</Button>
+<Button  onClick={() =>  requestForCareGiver(session)} className='  w-full  my-2 font-bold ' color='info' variant='contained' >Send Request</Button>
 
 <a href="/profile"><Button className=' w-full   font-bold bg-gray-700'   variant='contained'>Details</Button>
 </a>      </Box>

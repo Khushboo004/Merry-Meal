@@ -211,7 +211,7 @@ const  TimeTable=(props: Props) => {
                     display={"block"}
                     style={{ display: "flex", justifyContent: "center" }}
                   >
-                     <Link to={"/caregiver/edit-session/"+session.fundId} >
+                     <Link to={"/caregiver/edit-session/"+session.session_id} >
                     <Button
                       className="mr-5 text-[15px] font-bold"
                       color="info"

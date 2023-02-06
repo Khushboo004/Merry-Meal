@@ -37,3 +37,14 @@ console.log(token+"hdsdjsidhisssdu===================")
         },})
       .then((reponse) => reponse.data);
   };
+
+  
+  export const requestForCaregiver = (sessionId,token) => {
+  console.log(token+"+++++++++++++++++++++++++");
+    return axios
+      .put(`/api/v1/caregivers/requestCare/${sessionId}`,null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },})
+      
+  };
