@@ -50,6 +50,7 @@ const RegistrationForm = (props: Props) => {
         .then((res) => {
           localStorage.setItem("token", res.data.accessToken);
           getRoles(res.data.accessToken).then((res) => {
+            console.log(res.data);
             const auths: any = [];
             res.data.roleResponses.forEach((role: string) => {
               auths.push(role.replace("ROLE_", ""));

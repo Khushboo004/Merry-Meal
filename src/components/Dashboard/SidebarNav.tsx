@@ -9,13 +9,12 @@ import AdminSidebar from "./Admin/AdminSidebar";
 import { useSearchParams } from "react-router-dom";
 import RiderSidebar from "./Rider/RiderSidebar";
 import VolunteerSidebar from "./Volunteer/VolunteerSidebar";
-import MerryMealLogo from "../../assets/merry meal.png";
 type Props = {
   role: String;
 };
 
 const SidebarNav = (props: Props) => {
-  const [nav, setNav] = useState(true);
+  const [nav, setNav] = useState(false);
   const handleNav = () => {
     setNav(!nav);
   };
@@ -33,7 +32,6 @@ const SidebarNav = (props: Props) => {
             : "fixed left-[-100%]"
         }
       >
-        
         <h1 className="w-full text-3xl text-white font-bold m-6 text-center  cursor-pointer font-serif">
           Merry Meal
         </h1>

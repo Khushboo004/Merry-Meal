@@ -123,7 +123,7 @@ function App() {
               path={"profile"}
               element={<Profile role={"CAREGIVER"} />}
             ></Route>
-                        <Route
+            <Route
               path={"edit-session/:sessionId"}
               element={<EditSession />}
             ></Route>
@@ -226,6 +226,14 @@ function App() {
             <Route
               path={"profile"}
               element={<Profile role={"VOLUNTEER"} />}
+            ></Route>
+            <Route
+              path={"meal-details/:mealId"}
+              element={<MealDetails role={""} />}
+            />
+            <Route
+              path={"edit-pro"}
+              element={<EditProfile action="edit" />}
             ></Route>
             <Route path={"assessfood"} element={<MealAssess />}></Route>
           </Route>

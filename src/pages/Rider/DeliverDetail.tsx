@@ -50,10 +50,12 @@ const DeliverDetail = (props: Props) => {
           </div>
           {delivery.status === DeliveryStatus.Order ? (
             <></>
+          ) : delivery.status === DeliveryStatus.Delivered ? (
+            <></>
           ) : (
             <TakeOrderButton
               deliId={delivery.delivery_id}
-              status={DeliveryStatus.Order}
+              status={delivery?.status}
             />
           )}
         </>

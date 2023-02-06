@@ -37,7 +37,7 @@ const DeliverList = (props: Props) => {
 
     getPersonalProfile(token)
       .then((res) => setUser(res.data))
-      .then((error) => {
+      .catch((error) => {
         toast.error("Fetching getting error, please try again later");
         console.log(error);
       });
@@ -140,6 +140,8 @@ const DeliverList = (props: Props) => {
                             ) : (
                               <></>
                             )
+                          ) : deli.status === DeliveryStatus.Delivered ? (
+                            <></>
                           ) : (
                             <TakeOrderButton
                               deliId={deli.delivery_id}
