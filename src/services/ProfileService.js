@@ -21,12 +21,16 @@ export async function getUsers(token) {
 export async function uploadMealImage(mealId, imagefile, token) {
   let formData = new FormData();
   formData.append("file", imagefile);
-  return axios.post(`/api/v1/partners/meals/${mealId}/upload-meal-image`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: "Bearer " + token,
-    },
-  });
+  return axios.post(
+    `/api/v1/partners/meals/${mealId}/upload-meal-image`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
 }
 
 export async function editProfile(token, userId, formData, birth) {
@@ -42,7 +46,7 @@ export async function editProfile(token, userId, formData, birth) {
 }
 
 export async function deleUser(token, userId) {
-  return axios.delete(`/api/v1/users` + userId, {
+  return axios.delete(`/api/v1/users/` + userId, {
     headers: {
       Authorization: "Bearer " + token,
     },

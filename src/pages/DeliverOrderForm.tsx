@@ -1,19 +1,35 @@
 import { Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { orderMeal } from "../services/Delivery";
 
 export default function DeliverOrderForm() {
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [error, setError] = useState("");
-
+  const { mealId } = useParams();
+  const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!deliveryAddress) {
       setError("Delivery address is required");
-      toast.error("Delivery address is required")
+      toast.error("Delivery address is required");
       return;
     }
-    // handle successful submission here
+    const token = localStorage.getItem("token");
+    orderMeal(mealId, token, deliveryAddress)
+      .then((res) => {
+        toast.success(
+          "Order has been posted with delivery number " +
+            res.data.delivery_number
+        );
+        navigate("/member/meals");
+      })
+      .catch((error) => {
+        console.log(error);
+
+        toast.error("Posting order failed, Please retry later!");
+      });
   };
 
   return (
@@ -54,7 +70,7 @@ export default function DeliverOrderForm() {
               <div className=" m-2 text-center">
                 <button
                   type="submit"
-                  className="p-2 w-28 font-bold rounded-md bg-blue-800 "
+                  className="p-2 w-28 font-bold rounded-md bg-blue-800"
                 >
                   Order
                 </button>

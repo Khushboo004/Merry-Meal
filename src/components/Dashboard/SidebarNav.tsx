@@ -9,12 +9,13 @@ import AdminSidebar from "./Admin/AdminSidebar";
 import { useSearchParams } from "react-router-dom";
 import RiderSidebar from "./Rider/RiderSidebar";
 import VolunteerSidebar from "./Volunteer/VolunteerSidebar";
+import MerryMealLogo from "../../assets/merry meal.png";
 type Props = {
   role: String;
 };
 
 const SidebarNav = (props: Props) => {
-  const [nav, setNav] = useState(false);
+  const [nav, setNav] = useState(true);
   const handleNav = () => {
     setNav(!nav);
   };
@@ -78,7 +79,6 @@ const SidebarNav = (props: Props) => {
           {role === "RIDER" ? <RiderSidebar /> : <></>}
 
           {role === "VOLUNTEER" ? <VolunteerSidebar /> : <></>}
-
         </div>
       </div>
 

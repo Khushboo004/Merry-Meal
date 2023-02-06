@@ -141,6 +141,9 @@ const EditProfile = (props: Props) => {
 
   const handleCancel = () => {
     setOpen(false);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   const handleSave = () => {
@@ -155,6 +158,9 @@ const EditProfile = (props: Props) => {
       .then((res) => {
         toast.dismiss(toastId);
         toast.success("Profile Has Been Successfully updated!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((res) => {
         toast.error("Update Profile Fail, please retry!");

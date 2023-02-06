@@ -150,6 +150,10 @@ function App() {
             <Route path={"contact-us"} element={<ContactUs />} />
             <Route path={"caregiverReq"} element={<CaregiverReq />} />
             <Route
+              path={"delivery-form/:mealId"}
+              element={<DeliverOrderForm />}
+            />
+            <Route
               path={"edit-pro"}
               element={<EditProfile action="edit" />}
             ></Route>
@@ -171,7 +175,7 @@ function App() {
           <Route path={"contact-us"} element={<ContactUs />} />
           <Route path={"register"} element={<Registration auth={setAuth} />} />
           <Route path={"donation"} element={<Donation />} />
-          <Route path={"delivery-form"} element={<DeliverOrderForm />} />
+
           <Route
             path={"creatProfile"}
             element={<EditProfile action="submit" />}
@@ -193,7 +197,10 @@ function App() {
             ></Route>
             <Route path={"deliveries"} element={<Deliveries />}>
               <Route index element={<DeliverList />}></Route>
-              <Route path={"detail"} element={<DeliverDetail />}></Route>
+              <Route
+                path={"detail/:deliId"}
+                element={<DeliverDetail />}
+              ></Route>
             </Route>
           </Route>
         </Route>
