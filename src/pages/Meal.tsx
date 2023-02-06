@@ -20,7 +20,6 @@ import { deleteMeals, getAllMeals } from "../services/MealService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getPersonalProfile, getUsers } from "../services/ProfileService";
-import Allsession from "./CareGiver/Allsession";
 
 
 type Props = {

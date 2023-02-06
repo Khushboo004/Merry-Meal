@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {useState} from "react";
 import {
   Button,
-  Grid,
   Card,
-  CardMedia,
-  CardContent,
-  Typography,
   CardActions,
-  Box,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+
 } from "@mui/material";
 import Time from "../../assets/time.png";
 import { toast } from "react-toastify";
-import { addNewSession } from "../../services/SessionService";
-import Allsession from "./Allsession";
+import { addNewSession, getAllSession } from "../../services/SessionService";
+import { getPersonalProfile } from "../../services/ProfileService";
+import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 type Props = {
   role: String;
 };
 const  TimeTable=(props: Props) => {
   const { role } = props;
+
   const [caregiver, setCaregiver] = useState({
     session: "",
     date: "",
@@ -26,7 +29,32 @@ const  TimeTable=(props: Props) => {
   const fieldChanged = (event:any) => {
     setCaregiver({ ...caregiver, [event.target.name]: event.target.value });
   };
+  const [sessions, setSessions] = useState<any>();
+  const token: any = localStorage.getItem("token");
 
+  useEffect(() => {
+    
+
+    getPersonalProfile(token)
+      .then((res) => {
+        const user = res.data;
+        
+        getAllSession(token)
+          .then((res) => {
+            let cargiverSessions = res.data.filter(
+              (session: any) => session.user.user_id === user.user_id
+            );
+            setSessions(cargiverSessions);
+            return;
+          })
+          .catch((error) => {
+            toast.error("Error While Fetching, Please bnnv bnvbn retry later!");
+          });
+      })
+      .catch((error) => {
+        toast.error("Error While Fetching, Please retry later!");
+      });
+  }, []);
 
 
 
@@ -42,13 +70,14 @@ const  TimeTable=(props: Props) => {
       return;
     }
    
-    const token = localStorage.getItem("token");
 
     // submit the form on surver
-    addNewSession(caregiver, token)
+    addNewSession(caregiver,token)
       .then((res) => {
+       
+        console.log(token+"====================================")
         console.log(res.data.fundId);
-
+       
 
         toast.success("Session have  Uploaded Successfully");
         console.log(caregiver);
@@ -62,13 +91,13 @@ const  TimeTable=(props: Props) => {
         console.log(error);
       });
   };
-
   
   return (
-    <div className="pt-4  ml-3">
+    <div className=" ml-3">
       <Grid container spacing={3}>
       {role === "CAREGIVER" ? (
-        <Grid item xs={12}>
+      <Grid item xs={12} sm={12} lg={3} md={4}>
+
           <div className="shadow-lg border m-3 mt-0  md:mt-16">
             <div className="flex min-h-full items-center justify-center py-12 px-0 sm:px-6 lg:px-4">
               <div className="w-full max-w-md space-y-8">
@@ -127,26 +156,28 @@ const  TimeTable=(props: Props) => {
               </div>
             </div>
           </div>
+         
+       
         </Grid>
          ) : (
           <></>
         )}
-        
-{/* 
         <Grid item xs={12} sm={12} md={8} lg={9}>
           <h1 className="text-center text-xl font-bold my-2 p-2 uppercase font-serif underline underline-offset-4">
             My Time Table
           </h1>
           <Grid container spacing={3}>
+          {sessions != undefined
+                    ? sessions.map((session: any, index: any) => (
             <Grid item lg={2.5} md={4} sm={6} xs={6}>
               <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
+                <Box style={{ display: "flex", justifyContent: "center"}} className="pt-1">
                   <CardMedia
-                    sx={{ width: "90%" }}
                     component="img"
                     alt="green iguana"
-                    height="90"
-                    className="text-center"
+                    style={{
+                                 
+                      backgroundSize:"cover",width: "30%", height:"50%"}}
                     image={Time}
                   />
                 </Box>
@@ -155,11 +186,20 @@ const  TimeTable=(props: Props) => {
                     className="sm:text-[15px] text-[14px]"
                     color="text.dark"
                   >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
+                     <h1>
+                      <span className="font-bold">Name: </span>{session.user.name}
                     </h1>
                     <h1>
-                      <span className="font-bold">Session: </span>
+                      <span className="font-bold">Date: </span>{session.date}
+                    </h1>
+                    <h1>
+                      <span className="font-bold">Session: </span>{session.session}
+                    </h1>
+                    <h1>
+                      <span className="font-bold text-green-700">Status: </span>{session.status}
+                    </h1>
+                    <h1>
+                      <span className="font-bold">Phone No: </span>{session.user.phone_number}
                     </h1>
                   </Typography>
                 </CardContent>
@@ -171,243 +211,25 @@ const  TimeTable=(props: Props) => {
                     display={"block"}
                     style={{ display: "flex", justifyContent: "center" }}
                   >
+                     <Link to={"/caregiver/edit-session/"+session.fundId} >
                     <Button
                       className="mr-5 text-[15px] font-bold"
                       color="info"
                       variant="contained"
                     >
-                      Edit
+                      EDIT
                     </Button>
+                    </Link>
                   </Box>
                 </CardActions>
-              </Card>
+                </Card>
             </Grid>
-
-            <Grid item lg={2.5} md={4} sm={6} xs={6}>
-              <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
-                  <CardMedia
-                    sx={{ width: "90%" }}
-                    component="img"
-                    alt="green iguana"
-                    height="90"
-                    className="text-center"
-                    image={Time}
-                  />
-                </Box>
-                <CardContent>
-                  <Typography
-                    className="sm:text-[15px] text-[14px]"
-                    color="text.dark"
-                  >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
-                    </h1>
-                    <h1>
-                      <span className="font-bold">Session: </span>
-                    </h1>
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Box
-                    textAlign={"center"}
-                    display={"block"}
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Button
-                      className="mr-5 text-[15px] font-bold"
-                      color="info"
-                      variant="contained"
-                    >
-                      Edit
-                    </Button>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
-
-            <Grid item lg={2.5} md={4} sm={6} xs={6}>
-              <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
-                  <CardMedia
-                    sx={{ width: "90%" }}
-                    component="img"
-                    alt="green iguana"
-                    height="90"
-                    className="text-center"
-                    image={Time}
-                  />
-                </Box>
-                <CardContent>
-                  <Typography
-                    className="sm:text-[15px] text-[14px]"
-                    color="text.dark"
-                  >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
-                    </h1>
-                    <h1>
-                      <span className="font-bold">Session: </span>
-                    </h1>
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Box
-                    textAlign={"center"}
-                    display={"block"}
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Button
-                      className="mr-5 text-[15px] font-bold"
-                      color="info"
-                      variant="contained"
-                    >
-                      Edit
-                    </Button>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item lg={2.5} md={4} sm={6} xs={6}>
-              <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
-                  <CardMedia
-                    sx={{ width: "90%" }}
-                    component="img"
-                    alt="green iguana"
-                    height="90"
-                    className="text-center"
-                    image={Time}
-                  />
-                </Box>
-                <CardContent>
-                  <Typography
-                    className="sm:text-[15px] text-[14px]"
-                    color="text.dark"
-                  >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
-                    </h1>
-                    <h1>
-                      <span className="font-bold">Session: </span>
-                    </h1>
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Box
-                    textAlign={"center"}
-                    display={"block"}
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Button
-                      className="mr-5 text-[15px] font-bold"
-                      color="info"
-                      variant="contained"
-                    >
-                      Edit
-                    </Button>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item lg={2.5} md={4} sm={6} xs={6}>
-              <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
-                  <CardMedia
-                    sx={{ width: "90%" }}
-                    component="img"
-                    alt="green iguana"
-                    height="90"
-                    className="text-center"
-                    image={Time}
-                  />
-                </Box>
-                <CardContent>
-                  <Typography
-                    className="sm:text-[15px] text-[14px]"
-                    color="text.dark"
-                  >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
-                    </h1>
-                    <h1>
-                      <span className="font-bold">Session: </span>
-                    </h1>
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Box
-                    textAlign={"center"}
-                    display={"block"}
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Button
-                      className="mr-5 text-[15px] font-bold"
-                      color="info"
-                      variant="contained"
-                    >
-                      Edit
-                    </Button>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item lg={2.5} md={4} sm={6} xs={6}>
-              <Card elevation={10}>
-                <Box style={{ display: "flex", justifyContent: "center" }}>
-                  <CardMedia
-                    sx={{ width: "90%" }}
-                    component="img"
-                    alt="green iguana"
-                    height="90"
-                    className="text-center"
-                    image={Time}
-                  />
-                </Box>
-                <CardContent>
-                  <Typography
-                    className="sm:text-[15px] text-[14px]"
-                    color="text.dark"
-                  >
-                    <h1>
-                      <span className="font-bold">Time: </span>11am - 12pm
-                    </h1>
-                    <h1>
-                      <span className="font-bold">Session: </span>
-                    </h1>
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Box
-                    textAlign={"center"}
-                    display={"block"}
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Button
-                      className="mr-5 text-[15px] font-bold"
-                      color="info"
-                      variant="contained"
-                    >
-                      Edit
-                    </Button>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
+            ))
+             : ""}
+             </Grid>
           </Grid>
-        </Grid> */}
-      </Grid>
-      <div><Allsession role={role} /></div>
+        </Grid>
+     
     </div>
   );
 }
