@@ -44,7 +44,6 @@ const AddMeal = () => {
     // submit the form on surver
     addMealDetails(meal, token)
       .then((res) => {
-        console.log(res.data.mealId);
         uploadMealImage(res.data.mealId, imageFile, token)
           .then((data) => {
             toast.success("Image uploaded");

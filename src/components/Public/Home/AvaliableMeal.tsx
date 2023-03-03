@@ -17,7 +17,10 @@ const AvaliableMeal = () => {
   useEffect(() => {
     getAllMeals()
       .then((res) => {
-        const newArray = res.data.slice(0, 6);
+        const newArray = res.data
+        .filter(
+          (meals: any) => meals.status === "SAFE"
+        ).slice(0, 4);
         setMeals(newArray);
         return;
       })
@@ -38,9 +41,9 @@ const AvaliableMeal = () => {
                 </Grid>
                 <Grid item lg={6} xs={6}>
                   <div className="text-right">
-                    <a href="#" className="font-serif">
+                  <Link to="/member/meals">
                       View All
-                    </a>
+                      </Link>
                   </div>
                 </Grid>
               </Grid>

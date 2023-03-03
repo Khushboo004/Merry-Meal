@@ -22,7 +22,8 @@ const AvailableFruit = (props: Props) => {
   useEffect(() => {
       getAllMeals()
         .then((res) => {
-          let safeFood = res.data.filter((meal: any) => meal.category === "Fruit");
+          let safeFood = res.data.filter((meal: any) => meal.category === "Fruit").filter(
+            (meals: any) => meals.status === "SAFE").slice(0, 4);
           setMeals(safeFood);
           return;
         })
@@ -46,9 +47,9 @@ const AvailableFruit = (props: Props) => {
                 </Grid>
                 <Grid item lg={6} xs={6}>
                   <div className="text-right">
-                    <a href="#" className="font-serif">
+                  <Link to="/member/meals">
                       View All
-                    </a>
+                      </Link>
                   </div>
                 </Grid>
               </Grid>

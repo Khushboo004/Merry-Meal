@@ -156,6 +156,11 @@ const EditProfile = (props: Props) => {
     const toastId = toast.loading("Uploading Profile ...");
     editProfile(token, userId, formData, birth)
       .then((res) => {
+        if (imageFile) {
+          uploadImage(res.data.user_id, imageFile, token).then((res) => {
+            console.log(res);
+          });
+        }
         toast.dismiss(toastId);
         toast.success("Profile Has Been Successfully updated!");
         setTimeout(() => {
@@ -250,9 +255,8 @@ const EditProfile = (props: Props) => {
         </Avatar>
       </div>
       <div className="flex justify-center mt-2">
-        {action === "edit" ? (
-          ""
-        ) : (
+       
+        
           <input
             type="file"
             name="profileImage"
@@ -260,7 +264,7 @@ const EditProfile = (props: Props) => {
             id="profileImage"
             onChange={(e) => preview(e)}
           />
-        )}
+        
       </div>
       <div className="grid grid-cols-2 lg:px-36 mt-8">
         <div className="p-3 font-bold">Name</div>

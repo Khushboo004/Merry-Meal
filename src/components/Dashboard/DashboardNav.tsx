@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   IconButton,
@@ -7,9 +7,11 @@ import {
   MenuItem,
   ListItemIcon,
   Divider,
+  Box,
 } from "@mui/material";
 import { Logout } from "@mui/icons-material";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { getPersonalProfile } from "../../services/ProfileService";
 type Props = {
   role: String;
 };
@@ -26,6 +28,17 @@ const DashboardNav = (props: Props) => {
     setAnchorEl(null);
     navigate(`/${role?.toLowerCase()}`);
   };
+  const [user, setUser] = useState<any>();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    getPersonalProfile(token)
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const handleLogout = (e: any) => {
     localStorage.setItem("token", "");
@@ -38,7 +51,31 @@ const DashboardNav = (props: Props) => {
       </h1>
       <Tooltip title="Account Nav">
         <IconButton onClick={(e) => handleClick(e)}>
-          <Avatar sx={{ width: 40, height: 40 }}>N</Avatar>
+        {user ? (
+            <div className="flex-col  flex justify-center">
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+                pt={1}
+              >
+                <img
+                  className="w-[50px] text-center flex mr-1 h-12 rounded-3xl"
+                  src={
+                    user.profile_image?.startsWith("http")
+                      ? user.profile_image
+                      : `http://localhost:8080/api/v1/users/image/${user.profile_image}`
+                  }
+                  alt=""
+                />
+
+                <span>{user.name}</span>
+              </Box>
+            </div>
+          ) : (
+            ""
+          )}
         </IconButton>
       </Tooltip>
       <Menu

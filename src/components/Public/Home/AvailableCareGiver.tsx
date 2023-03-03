@@ -17,6 +17,7 @@ import {
 } from "../../../services/SessionService";
 import { getPersonalProfile } from "../../../services/ProfileService";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 type Props = {
   role: String;
 };
@@ -73,9 +74,9 @@ const AvailableCareGiver = (props: Props) => {
                 </Grid>
                 <Grid item lg={6} xs={6}>
                   <div className="text-right">
-                    <a href="#" className="font-serif">
+                  <Link to="/member/caregiverReq">
                       View All
-                    </a>
+                      </Link>
                   </div>
                 </Grid>
               </Grid>
